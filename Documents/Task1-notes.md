@@ -40,20 +40,27 @@ CREWS
   - **(3x) Driver Actuator Agent**: Follows the plan of the Organization Agent. (Drives ambulance).  
     - **Type: Actuator.**  
     - Hybrid
+- **Police Crew**  
+  - **Organization Agent:** Creates strict plan for this crew.  
+    - **Type: Facilitator**  
+    - Deliberative  
+  - **(3x) Patrol Actuator Agent:** Follows the plan of the Organization Agent. (Drives patrol car, manages traffic and evacuation).  
+    - **Type: Actuator.**  
+    - Hybrid  
 
 INDIVIDUAL AGENT PROPERTIES
 
-|  | Emergency | Firefighting Crew |  | Medical Team |  |
-| :---- | ----- | ----- | :---- | ----- | :---- |
-|  | **Contact Agent** | **Organization Agent** | **Actuator Agent** | **Organization Agent** | **Actuator Agent** |
-| **Flexibility** | YES | YES | YES | YES | YES |
-| **Reactivity** | NO | YES | YES | YES | YES |
-| **Proactiveness** | YES | YES | YES | YES | YES |
-| **Social Ability** | YES | YES | YES | YES | YES |
-| **Rationality** | YES | YES | YES | YES | YES |
-| **Reasoning** | YES | YES | LESS | YES | LESS |
-| **Learning** | NO | NO | NO | NO | NO |
-| **Autonomy** | HIGH | HIGH | LOW | HIGH | LOW |
-| **Temporal continuity** | YES | YES | YES | YES | YES |
-| **Mobility** | NO | YES | YES | YES | YES |
+|  | Emergency | Firefighting Crew |  | Medical Team | | Police Crew | |
+| :---- | ----- | ----- | :---- | ----- | :---- | ---- | ---- | 
+|  | **Contact Agent** | **Organization Agent** | **Actuator Agent** | **Organization Agent** | **Actuator Agent** | **Organization Agent** | **Actuator Agent** |
+| **Flexibility** | YES | YES | YES | YES | YES | YES | YES |
+| **Reactivity** | NO | YES | YES | YES | YES | YES | YES |
+| **Proactiveness** | YES | YES | YES | YES | YES | YES | YES |
+| **Social Ability** | YES | YES | YES | YES | YES | YES | YES |
+| **Rationality** | YES | YES | YES | YES | YES | YES | YES |
+| **Reasoning** | YES | YES | LESS | YES | LESS | YES | LESS |
+| **Learning** | NO | NO | NO | NO | NO | NO | NO | 
+| **Autonomy** | HIGH | HIGH | LOW | HIGH | LOW | HIGH | LOW |
+| **Temporal continuity** | YES | YES | YES | YES | YES | YES | YES |
+| **Mobility** | NO | YES | YES | YES | YES | YES | YES |
 
