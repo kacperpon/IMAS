@@ -1,0 +1,47 @@
+- **Emergency crew**  
+  - **Contact agent.** Recieves the report in natural language and compiles the data in json format to pass it to the organization agents.  
+    - **Type:** Facilitator
+    - **Tools:** FileReadTool
+  - **Planner agent.** Recieves the plans from each organization agent and compiles them into a global plan, consults with the ethics crew in case there are ethical dilemmas.  
+    - **Type:** Facilitator
+
+- **Ethics crew**  
+  - **Philosopher agent.** Recieves an ethic dilemma from the emergency planner and solves it using RAG to extract the conclusion from an ethics "book" (text file).  
+    - **Type:** Facilitator
+    - **Tools:** FileReadTool
+    
+- **Firefighting crew**  
+  - **Organization Agent:** Receives the structured information from the emergency contact agent, creates a list of tasks taking into account the resources available and the distance to the emergencies. Then it sends its plan to the emergency planner agent, when the whole plan is compiled (planner agent has responded), it passes the tasks to the actuators.  
+    - **Type:** Facilitator  
+    - **Deliberative:** Makes a general plan to be executed by Actuator agents. This plan does not include small details as the Agent will now know the full state of the environment. Remember, the environment is not fully accessible.*  
+    - **Reactive:** Will change plan based on the evolution of the emergency.
+    - **Tools:** DistanceMetricTool
+      
+  - **(3x) Firefighter Actuator Agent:** Follows the plan of the Organization Agent. (Fights fire).  
+    - **Type:** Actuator.  
+    - *Hybrid (follows a plan and takes small decisions). A small obstacle does not imply that the organization agent needs to know about it and change the whole plan. Little obstacles can be surpassed by the Actuator Agent’s own decisions.*  
+    - *Reactive: Will change plan based on the evolution of the emergency.*  
+  - **(3x) Rescue Actuator Agent:** Follows the plan of the Organization Agent. (Rescues people)  
+    - **Type:** Actuator.  
+    - *Hybrid*  
+    - Reactive: Will change plan based on the evolution of the emergency.  
+
+- **Medical crew**  
+  - **Organization Agent:** Receives the structured information from the emergency contact agent, creates a list of tasks taking into account the resources available and the distance to the emergencies. Then it sends its plan to the emergency planner agent, when the whole plan is compiled (planner agent has responded), it passes the tasks to the actuators. 
+    - **Type:** Facilitator  
+    - **Deliberative**
+    - **Tools:** DistanceMetricTool  
+  - **(3x) Med Actuator Agent:** Follows the plan of the Organization Agent. (Attends victims, first aid).  
+    - **Type:** Actuator.  
+    - **Hybrid**  
+  - **(3x) Driver Actuator Agent**: Follows the plan of the Organization Agent. (Drives ambulance).  
+    - **Type:** Actuator.  
+    - **Hybrid**
+- **Police Crew**  
+  - **Organization Agent:** Receives the structured information from the emergency contact agent, decides on what alternative routes should be created to avoid roads that are blocked by fires.  
+    - **Type:** Facilitator  
+    - **Deliberative**
+    - **Tools:** DistanceMetricTool 
+  - **(3x) Patrol Actuator Agent:** Follows the plan of the Organization Agent. (Drives patrol car, manages traffic and evacuation).  
+    - **Type:** Actuator.  
+    - **Hybrid**  
