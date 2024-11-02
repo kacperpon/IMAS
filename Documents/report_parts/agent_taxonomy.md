@@ -1,54 +1,79 @@
-ENVIRONMENT
+## 3.  Agent Taxonomy
 
-- **Accessibility**: Inaccessible: define some parts inaccessible. General map is accessible. But agents know specifics like their particular location, magnitude of the fire, number of wounded… Agent communications is required for all agents to know the full state.  
-- **Deterministic:** Non-Deterministic**:** The fact that we perform an action does not mean that we will always get the same results from the environment. There can be a set of probabilistic variables that make the environment non-deterministic. For instance, if we put out a fire, there can be a chance that the fire will be stopped or not.  
-- **Episodic:** Non-Episodic: Since we won’t have any algorithm to train along a set of distinct episodes (implementation based on pre-trained LLM) we will not make the environment episodic. However, it could be episodic if every emergency is considered an individual episode.  
-- **Static/dynamic**: Dynamic. A fire can get worse over time. Victim’s health can be reduced over time.  
-- **Discrete/continuous:** Continuous. In terms of the map, the agent can go anywhere in X, Y, without being discrete. Time will also be continuous. Actions can be discrete, each type of agent will have a list of actions it can perform, but the environment itself is continuous. The fire intensity can be from 1 to 100 continuous.
+### 3.1 Classification Framework
+The emergency response multi-agent system uses a hierarchical framework that
+sets clear boundaries between three primary agent types: Contact Agents, Organisation Agents, and Actuator Agents. This design optimises emergency reponse operations while maintaining clear command structure at the same time with the goal of optimal operational efficiency.
 
-CREWS
+#### 3.1.1 Agent Types
+**Contact Agent (Type: Faciliator)**
+This agent is the primary coordinator within the emergency response team, operating as a high-evel design facilitator. While this agent has high levels of autonomy and strong reasoning capabilities, it lacks proactiveness and mobility. The primary role includes optimal distribution of resources and coordination of response teams - making it essential for maintaining system-wide coherence without direct involvement. 
 
-- **Emergency**  
-  - **Contact agent.** Distributes everything, and coordinates other CREWS. Gives objectives to the Organization Agent of each crew.  
-    - **Type: Facilitator**  
-    - *No flexibility.*  
-    - *Deliberative*  
-    - *Not reactive.*  
-    - *Not proactive: Does not read into the details of the emergency, just orders the crews to solve the problem.*  
-    - *Social Ability: Interact with other agents.*  
-    - *No mobility.*  
-- **Firefighting crew**  
-  - **Organization Agent:** Creates strict plan for this crew.  
-    - **Type: Facilitator**  
-    - *Deliberative. Makes a general plan to be executed by Actuator agents. This plan does not include small details as the Agent will now know the full state of the environment. Remember, the environment is not fully accessible.*  
-    - *Reactive: Will change plan based on the evolution of the emergency.*  
-  - **(3x) Firefighter Actuator Agent:** Follows the plan of the Organization Agent. (Fights fire).  
-    - **Type: Actuator.**  
-    - *Hybrid (follows a plan and takes small decisions). A small obstacle does not imply that the organization agent needs to know about it and change the whole plan. Little obstacles can be surpassed by the Actuator Agent’s own decisions.*  
-    - *Reactive: Will change plan based on the evolution of the emergency.*  
-  - **(3x) Rescue Actuator Agent:** Follows the plan of the Organization Agent. (Rescues people)  
-    - **Type: Actuator.**  
-    - *Hybrid*  
-    - Reactive: Will change plan based on the evolution of the emergency.  
-- **Medical Team**  
-  - **Organization Agent:** Creates strict plan for this crew.  
-    - **Type: Facilitator**  
-    - Deliberative  
-  - **(3x) Med Actuator Agent:** Follows the plan of the Organization Agent. (Attends victims, first aid).  
-    - **Type: Actuator.**  
-    - Hybrid  
-  - **(3x) Driver Actuator Agent**: Follows the plan of the Organization Agent. (Drives ambulance).  
-    - **Type: Actuator.**  
-    - Hybrid
-- **Police Crew**  
-  - **Organization Agent:** Creates strict plan for this crew.  
-    - **Type: Facilitator**  
-    - Deliberative  
-  - **(3x) Patrol Actuator Agent:** Follows the plan of the Organization Agent. (Drives patrol car, manages traffic and evacuation).  
-    - **Type: Actuator.**  
-    - Hybrid  
+**Organisation Agent (Type: Faciliator)**
+The organisation agent functions as strategic planners within each specialised crew (firefighting, medical, and police). Some qualities of these agents include:
 
-INDIVIDUAL AGENT PROPERTIES
+- Deliberative decision-making processes.
+- High autonomy in plan creation.
+- Strong reactive capabilities to emergency evolution.
+- Stationary operation with robust communication abilities.
+
+**Organisation Agent (Type: Faciliator)**
+The actuator agent represents the operational level of the system, which includes firefighters, medical staff, and police patrol units. Some qualities of these agents include:
+
+- Hybrid architecture combining planned and reactive behaviors
+- Limited autonomy within predetermined operational frameworks
+- High mobility for field operations
+- Specialized task execution capabilities
+
+
+### 3.2 Cross-Domain Analysis
+
+#### 3.2.1 Common Properties Across Agent Types
+Several fundamental agent properties are shared across all of our agent types, while other properties are selected for an agent based on the required needs.
+
+##### 1. Universal Characteristics
+- Flexibility: All agents maintain adaptability to dynamic emergency situations.
+- Social Ability: Required for inter-agent coordination.
+- Rationality: Essential for logical, information-based decision-making.
+- Temporal Continuity: All agents operate continuously to maintain response readiness.
+
+##### 2. Differentiated Properties 
+The system implements distinction in properties to maximise efficiency:
+- **a) Reasoning Capabilities**
+Contact and organisation agents employ a high level of reasoning, whereas actuator agents employ limited level of reasoning.
+- **b) Autonomy Distribution**
+Contact and organisation agents employ a high level of reasoning to perform strategic planning, whereas actuator agents employ limited level of reasoning for consistent plan execution.
+
+#### 3.2.2 Domain-Specific Variations
+The basic framework remains consistent across domains, but more specific implementations are
+required based on the operational requirements:
+
+**1. Firefighting Domain**
+- Organisation Agents: Emphasises firefighting-specific planning.
+- Actuator Agents: Split between firefighting and rescue operations which require specialised mobility patterns - these to be provided by the organisation agents.
+
+**2. Medical Domain**
+- Organisation Agents: Focuses on allocation of resources and patient distribution.
+- Actuator Agents: Split between medical care and transportation roles.
+
+**3. Police Domain**
+- Organisation Agents: Coordinates traffic and crowd control strategies.
+- Actuator Agents: Focuses on mobility restrictions and public interaction.
+
+#### 3.2.3 System-Wide Characteristics
+Several system-wide characteristics have been established following on from our analysis of the problem:
+
+**1. Learning Implementation**
+The system excludes the use of learning capabilities to learn from previous responses. As the system relies on pre-defined protocols and real-time adaptation, tt is assumed an optimal plan is established - hence no learning is required.
+
+**2. Mobility Patterns**
+A clear distinction is formed between stationary agents (Contact and Organisation) and mobile agents (Actuators) for operations.
+
+**3. Communication Hierarchy**
+Vertical communication channels are established between different agent types who have the ability for cross-agent communication, whereas horizontal communication channels are established for same-level agent communication.
+
+### 3.3 Agent Taxonomy Grid
+Below is a agent taxonomy grid outlining each agent along with each fundamental agent property, and whether an agent contains the property or not along with a justification for the design.
+
 |                  | Emergency          | Firefighting Crew          |                  | Medical Team            |                  | Police Crew              |                  | Justification                                                                                                                                                                                                                                                                                    |
 |------------------|--------------------|----------------------------|------------------|--------------------------|------------------|--------------------------|------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 |                  | **Contact Agent**  | **Organization Agent**     | **Actuator Agent** | **Organization Agent**   | **Actuator Agent** | **Organization Agent**   | **Actuator Agent** |                                                                                                                                                                                                                                                                                                 |
