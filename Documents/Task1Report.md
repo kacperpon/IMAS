@@ -64,17 +64,17 @@ The city map is designed to be generally accessible to all agents, with specific
 
 ### Determinism
 
-A deterministic environment is one in which any action has a single guaranteed effect, there is no uncertainty aboutthe state that will result from performing an action.[1]  
+A deterministic environment is one in which any action has a single guaranteed effect, there is no uncertainty aboutthe state that will result from performing an action.[1,4]  
 The environment operates in a **Non-Deterministic** manner, meaning that actions do not always yield the same outcomes. Probabilistic factors influence the success or failure of certain actions. For example, an agent's attempt to extinguish a fire may not always be successful, as external conditions could allow the fire to persist or even spread.
 
 ### Episodicity
 
-With episodicity defined as the extent to which an actor's actions during one time period affect events occurring during a different time period [2] we have determined that this environment is  **Non-Episodic**.  
+With episodicity defined as the extent to which an actor's actions during one time period affect events occurring during a different time period [2,4] we have determined that this environment is  **Non-Episodic**.  
 There is no reliance on a training algorithm involving distinct episodes, as the system utilizes pre-trained language models, allowing it to operate continuously. However, each emergency report received by agents can be considered a self-contained episode for practical purposes.
 
 ### Dynamism
 
-A static environment is one that can be assumed to remain unchanged except by the performance of actions by the agent [1].  
+A static environment is one that can be assumed to remain unchanged except by the performance of actions by the agent [1, 4].  
 The environment is **Dynamic**, with evolving conditions over time. Fires can grow in intensity if not extinguished, and the health of injured individuals may deteriorate if they do not receive timely assistance. This dynamism adds complexity to the agents' decision-making processes.
 
 ### Continuity
@@ -303,4 +303,5 @@ Requires movement to execute plans in the field.
 
 [1] Wooldridge (2002). An Introduction to Multiagent Systems   
 [2] Zou, W. (2023). Overview on reinforcement learning of multi-agent game. In Journal of Physics: Conference Series (Vol. 2646, 012021). IOP Publishing   
-[3] Russell, S.J. and Norvig, P. (2009) Artificial Intelligence. Upper Saddle River, N.J: Pearson Education. 
+[3] Russell, S.J. and Norvig, P. (2009) Artificial Intelligence. Upper Saddle River, N.J: Pearson Education.  
+[4] Balaji, P.G., Srinivasan, D. (2010). An Introduction to Multi-Agent Systems. In: Srinivasan, D., Jain, L.C. (eds) Innovations in Multi-Agent Systems and Applications - 1. Studies in Computational Intelligence, vol 310. Springer, Berlin, Heidelberg. https://doi.org/10.1007/978-3-642-14435-6_1
