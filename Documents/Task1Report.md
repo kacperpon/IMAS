@@ -1,10 +1,10 @@
 # Design of a Multi-Agent System for Emergency Response Simulation in Urban Environments: Task 1.
 
 **Students:**
-Pedro Agundez Fernández
-Pau Baguer Fàbrega
-Carlos Jiménez Farfán
-Kacper Krzysztof Poniatowski
+Pedro Agundez Fernández,
+Pau Baguer Fàbrega,
+Carlos Jiménez Farfán,
+Kacper Krzysztof Poniatowski,
 Niklas Long Schiefelbein
 
 ## Introduction
@@ -29,8 +29,6 @@ In this design phase, we focus on analyzing the environment, selecting and defin
 
 ### Continuity
 - **Discrete vs Continuous**: The environment is **Continuous** in terms of the map and time. Agents can navigate freely along the X and Y coordinates. While the map and time are continuous, agent actions (e.g., moving, extinguishing fire) are discrete.
-
-
 
 
 # 2. Agent selection and definition
@@ -88,7 +86,7 @@ In this design phase, we focus on analyzing the environment, selecting and defin
 ![sequence_diagram](Sequence_diagram/03_11_sequence_diagram_agent_version.drawio.png)
 
 
-# Agent taxonomy
+# Agent Taxonomy
 
 ## 3. Agent Taxonomy Analysis
 
