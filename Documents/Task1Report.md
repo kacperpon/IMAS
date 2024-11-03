@@ -16,19 +16,24 @@ In this design phase, we focus on analyzing the environment, selecting and defin
 # 1. Environment analysis
 
 ### Accessibility
-- **Accessible vs Inaccessible**: The general city map is accessible to all agents, but certain areas will be defined as inaccessible. Each agent only knows their specific location, the severity and type of the fire, and the number of wounded individuals nearby. To get a complete view of the situation, agents must communicate and share information about these details.
+
+The city map is designed to be generally accessible to all agents, with specific areas defined as inaccessible. Each agent, however, has a limited perception of the environment; they are only aware of their current location, the severity and type of any fire nearby, and the number of wounded individuals in the vicinity. To obtain a comprehensive view of the entire situation, agents need to communicate and share information regarding these details with one another.
 
 ### Determinism
-- **Deterministic vs Non-Deterministic**: The environment is **Non-Deterministic**. Actions do not guarantee the same outcomes each time; probabilistic factors are at play. For instance, attempting to extinguish a fire might not always succeed, as conditions could cause the fire to persist or spread.
+
+The environment operates in a **Non-Deterministic** manner, meaning that actions do not always yield the same outcomes. Probabilistic factors influence the success or failure of certain actions. For example, an agent's attempt to extinguish a fire may not always be successful, as external conditions could allow the fire to persist or even spread.
 
 ### Episodicity
-- **Episodic vs Non-Episodic**: The environment is **Non-Episodic**. Since there is no training algorithm relying on distinct episodes (the system is based on pre-trained language models), the scenario runs continuously. However, each emergency report could be treated as an individual episode.
+
+This environment is characterized as **Non-Episodic**. There is no reliance on a training algorithm involving distinct episodes, as the system utilizes pre-trained language models, allowing it to operate continuously. However, each emergency report received by agents can be considered a self-contained episode for practical purposes.
 
 ### Dynamism
-- **Static vs Dynamic**: The environment is **Dynamic**. Fires can escalate over time, and the health of injured individuals may decline if they are not treated quickly.
+
+The environment is **Dynamic**, with evolving conditions over time. Fires can grow in intensity if not extinguished, and the health of injured individuals may deteriorate if they do not receive timely assistance. This dynamism adds complexity to the agents' decision-making processes.
 
 ### Continuity
-- **Discrete vs Continuous**: The environment is **Continuous** in terms of the map and time. Agents can navigate freely along the X and Y coordinates. While the map and time are continuous, agent actions (e.g., moving, extinguishing fire) are discrete.
+
+In terms of space and time, the environment is **Continuous**. Agents are free to navigate across continuous X and Y coordinates on the map. While the overall map and time structure remain continuous, agent actions, such as moving or extinguishing a fire, are performed in discrete steps.
 
 
 # 2. Agent selection and definition
