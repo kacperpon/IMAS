@@ -17,35 +17,41 @@ In this design phase, we focus on analyzing the environment, selecting and defin
 
 ### Accessibility
 
+An accessible environment is one in which the agent can obtain complete, accurate, up-to-date information about the environment's state.[^1]
 The city map is designed to be generally accessible to all agents, with specific areas defined as inaccessible. Each agent, however, has a limited perception of the environment; they are only aware of their current location, the severity and type of any fire nearby, and the number of wounded individuals in the vicinity. To obtain a comprehensive view of the entire situation, agents need to communicate and share information regarding these details with one another.
 
 ### Determinism
 
+A deterministic environment is one in which any action has a single guaranteed effect, there is no uncertainty aboutthe state that will result from performing an action.[^1].
 The environment operates in a **Non-Deterministic** manner, meaning that actions do not always yield the same outcomes. Probabilistic factors influence the success or failure of certain actions. For example, an agent's attempt to extinguish a fire may not always be successful, as external conditions could allow the fire to persist or even spread.
 
 ### Episodicity
 
-This environment is characterized as **Non-Episodic**. There is no reliance on a training algorithm involving distinct episodes, as the system utilizes pre-trained language models, allowing it to operate continuously. However, each emergency report received by agents can be considered a self-contained episode for practical purposes.
+With episodicity defined as the extent to which an actor's actions during one time period affect events occurring during a different time period [^2] we have determined that this environment is  **Non-Episodic**. 
+There is no reliance on a training algorithm involving distinct episodes, as the system utilizes pre-trained language models, allowing it to operate continuously. However, each emergency report received by agents can be considered a self-contained episode for practical purposes.
 
 ### Dynamism
 
+A static environment is one that can be assumed to remain unchanged except by the performance of actions by the agent [^1].
 The environment is **Dynamic**, with evolving conditions over time. Fires can grow in intensity if not extinguished, and the health of injured individuals may deteriorate if they do not receive timely assistance. This dynamism adds complexity to the agents' decision-making processes.
 
 ### Continuity
 
-In terms of space and time, the environment is **Continuous**. Agents are free to navigate across continuous X and Y coordinates on the map. While the overall map and time structure remain continuous, agent actions, such as moving or extinguishing a fire, are performed in discrete steps.
+An environment is discrete if there are a fixed, finite number of actions and percepts in it[^1].
+In terms of space, the environment is **Continuous**. Agents are free to navigate across continuous X and Y coordinates on the map. While the overall map and time structure remain continuous, agent actions, such as moving or extinguishing a fire, are performed in discrete steps.
 
 
 # 2. Agent selection and definition
 
 ![agents](<crews graph.png>)
 
+An agent is anything that can be viewed as perceiving its environment through sensors and acting upon that environment through actuators [^3].
+In this section we define the types of agents we propose for this task, each agent is defined by its task, type (facilitator or actuator) and tools.
+
 - **Emergency crew**  
-  - **Contact agent.** Recieves the report in natural language and compiles the data in json format to pass it to the organization agents.  
+  - **Contact agent.** Recieves the report in natural language and compiles the data in json format to pass it to the organization agents. Once it recrives the plans from each organization agent and compiles them into a global plan, consults with the ethics crew in case there are ethical dilemmas and sends it back to the crews to execute. 
     - **Type:** Facilitator
     - **Tools:** FileReadTool
-  - **Planner agent.** Recieves the plans from each organization agent and compiles them into a global plan, consults with the ethics crew in case there are ethical dilemmas.  
-    - **Type:** Facilitator
 
 - **Ethics crew**  
   - **Philosopher agent.** Recieves an ethic dilemma from the emergency planner and solves it using RAG to extract the conclusion from an ethics "book" (text file).  
@@ -211,3 +217,9 @@ Actuator = YES
 
 Must physically respond to emergencies.
 Requires movement to execute plans in the field.
+
+
+# Bibliography
+
+[^1] Wooldridge (2002). An Introduction to Multiagent Systems
+[^2] Zou, W. (2023). Overview on reinforcement learning of multi-agent game. In Journal of Physics: Conference Series (Vol. 2646, 012021). IOP Publishing
