@@ -1,3 +1,5 @@
+## Environment Set Up
+
 ### Accessibility
 - **Accessible vs Inaccessible**: The general city map is accessible to all agents, but certain areas will be defined as inaccessible. Each agent only knows their specific location, the severity and type of the fire, and the number of wounded individuals nearby. To get a complete view of the situation, agents must communicate and share information about these details.
 
