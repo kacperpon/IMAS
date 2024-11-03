@@ -17,27 +17,27 @@ In this design phase, we focus on analyzing the environment, selecting and defin
 
 ### Accessibility
 
-An accessible environment is one in which the agent can obtain complete, accurate, up-to-date information about the environment's state.[^1]
+An accessible environment is one in which the agent can obtain complete, accurate, up-to-date information about the environment's state.[1]  
 The city map is designed to be generally accessible to all agents, with specific areas defined as inaccessible. Each agent, however, has a limited perception of the environment; they are only aware of their current location, the severity and type of any fire nearby, and the number of wounded individuals in the vicinity. To obtain a comprehensive view of the entire situation, agents need to communicate and share information regarding these details with one another.
 
 ### Determinism
 
-A deterministic environment is one in which any action has a single guaranteed effect, there is no uncertainty aboutthe state that will result from performing an action.[^1].
+A deterministic environment is one in which any action has a single guaranteed effect, there is no uncertainty aboutthe state that will result from performing an action.[1]  
 The environment operates in a **Non-Deterministic** manner, meaning that actions do not always yield the same outcomes. Probabilistic factors influence the success or failure of certain actions. For example, an agent's attempt to extinguish a fire may not always be successful, as external conditions could allow the fire to persist or even spread.
 
 ### Episodicity
 
-With episodicity defined as the extent to which an actor's actions during one time period affect events occurring during a different time period [^2] we have determined that this environment is  **Non-Episodic**. 
+With episodicity defined as the extent to which an actor's actions during one time period affect events occurring during a different time period [2] we have determined that this environment is  **Non-Episodic**.  
 There is no reliance on a training algorithm involving distinct episodes, as the system utilizes pre-trained language models, allowing it to operate continuously. However, each emergency report received by agents can be considered a self-contained episode for practical purposes.
 
 ### Dynamism
 
-A static environment is one that can be assumed to remain unchanged except by the performance of actions by the agent [^1].
+A static environment is one that can be assumed to remain unchanged except by the performance of actions by the agent [1].  
 The environment is **Dynamic**, with evolving conditions over time. Fires can grow in intensity if not extinguished, and the health of injured individuals may deteriorate if they do not receive timely assistance. This dynamism adds complexity to the agents' decision-making processes.
 
 ### Continuity
 
-An environment is discrete if there are a fixed, finite number of actions and percepts in it[^1].
+An environment is discrete if there are a fixed, finite number of actions and percepts in it[1].  
 In terms of space, the environment is **Continuous**. Agents are free to navigate across continuous X and Y coordinates on the map. While the overall map and time structure remain continuous, agent actions, such as moving or extinguishing a fire, are performed in discrete steps.
 
 
@@ -45,7 +45,7 @@ In terms of space, the environment is **Continuous**. Agents are free to navigat
 
 ![agents](<crews graph.png>)
 
-An agent is anything that can be viewed as perceiving its environment through sensors and acting upon that environment through actuators [^3].
+An agent is anything that can be viewed as perceiving its environment through sensors and acting upon that environment through actuators [3].  
 In this section we define the types of agents we propose for this task, each agent is defined by its task, type (facilitator or actuator) and tools.
 
 - **Emergency crew**  
@@ -124,13 +124,13 @@ This section of the report analyses the properties of each of the agents outline
 All agents = YES
 
 Essential in emergency response where situations are dynamic and unpredictable.
-Agents must adapt to changing circumstances (new fires, resource constraints, casualties).
+Agents must adapt to changing circumstances (new fires, resource constraints, casualties).  
 Even with predefined protocols, flexibility allows for situational adaptation.
 
 #### 3.3.2 Reactivity
 All agents = YES
 
-All agents must respond to changes in their environment.
+All agents must respond to changes in their environment.  
 Emergency situations are inherently unpredictable and require immediate responses.
 Examples: Contact Agent reacts to new reports, Organization Agents to resource changes, Actuators to field conditions.
 
@@ -138,89 +138,89 @@ Examples: Contact Agent reacts to new reports, Organization Agents to resource c
 
 Contact & Philosopher = NO
 
-Only respond to incoming reports/queries.
+Only respond to incoming reports/queries.  
 Cannot anticipate when emergencies will occur or when ethical guidance will be needed.
 
 
 Organization & Actuator = YES
 
-Must anticipate potential scenarios and prepare accordingly.
+Must anticipate potential scenarios and prepare accordingly.  
 Example: Organization Agent preparing backup plans, Actuators positioning for better response.
 
 #### 3.3.4 Social Ability
 All agents = YES
 
-Essential for coordination in a multi-agent system.
+Essential for coordination in a multi-agent system.  
 Emergency response requires constant communication between all levels.
 Information must flow smoothly between planning and execution.
 
 #### 3.3.5 Rationality
 All agents = YES
 
-All decisions must be based on logical evaluation of available information.
-Critical in emergency situations where resources and time are limited.
+All decisions must be based on logical evaluation of available information.  
+Critical in emergency situations where resources and time are limited.  
 Ensures consistent and justifiable decision-making.
 
 #### 3.3.6 Reasoning
 
 Contact, Organization, Philosopher = YES
 
-Required for complex decision-making and planning.
-Must process multiple variables and constraints.
+Required for complex decision-making and planning.  
+Must process multiple variables and constraints.  
 
 
 Actuator = LESS
 
-Follows pre-defined plans with limited decision-making scope.
-Only needs basic reasoning for immediate field decisions.
+Follows pre-defined plans with limited decision-making scope.  
+Only needs basic reasoning for immediate field decisions.  
 
 
 
 #### 3.3.7 Learning
 All agents = NO
 
-System relies on predefined protocols for consistency.
-Emergency response requires predictable, reliable behavior.
-Learning could introduce unpredictability in critical situations.
+System relies on predefined protocols for consistency.  
+Emergency response requires predictable, reliable behavior.  
+Learning could introduce unpredictability in critical situations.  
 
 #### 3.3.8 Autonomy
 
 Contact, Organization, Philosopher = HIGH
 
-Need independence to make complex decisions.
-Must handle multiple scenarios without constant oversight.
+Need independence to make complex decisions.  
+Must handle multiple scenarios without constant oversight.  
 
 
 Actuator = LOW
 
-Follows organization agent's plans.
-Limited decision-making scope to ensure plan consistency.
+Follows organization agent's plans.  
+Limited decision-making scope to ensure plan consistency.  
 
 
 
 #### 3.3.9 Temporal Continuity
 All agents = YES
 
-Emergency response system must operate continuously.
-No agent can have "downtime" as emergencies can occur anytime.
+Emergency response system must operate continuously.  
+No agent can have "downtime" as emergencies can occur anytime.  
 System must maintain readiness 24/7.
 
 #### 3.3.10 Mobility
 
 Contact, Organization, Philosopher = NO
 
-Operate from fixed command/control positions.
-Focus on planning and coordination.
+Operate from fixed command/control positions.  
+Focus on planning and coordination.  
 
 
 Actuator = YES
 
-Must physically respond to emergencies.
-Requires movement to execute plans in the field.
+Must physically respond to emergencies.  
+Requires movement to execute plans in the field.  
 
 
 # Bibliography
 
-[^1] Wooldridge (2002). An Introduction to Multiagent Systems
-[^2] Zou, W. (2023). Overview on reinforcement learning of multi-agent game. In Journal of Physics: Conference Series (Vol. 2646, 012021). IOP Publishing
-[^3] Russell, S.J. and Norvig, P. (2009) Artificial Intelligence. Upper Saddle River, N.J: Pearson Education. 
+[1] Wooldridge (2002). An Introduction to Multiagent Systems   
+[2] Zou, W. (2023). Overview on reinforcement learning of multi-agent game. In Journal of Physics: Conference Series (Vol. 2646, 012021). IOP Publishing   
+[3] Russell, S.J. and Norvig, P. (2009) Artificial Intelligence. Upper Saddle River, N.J: Pearson Education. 
