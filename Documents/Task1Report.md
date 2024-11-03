@@ -7,6 +7,34 @@ Carlos Jiménez Farfán,
 Kacper Krzysztof Poniatowski,
 Niklas Long Schiefelbein
 
+## Index
+
+- [Introduction](#introduction)
+- [1. Environment Analysis](#1-environment-analysis)
+  - [Accessibility](#accessibility)
+  - [Determinism](#determinism)
+  - [Episodicity](#episodicity)
+  - [Dynamism](#dynamism)
+  - [Continuity](#continuity)
+- [2. Agent Selection and Definition](#2-agent-selection-and-definition)
+- [3. Agent Taxonomy](#3-agent-taxonomy)
+  - [3.1 Overview](#31-overview)
+  - [3.2 Agent Property Analysis](#32-agent-property-analysis)
+  - [3.3 Property Justification](#33-property-justification)
+    - [3.3.1 Flexibility](#331-flexibility)
+    - [3.3.2 Reactivity](#332-reactivity)
+    - [3.3.3 Proactiveness](#333-proactiveness)
+    - [3.3.4 Social Ability](#334-social-ability)
+    - [3.3.5 Rationality](#335-rationality)
+    - [3.3.6 Reasoning](#336-reasoning)
+    - [3.3.7 Learning](#337-learning)
+    - [3.3.8 Autonomy](#338-autonomy)
+    - [3.3.9 Temporal Continuity](#339-temporal-continuity)
+    - [3.3.10 Mobility](#3310-mobility)
+- [Bibliography](#bibliography)
+
+
+
 ## Introduction
 
 This is the report for Task 1, which presents the initial design of a Multi-Agent System (MAS) for managing emergency responses in an urban city. The objective of this project is to simulate a coordinated response among various autonomous agents to solve rescue scenarios which may contain fires, medical injuries, traffic management, etc. The environment will be carefully selected to emulate the real-world challenges and complexities of emergency management, including the optimization of resource allocation to ensure a precise and timely response by the emergency crews.
@@ -219,7 +247,7 @@ Must physically respond to emergencies.
 Requires movement to execute plans in the field.
 
 
-# Bibliography
+## Bibliography
 
 [^1] Wooldridge (2002). An Introduction to Multiagent Systems
 [^2] Zou, W. (2023). Overview on reinforcement learning of multi-agent game. In Journal of Physics: Conference Series (Vol. 2646, 012021). IOP Publishing
