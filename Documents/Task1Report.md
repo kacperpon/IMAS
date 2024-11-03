@@ -223,3 +223,4 @@ Requires movement to execute plans in the field.
 
 [^1] Wooldridge (2002). An Introduction to Multiagent Systems
 [^2] Zou, W. (2023). Overview on reinforcement learning of multi-agent game. In Journal of Physics: Conference Series (Vol. 2646, 012021). IOP Publishing
+[^3] Russell, S.J. and Norvig, P. (2009) Artificial Intelligence. Upper Saddle River, N.J: Pearson Education. 
