@@ -1,14 +1,13 @@
 ## 3.  Agent Taxonomy
 
 ### 3.1 Classification Framework
-The emergency response multi-agent system uses a hierarchical framework that
-sets clear boundaries between three primary agent types: Contact Agents, Organisation Agents, and Actuator Agents. This design optimises emergency reponse operations while maintaining clear command structure at the same time with the goal of optimal operational efficiency.
+The emergency response multi-agent system uses a hierarchical framework that sets clear boundaries between four primary agent types: Contact Agents, Organisation Agents, and Actuator Agents, and a Philosopher Agent. This design optimises emergency reponse operations while maintaining clear command structure at the same time with the goal of optimal operational efficiency, all contained within strict ethics guidelines.
 
 #### 3.1.1 Agent Types
-**Contact Agent (Type: Faciliator)**
-This agent is the primary coordinator within the emergency response team, operating as a high-evel design facilitator. While this agent has high levels of autonomy and strong reasoning capabilities, it lacks proactiveness and mobility. The primary role includes optimal distribution of resources and coordination of response teams - making it essential for maintaining system-wide coherence without direct involvement. 
+**Contact Agent**
+This agent is the primary coordinator within the overall emergency response team, operating as a high-level response design facilitator. While this agent has high levels of autonomy and strong reasoning capabilities, it lacks proactiveness and mobility. The primary role includes optimal distribution of resources and coordination of response teams - making it essential for maintaining system-wide coherence without direct involvement. 
 
-**Organisation Agent (Type: Faciliator)**
+**Organisation Agent**
 The organisation agent functions as strategic planners within each specialised crew (firefighting, medical, and police). Some qualities of these agents include:
 
 - Deliberative decision-making processes.
@@ -16,7 +15,7 @@ The organisation agent functions as strategic planners within each specialised c
 - Strong reactive capabilities to emergency evolution.
 - Stationary operation with robust communication abilities.
 
-**Organisation Agent (Type: Faciliator)**
+**Actuator Agent**
 The actuator agent represents the operational level of the system, which includes firefighters, medical staff, and police patrol units. Some qualities of these agents include:
 
 - Hybrid architecture combining planned and reactive behaviors
@@ -24,11 +23,13 @@ The actuator agent represents the operational level of the system, which include
 - High mobility for field operations
 - Specialized task execution capabilities
 
+**Philosopher Agent**
+TODO!!!
 
 ### 3.2 Cross-Domain Analysis
 
 #### 3.2.1 Common Properties Across Agent Types
-Several fundamental agent properties are shared across all of our agent types, while other properties are selected for an agent based on the required needs.
+Several fundamental agent properties are shared across most of our agent types, while other properties are selected for an agent based on the required needs.
 
 ##### 1. Universal Characteristics
 - Flexibility: All agents maintain adaptability to dynamic emergency situations.
