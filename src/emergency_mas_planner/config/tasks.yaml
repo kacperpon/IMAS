@@ -1,0 +1,8 @@
+task_name:
+  description: >
+    Task description
+  expected_output: >
+    Expected output description.
+  agent: agent_name
+  context: # Optional
+    - other_task
