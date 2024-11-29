@@ -48,6 +48,7 @@ Niklas Long Schiefelbein
   - [Bibliography](#bibliography)
 
 
+<div style="page-break-after: always;"></div>
 
 ## Introduction
 
@@ -82,6 +83,8 @@ The environment is **Dynamic**, with evolving conditions over time. Fires can gr
 An environment is discrete if there are a fixed, finite number of actions and percepts in it[1].  
 In terms of space, the environment is **Continuous**. Agents are free to navigate across continuous X and Y coordinates on the map. While the overall map and time structure remain continuous, agent actions, such as moving or extinguishing a fire, are performed in discrete steps.
 
+
+<div style="page-break-after: always;"></div>
 
 # 2. Agent selection and definition
 
@@ -136,6 +139,8 @@ In this section we define the types of agents we propose for this task, each age
     - **Type:** Actuator.  
     - **Hybrid**  
 
+<div style="page-break-after: always;"></div>
+
 # 3 Emergency Response System Workflow  
 
 ![sequence_diagram](Sequence_diagram/03_11_sequence_diagram_agent_version.drawio.png)  
@@ -178,6 +183,8 @@ Throughout the operation, all units maintain constant communication by providing
 
 Once the immediate emergency is addressed, the firefighting team confirms complete fire extinction. All actuator agents then perform thorough final checks of their respective areas of responsibility. Each team methodically verifies that their specific objectives have been fully met according to the response plan.
 
+
+<div style="page-break-after: always;"></div>
 
 # 4. Agent Taxonomy Analysis
 
