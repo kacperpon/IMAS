@@ -9,29 +9,43 @@ Niklas Long Schiefelbein
 
 ## Index
 
-- [Introduction](#introduction)
-- [1. Environment Analysis](#1-environment-analysis)
-  - [Accessibility](#accessibility)
-  - [Determinism](#determinism)
-  - [Episodicity](#episodicity)
-  - [Dynamism](#dynamism)
-  - [Continuity](#continuity)
-- [2. Agent Selection and Definition](#2-agent-selection-and-definition)
-- [3. Agent Taxonomy](#3-agent-taxonomy)
-  - [3.1 Overview](#31-overview)
-  - [3.2 Agent Property Analysis](#32-agent-property-analysis)
-  - [3.3 Property Justification](#33-property-justification)
-    - [3.3.1 Flexibility](#331-flexibility)
-    - [3.3.2 Reactivity](#332-reactivity)
-    - [3.3.3 Proactiveness](#333-proactiveness)
-    - [3.3.4 Social Ability](#334-social-ability)
-    - [3.3.5 Rationality](#335-rationality)
-    - [3.3.6 Reasoning](#336-reasoning)
-    - [3.3.7 Learning](#337-learning)
-    - [3.3.8 Autonomy](#338-autonomy)
-    - [3.3.9 Temporal Continuity](#339-temporal-continuity)
-    - [3.3.10 Mobility](#3310-mobility)
-- [Bibliography](#bibliography)
+- [Design of a Multi-Agent System for Emergency Response Simulation in Urban Environments: Task 1.](#design-of-a-multi-agent-system-for-emergency-response-simulation-in-urban-environments-task-1)
+  - [Index](#index)
+  - [Introduction](#introduction)
+- [1. Environment analysis](#1-environment-analysis)
+    - [Accessibility](#accessibility)
+    - [Determinism](#determinism)
+    - [Episodicity](#episodicity)
+    - [Dynamism](#dynamism)
+    - [Continuity](#continuity)
+- [2. Agent selection and definition](#2-agent-selection-and-definition)
+- [3 Emergency Response System Workflow](#3-emergency-response-system-workflow)
+  - [1. Initial Emergency Report \& Assessment](#1-initial-emergency-report--assessment)
+  - [2. Strategic Planning](#2-strategic-planning)
+    - [Initial Distribution](#initial-distribution)
+    - [Specialized Planning](#specialized-planning)
+  - [3. Plan Integration \& Approval](#3-plan-integration--approval)
+  - [4. Operational Execution](#4-operational-execution)
+    - [Team Deployment](#team-deployment)
+    - [Parallel Operations](#parallel-operations)
+    - [Real-time Coordination](#real-time-coordination)
+  - [5. Incident Resolution](#5-incident-resolution)
+    - [Final Checks](#final-checks)
+- [4. Agent Taxonomy Analysis](#4-agent-taxonomy-analysis)
+    - [3.1 Overview](#31-overview)
+    - [3.2 Agent Property Analysis](#32-agent-property-analysis)
+    - [3.3 Property Justification](#33-property-justification)
+      - [3.3.1 Flexibility](#331-flexibility)
+      - [3.3.2 Reactivity](#332-reactivity)
+      - [3.3.3 Proactiveness](#333-proactiveness)
+      - [3.3.4 Social Ability](#334-social-ability)
+      - [3.3.5 Rationality](#335-rationality)
+      - [3.3.6 Reasoning](#336-reasoning)
+      - [3.3.7 Learning](#337-learning)
+      - [3.3.8 Autonomy](#338-autonomy)
+      - [3.3.9 Temporal Continuity](#339-temporal-continuity)
+      - [3.3.10 Mobility](#3310-mobility)
+  - [Bibliography](#bibliography)
 
 
 
@@ -50,17 +64,17 @@ The city map is designed to be generally accessible to all agents, with specific
 
 ### Determinism
 
-A deterministic environment is one in which any action has a single guaranteed effect, there is no uncertainty aboutthe state that will result from performing an action.[1]  
+A deterministic environment is one in which any action has a single guaranteed effect, there is no uncertainty aboutthe state that will result from performing an action.[1,4]  
 The environment operates in a **Non-Deterministic** manner, meaning that actions do not always yield the same outcomes. Probabilistic factors influence the success or failure of certain actions. For example, an agent's attempt to extinguish a fire may not always be successful, as external conditions could allow the fire to persist or even spread.
 
 ### Episodicity
 
-With episodicity defined as the extent to which an actor's actions during one time period affect events occurring during a different time period [2] we have determined that this environment is  **Non-Episodic**.  
+With episodicity defined as the extent to which an actor's actions during one time period affect events occurring during a different time period [2,4] we have determined that this environment is  **Non-Episodic**.  
 There is no reliance on a training algorithm involving distinct episodes, as the system utilizes pre-trained language models, allowing it to operate continuously. However, each emergency report received by agents can be considered a self-contained episode for practical purposes.
 
 ### Dynamism
 
-A static environment is one that can be assumed to remain unchanged except by the performance of actions by the agent [1].  
+A static environment is one that can be assumed to remain unchanged except by the performance of actions by the agent [1, 4].  
 The environment is **Dynamic**, with evolving conditions over time. Fires can grow in intensity if not extinguished, and the health of injured individuals may deteriorate if they do not receive timely assistance. This dynamism adds complexity to the agents' decision-making processes.
 
 ### Continuity
@@ -122,12 +136,50 @@ In this section we define the types of agents we propose for this task, each age
     - **Type:** Actuator.  
     - **Hybrid**  
 
-![sequence_diagram](Sequence_diagram/03_11_sequence_diagram_agent_version.drawio.png)
+# 3 Emergency Response System Workflow  
+
+![sequence_diagram](Sequence_diagram/03_11_sequence_diagram_agent_version.drawio.png)  
+
+## 1. Initial Emergency Report & Assessment
+
+The emergency response process initiates when a report is received by the system. Emergency services immediately gather structured information through a detailed Markdown report. This report is essential as it contains comprehensive details about the incident: the specific classification of the fire (whether it's ordinary, electrical, or gas-based), the exact location marked by X and Y coordinates, a count of people who have been injured in the incident, and a clear assessment of the fire's severity, categorized as low, medium, or high.
+
+## 2. Strategic Planning
+
+### Initial Distribution
+
+Upon receiving this information, the emergency service swiftly develops a preliminary general plan. This plan is then systematically distributed to three key specialized departments: the Firefighting Crew, Medical Team, and Police Department. Each department receives relevant aspects of the plan pertaining to their specific roles and responsibilities.
+
+### Specialized Planning
+
+After receiving the initial plan, each department's organizational agents begin developing their own optimized response strategies. The Firefighting team creates a detailed plan considering the specific characteristics of the fire and the resources at their disposal. The Medical team focuses their planning on effective casualty management and coordination with nearby hospitals. Meanwhile, the Police department develops comprehensive strategies for traffic control that might be necessary.
+
+## 3. Plan Integration & Approval
+
+Following the specialized planning phase, all individual plans are brought together at the Emergency Services level for consolidation. When necessary, an ethical review is conducted to ensure all planned actions meet required standards and guidelines. Once approved, a comprehensive final plan is crafted, incorporating all specialized elements, and distributed back to all teams for execution.
+
+## 4. Operational Execution
+
+### Team Deployment
+
+With the final plan approved, all actuator agents, representing the field units, execute their assigned tasks. Firefighting units proceed directly to the fire location, while medical units mobilize to handle casualties. Simultaneously, police units begin implementing traffic management procedures as needed.
+
+### Parallel Operations
+
+The execution phase involves multiple specialized operations occurring concurrently. The Firefighting team conducts both primary firefighting operations and rescue missions when required. The Medical team focuses on providing immediate medical treatment and coordinating patient transportation to appropriate facilities. The Police team maintains area security through regular patrols while managing traffic flow around the incident site.
+
+### Real-time Coordination
+
+Throughout the operation, all units maintain constant communication by providing regular status updates. This dynamic approach ensures effective inter-team coordination and optimal resource utilization throughout the emergency response.
+
+## 5. Incident Resolution
+
+### Final Checks
+
+Once the immediate emergency is addressed, the firefighting team confirms complete fire extinction. All actuator agents then perform thorough final checks of their respective areas of responsibility. Each team methodically verifies that their specific objectives have been fully met according to the response plan.
 
 
-# Agent Taxonomy
-
-## 3. Agent Taxonomy Analysis
+# 4. Agent Taxonomy Analysis
 
 ### 3.1 Overview
 This section of the report analyses the properties of each of the agents outlined in the previous section (Contact Agent, Organisation Agent, Actuator Agent, and Philosopher Agent). For each agent type, we examine which properties are present and provide justification for these design decisions.
@@ -251,4 +303,5 @@ Requires movement to execute plans in the field.
 
 [1] Wooldridge (2002). An Introduction to Multiagent Systems   
 [2] Zou, W. (2023). Overview on reinforcement learning of multi-agent game. In Journal of Physics: Conference Series (Vol. 2646, 012021). IOP Publishing   
-[3] Russell, S.J. and Norvig, P. (2009) Artificial Intelligence. Upper Saddle River, N.J: Pearson Education. 
+[3] Russell, S.J. and Norvig, P. (2009) Artificial Intelligence. Upper Saddle River, N.J: Pearson Education.  
+[4] Balaji, P.G., Srinivasan, D. (2010). An Introduction to Multi-Agent Systems. In: Srinivasan, D., Jain, L.C. (eds) Innovations in Multi-Agent Systems and Applications - 1. Studies in Computational Intelligence, vol 310. Springer, Berlin, Heidelberg. https://doi.org/10.1007/978-3-642-14435-6_1
