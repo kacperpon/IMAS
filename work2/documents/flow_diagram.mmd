@@ -1,0 +1,47 @@
+flowchart TD
+
+    A[UserRequest]:::start --> B[Distributor Agent]
+
+    %% Emergency Crew Workflow
+    subgraph Emergency Crew
+        B
+        E
+        B --> E[Are there injured people?]
+    end
+
+    %% Individual Crew Planning
+    subgraph Firefighter Crew
+        B --> |Distribute information to Firefighting Crew| D[Firefighting Crew Planning]
+        D --> D1[Generate FirefightingPlan]
+    end
+
+    subgraph Police Crew
+        B --> |Distribute information to Police Crew| F[Police Crew Planning]
+        F --> F1[Generate PolicePlan]
+    end
+
+    %% Medical Crew Workflow
+    E --> |Yes - distribute information to Medical Crew| E1[Medical Crew Planning]
+    E --> |No - medical crew plan not required| I
+
+    subgraph Medical Crew
+        E1 --> E2[Generate MedicalPlan]
+    end
+
+    %% Aggregation of Plans
+    D1 --> |Send FirefightingPlan to Distributor| I
+    F1 --> |Send PolicePlan to Distributor| I
+    E2 --> |Send MedicalPlan to Distributor| I
+
+    subgraph Emergency Crew
+        I[Receiver Agent Compiles FinalPlan]
+        I --> I1[Ethical issues detected?]
+        I1 --> |Yes, ethical concerns detected| I2[Philosopher Agent Consultation]
+    end
+
+        I1 --> |No ethical concerns detected. No consultation provided| J[Skip Philosopher Consultation]
+    I2 --> |Ethical recommendation added to output| J[FinalPlan Output]
+
+    %% Styles
+    style I1 fill:#0D5862,stroke:#a8a8a8,stroke-width:1px
+    style E fill:#0D5862,stroke:#a8a8a8,stroke-width:1px
