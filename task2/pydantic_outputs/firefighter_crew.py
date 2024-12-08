@@ -66,7 +66,9 @@ class FireTruckSelection(BaseModel):
 class RoutePlanning(BaseModel):
     """Output for planning the route."""
 
-    routes: List[List[int]] = Field(..., description="List of planned OSMnx routes.")
+    routes: List[tuple[str, List[int]]] = Field(
+        ..., description="List of planned OSMnx routes for each fire truck."
+    )
     action_details: str = Field(
         ..., description="Additional information on route planning."
     )
@@ -75,23 +77,12 @@ class RoutePlanning(BaseModel):
 class FirePlanCompilation(BaseModel):
     """Comprehensive output for compiling the final plan."""
 
-    n_firefighters: int = Field(..., description="Number of firefighters assigned.")
-    extinguishing_tools: List[str] = Field(
-        ..., description="List of selected tools for extinguishing."
+    response_plan: str = Field(
+        ..., description="Compiled response plan for the firefighter operation."
     )
-    rescue_strategy: str = Field(..., description="Strategy for rescuing victims.")
-    stop_fire_strategy: str = Field(..., description="Strategy for stopping the fire.")
-    ordered_victim_rescue: List[str] = Field(
-        ..., description="List of victims ordered by rescue priority."
-    )
-    rescue_tools: List[str] = Field(
-        ..., description="List of tools used for rescue operations."
-    )
-    fire_trucks: List[str] = Field(..., description="List of selected fire trucks.")
-    routes: List[List[int]] = Field(..., description="List of planned OSMnx routes.")
     ethical_issues: Optional[str] = Field(
         None, description="Ethical issues considered in the plan."
     )
     action_details: str = Field(
-        ..., description="Additional details of the overall plan."
+        ..., description="Additional details of the overall firefighter plan."
     )
