@@ -41,17 +41,17 @@ class CityEmergencyResponseFlow(Flow[InitialInformation]):
         self.state.initial_emergency_report = open("initial_report.md").read()
         print(self.state.initial_emergency_report)
 
-    # @listen(read_emergency_characteristics)
-    # def start_emergency_pipeline(self):
-    #     print("Handling the reported emergency")
-    #     result = (
-    #         EmergencyCrew()
-    #         .crew()
-    #         .kickoff(inputs={"sentence_count": self.state.sentence_count})
-    #     )
+    @listen(read_emergency_characteristics)
+    def start_emergency_pipeline(self):
+        print("Handling the reported emergency")
+        result = (
+            EmergencyCrew()
+            .crew()
+            .kickoff(inputs={"sentence_count": self.state.sentence_count})
+        )
 
-    #     print("Poem generated", result.raw)
-    #     self.state.poem = result.raw
+        print("Poem generated", result.raw)
+        self.state.poem = result.raw
 
     # @listen(start_emergency_pipeline)
     # def save_poem(self):
