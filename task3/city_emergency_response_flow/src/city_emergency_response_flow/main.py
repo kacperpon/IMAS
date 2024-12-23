@@ -21,6 +21,7 @@ from .crews.police_crew.police_crew import PoliceCrew
 
 class InitialInformation(BaseModel):
     initial_emergency_report: str = ""
+    final_report: str = ""
 
 
 # class PoemState(BaseModel):
@@ -39,7 +40,6 @@ class CityEmergencyResponseFlow(Flow[InitialInformation]):
     def read_emergency_characteristics(self):
         print("Reading emergency characteristics")
         self.state.initial_emergency_report = open("initial_report.md").read()
-        print(self.state.initial_emergency_report)
 
     @listen(read_emergency_characteristics)
     def start_emergency_pipeline(self):
@@ -47,11 +47,14 @@ class CityEmergencyResponseFlow(Flow[InitialInformation]):
         result = (
             EmergencyCrew()
             .crew()
-            .kickoff(inputs={"sentence_count": self.state.sentence_count})
+            .kickoff(
+                inputs={"initial_emergency_report": self.state.initial_emergency_report}
+            )
         )
 
-        print("Poem generated", result.raw)
-        self.state.poem = result.raw
+        # TODO
+        print("Results for now", result.raw)
+        self.state.final_report = result.raw
 
     # @listen(start_emergency_pipeline)
     # def save_poem(self):
