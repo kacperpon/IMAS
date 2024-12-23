@@ -1,44 +1,139 @@
-from crewai import Agent, Crew, Process, Task
+import os
+from crewai import Agent, Crew, Process, Task, LLM
 from crewai.project import CrewBase, agent, crew, task
-
-# If you want to run a snippet of code before or after the crew starts,
-# you can use the @before_kickoff and @after_kickoff decorators
-# https://docs.crewai.com/concepts/crews#example-crew-class-with-decorators
+from .schemas.schemas import *
 
 
 @CrewBase
 class FirefightingCrew:
     """FirefightingCrew crew"""
 
+    llm = LLM(model="ollama/llama3.1")
+    output_path = os.path.join(
+        os.path.dirname(os.path.relpath(__file__)), "crew_outputs"
+    )
     agents_config = "config/agents.yaml"
     tasks_config = "config/tasks.yaml"
 
-    # If you would like to add tools to your agents, you can learn more about it here:
-    # https://docs.crewai.com/concepts/agents#agent-tools
     @agent
-    def researcher(self) -> Agent:
-        return Agent(config=self.agents_config["researcher"], verbose=True)
+    def fire_personnel_specialist(self) -> Agent:
+        return Agent(
+            config=self.agents_config["fire_personnel_specialist"],
+            llm=self.llm,
+            verbose=True,
+        )
 
     @agent
-    def reporting_analyst(self) -> Agent:
-        return Agent(config=self.agents_config["reporting_analyst"], verbose=True)
+    def fire_type_specialist(self) -> Agent:
+        return Agent(
+            config=self.agents_config["fire_type_specialist"],
+            llm=self.llm,
+            verbose=True,
+        )
 
-    # To learn more about structured task outputs,
-    # task dependencies, and task callbacks, check out the documentation:
-    # https://docs.crewai.com/concepts/tasks#overview-of-a-task
-    @task
-    def research_task(self) -> Task:
-        return Task(
-            config=self.tasks_config["research_task"],
+    @agent
+    def building_structure_specialist(self) -> Agent:
+        return Agent(
+            config=self.agents_config["building_structure_specialist"],
+            llm=self.llm,
+            verbose=True,
+        )
+
+    @agent
+    def rescue_specialist(self) -> Agent:
+        return Agent(
+            config=self.agents_config["rescue_specialist"],
+            llm=self.llm,
+            verbose=True,
+        )
+
+    @agent
+    def fire_truck_chief(self) -> Agent:
+        return Agent(
+            config=self.agents_config["fire_truck_chief"],
+            llm=self.llm,
+            verbose=True,
+        )
+
+    @agent
+    def tool_specialist(self) -> Agent:
+        return Agent(
+            config=self.agents_config["tool_specialist"],
+            llm=self.llm,
+            verbose=True,
         )
 
     @task
-    def reporting_task(self) -> Task:
-        return Task(config=self.tasks_config["reporting_task"], output_file="report.md")
+    def taskforce_assignment(self) -> Task:
+        return Task(
+            config=self.tasks_config["taskforce_assignment"],
+            output_pydantic=TaskforceAssignment,
+            output_file=os.path.join(self.output_path, "taskforce_assignment.json"),
+        )
+
+    @task
+    def extinguishing_tools_selection(self) -> Task:
+        return Task(
+            config=self.tasks_config["extinguishing_tools_selection"],
+            output_pydantic=ExtinguishingToolSelection,
+            output_file=os.path.join(
+                self.output_path, "extinguishing_tools_selection.json"
+            ),
+        )
+
+    @task
+    def building_structure_assessment(self) -> Task:
+        return Task(
+            config=self.tasks_config["building_structure_assessment"],
+            output_pydantic=AssessBuildingStructurePlanning,
+            output_file=os.path.join(
+                self.output_path, "building_structure_assessment.json"
+            ),
+        )
+
+    @task
+    def victim_rescue_planning(self) -> Task:
+        return Task(
+            config=self.tasks_config["victim_rescue_planning"],
+            output_pydantic=VictimRescuePlanning,
+            output_file=os.path.join(self.output_path, "victim_rescue_planning.json"),
+        )
+
+    @task
+    def tool_selection(self) -> Task:
+        return Task(
+            config=self.tasks_config["tool_selection"],
+            output_pydantic=ToolSelection,
+            output_file=os.path.join(self.output_path, "tool_selection.json"),
+        )
+
+    @task
+    def fire_truck_selection(self) -> Task:
+        return Task(
+            config=self.tasks_config["fire_truck_selection"],
+            output_pydantic=FireTruckSelection,
+            output_file=os.path.join(self.output_path, "fire_truck_selection.json"),
+        )
+
+    @task
+    def route_planning(self) -> Task:
+        return Task(
+            config=self.tasks_config["route_planning"],
+            output_pydantic=RoutePlanning,
+            output_file=os.path.join(self.output_path, "route_planning.json"),
+        )
+
+    @task
+    def final_plan_compilation(self) -> Task:
+        return Task(
+            config=self.tasks_config["final_plan_compilation"],
+            output_pydantic=FirePlanCompilation,
+            output_file=os.path.join(self.output_path, "final_plan_compilation.json"),
+        )
 
     @crew
     def crew(self) -> Crew:
-        """Creates the FirefightingCrew crew"""
+        """Creates the EmergencyCrew crew"""
         # To learn how to add knowledge sources to your crew, check out the documentation:
         # https://docs.crewai.com/concepts/knowledge#what-is-knowledge
 
@@ -47,5 +142,4 @@ class FirefightingCrew:
             tasks=self.tasks,  # Automatically created by the @task decorator
             process=Process.sequential,
             verbose=True,
-            # process=Process.hierarchical, # In case you wanna use that instead https://docs.crewai.com/how-to/Hierarchical/
         )
