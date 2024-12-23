@@ -1,17 +1,56 @@
-research_task:
+# Firefighting Crew Tasks
+taskforce_assignment:
   description: >
-    Conduct a thorough research about {topic}
-    Make sure you find any interesting and relevant information given
-    the current year is 2024.
+    Assign the number of firefighters required for the emergency by analyzing inputs such as the fire type, location, and severity.
   expected_output: >
-    A list with 10 bullet points of the most relevant information about {topic}
-  agent: researcher
+    A count of firefighters needed along with a detailed action plan.
+  agent: fire_personnel_specialist
 
-reporting_task:
+extinguishing_tools_selection:
   description: >
-    Review the context you got and expand each topic into a full section for a report.
-    Make sure the report is detailed and contains any and all relevant information.
+    Select the appropriate tools for extinguishing the fire based on the fire type and other variables.
   expected_output: >
-    A fully fledge reports with the mains topics, each with a full section of information.
-    Formatted as markdown without '```'
-  agent: reporting_analyst
+    A list of firefighting tools with an explanation of their selection.
+  agent: fire_type_specialist
+
+building_structure_assessment:
+  description: >
+    Evaluate the structural integrity of the building to determine rescue and fire suppression strategies.
+  expected_output: >
+    A rescue strategy, fire suppression strategy, and a detailed explanation of the analysis.
+  agent: building_structure_specialist
+
+victim_rescue_planning:
+  description: >
+    Prioritize the rescue of victims based on their condition and severity of injuries.
+  expected_output: >
+    An ordered list of victims for rescue and an explanation of the prioritization.
+  agent: rescue_specialist
+
+tool_selection:
+  description: >
+    Select additional firefighting tools required for rescue and suppression based on the strategies.
+  expected_output: >
+    A list of firefighting tools which were selected and an explanation why these tools are chosen.
+  agent: tool_specialist
+
+fire_truck_selection:
+  description: >
+    Assign fire trucks based on proximity and suitability for the task.
+  expected_output: >
+    A list of fire trucks selected with a rationale for the decision.
+  agent: fire_truck_chief
+
+route_planning:
+  description: >
+    Determine the most efficient routes for fire trucks to reach the emergency site.
+  expected_output: >
+    Optimized routes and an explanation of the routing plan.
+  agent: fire_truck_chief
+
+final_plan_compilation:
+  description: >
+    Compile all outputs into a comprehensive firefighting response plan.
+  expected_output: >
+    A complete firefighting response plan addressing all aspects of the operation.
+  agent: fire_personnel_specialist

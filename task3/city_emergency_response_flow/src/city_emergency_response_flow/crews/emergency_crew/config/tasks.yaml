@@ -1,17 +1,21 @@
-research_task:
+# Emergency Crew Tasks
+emergency_alert_distribution:
   description: >
-    Conduct a thorough research about {topic}
-    Make sure you find any interesting and relevant information given
-    the current year is 2024.
+    Distribute emergency alerts and assign tasks to relevant crews.
   expected_output: >
-    A list with 10 bullet points of the most relevant information about {topic}
-  agent: researcher
+    A list of distributed tasks and an explanation of the distribution logic.
+  agent: distributor
 
-reporting_task:
+situation_report_compilation:
   description: >
-    Review the context you got and expand each topic into a full section for a report.
-    Make sure the report is detailed and contains any and all relevant information.
+    Consolidate subplans from all crews into a comprehensive situation report.
   expected_output: >
-    A fully fledge reports with the mains topics, each with a full section of information.
-    Formatted as markdown without '```'
-  agent: reporting_analyst
+    A detailed situation report covering all aspects of the emergency.
+  agent: distributor
+
+ethical_consultation:
+  description: >
+    Evaluate the consolidated plans for ethical concerns and provide recommendations.
+  expected_output: >
+    A finalized situation report addressing ethical concerns.
+  agent: philosopher

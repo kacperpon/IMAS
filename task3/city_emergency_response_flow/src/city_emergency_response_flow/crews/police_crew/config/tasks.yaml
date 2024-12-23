@@ -1,17 +1,35 @@
-research_task:
+# Police Crew Tasks
+police_taskforce_assignment:
   description: >
-    Conduct a thorough research about {topic}
-    Make sure you find any interesting and relevant information given
-    the current year is 2024.
+    Assign police officers required for managing the emergency.
   expected_output: >
-    A list with 10 bullet points of the most relevant information about {topic}
-  agent: researcher
+    A count of required officers and an action plan for their deployment.
+  agent: receiver_and_personnel_specialist
 
-reporting_task:
+perimeter_control_planning:
   description: >
-    Review the context you got and expand each topic into a full section for a report.
-    Make sure the report is detailed and contains any and all relevant information.
+    Plan safety perimeters to secure the area around the emergency site.
   expected_output: >
-    A fully fledge reports with the mains topics, each with a full section of information.
-    Formatted as markdown without '```'
-  agent: reporting_analyst
+    Proposed perimeter locations with an explanation of the strategy.
+  agent: traffic_specialist
+
+patrol_vehicle_assignment:
+  description: >
+    Assign patrol vehicles to monitor perimeters and support evacuation.
+  expected_output: >
+    A list of assigned vehicles and an explanation of their allocation.
+  agent: dispatch_specialist
+
+patrol_route_planning:
+  description: >
+    Plan efficient patrol routes to ensure safety perimeters are monitored effectively.
+  expected_output: >
+    Optimized patrol routes and a routing strategy explanation.
+  agent: dispatch_specialist
+
+police_final_plan_compilation:
+  description: >
+    Compile all outputs into a comprehensive police response plan.
+  expected_output: >
+    A complete police response plan addressing all aspects of the operation.
+  agent: receiver_and_personnel_specialist

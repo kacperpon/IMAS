@@ -1,17 +1,57 @@
-research_task:
+# Medical Crew Tasks
+medical_taskforce_assignment:
   description: >
-    Conduct a thorough research about {topic}
-    Make sure you find any interesting and relevant information given
-    the current year is 2024.
+    Determine the number of doctors required for the medical emergency.
   expected_output: >
-    A list with 10 bullet points of the most relevant information about {topic}
-  agent: researcher
+    A count of required doctors and an action plan for their deployment.
+  agent: medical_personnel_specialist
 
-reporting_task:
+medical_supplies_preparation:
   description: >
-    Review the context you got and expand each topic into a full section for a report.
-    Make sure the report is detailed and contains any and all relevant information.
+    Compile necessary medical supplies based on the emergency.
   expected_output: >
-    A fully fledge reports with the mains topics, each with a full section of information.
-    Formatted as markdown without '```'
-  agent: reporting_analyst
+    A list of medical supplies with justifications for their selection.
+  agent: equipment_specialist
+
+hospital_capacity_check:
+  description: >
+    Evaluate hospital capacities to accommodate injured individuals.
+  expected_output: >
+    A list of hospital capacities and a detailed explanation of the evaluation process.
+  agent: hospital_coordinator
+  human_input: True
+
+hospital_voting:
+  description: >
+    Coordinate a voting mechanism to prioritize hospital choices based on capacity and severity of injuries.
+  expected_output: >
+    A ranked list of hospitals with a detailed explanation of the voting process.
+  agent: hospital_coordinator
+
+injury_voting:
+  description: >
+    Map victims to hospitals based on severity of injuries and hospital availability using a voting process.
+  expected_output: >
+    A mapping of victims to hospitals and a detailed explanation of the prioritization strategy.
+  agent: triage_specialist
+
+ambulance_selection:
+  description: >
+    Assign ambulances based on proximity and suitability for transporting injured individuals.
+  expected_output: >
+    A list of selected ambulances and an explanation of their allocation.
+  agent: ambulance_coordinator
+
+ambulance_route_planning:
+  description: >
+    Plan the most efficient routes for ambulances to transport victims to hospitals.
+  expected_output: >
+    Optimized ambulance routes and a detailed routing plan.
+  agent: ambulance_coordinator
+
+medical_final_plan_compilation:
+  description: >
+    Compile all outputs into a comprehensive medical response plan.
+  expected_output: >
+    A complete medical response plan covering all aspects of the operation.
+  agent: medical_personnel_specialist
