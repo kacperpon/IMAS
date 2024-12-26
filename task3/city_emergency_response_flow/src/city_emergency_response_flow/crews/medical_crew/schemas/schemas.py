@@ -70,8 +70,8 @@ class HospitalVoting(BaseModel):
         return schema
 
 
-class VictimVoting(BaseModel):
-    """Output for victim voting."""
+class InjuryVoting(BaseModel):
+    """Output for victim-injury voting."""
 
     victim_hospital_voting_map: dict = Field(
         ..., description="Mapping of victims to hospital votes."
