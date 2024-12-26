@@ -3,7 +3,7 @@ from random import randint
 
 from pydantic import BaseModel
 
-from crewai.flow.flow import Flow, listen, start
+from crewai.flow.flow import Flow, listen, start, router, or_
 
 from .crews.emergency_crew.emergency_crew import EmergencyCrew
 from .crews.firefighting_crew.firefighting_crew import FirefightingCrew
@@ -40,9 +40,13 @@ class CityEmergencyResponseFlow(Flow[InitialInformation]):
     def read_emergency_characteristics(self):
         print("Reading emergency characteristics")
         self.state.initial_emergency_report = open("initial_report.md").read()
+        self.state.medical_crew_required = True
+        self.state.firefighting_information = ""
+        self.state.medical_information = ""
+        self.state.police_information = ""
 
     @listen(read_emergency_characteristics)
-    def start_emergency_pipeline(self):
+    def call_emergency_centre(self):
         print("Handling the reported emergency")
         result = (
             EmergencyCrew()
@@ -55,6 +59,44 @@ class CityEmergencyResponseFlow(Flow[InitialInformation]):
         # TODO
         print("Results for now", result.raw)
         self.state.final_report = result.raw
+
+    @router(call_emergency_centre)
+    def medical_crew_required(self):
+        if self.state.medical_crew_required:
+            return "meds_required"
+        else:
+            return "meds_not_required"
+
+    @listen(or_("meds_required", "meds_not_required"))
+    def create_fire_plan(self):
+        print("Develop a plan for the firefighting crew")
+        result = (
+            FirefightingCrew()
+            .crew()
+            .kickoff_async(
+                inputs={"firefighting_information": self.state.firefighting_information}
+            )
+        )
+
+    @listen("meds_required")  # only when explicitly required
+    def create_medical_plan(self):
+        print("Develop a plan for the medical crew")
+        result = (
+            MedicalCrew()
+            .crew()
+            .kickoff_async(
+                inputs={"medical_information": self.state.medical_information}
+            )
+        )
+
+    @listen(or_("meds_required", "meds_not_required"))
+    def create_police_plan(self):
+        print("Develop a plan for the police crew")
+        result = (
+            PoliceCrew()
+            .crew()
+            .kickoff_async(inputs={"police_information": self.state.police_information})
+        )
 
     # @listen(start_emergency_pipeline)
     # def save_poem(self):
