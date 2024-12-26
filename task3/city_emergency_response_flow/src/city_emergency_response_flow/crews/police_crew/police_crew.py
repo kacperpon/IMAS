@@ -1,46 +1,95 @@
-from crewai import Agent, Crew, Process, Task
+import os
+from crewai import Agent, Crew, Process, Task, LLM
 from crewai.project import CrewBase, agent, crew, task
-
-# If you want to run a snippet of code before or after the crew starts,
-# you can use the @before_kickoff and @after_kickoff decorators
-# https://docs.crewai.com/concepts/crews#example-crew-class-with-decorators
+from .schemas.schemas import *
 
 
 @CrewBase
 class PoliceCrew:
     """PoliceCrew crew"""
 
+    llm = LLM(model="ollama/llama3.1")
+    output_path = os.path.join(
+        os.path.dirname(os.path.relpath(__file__)), "crew_outputs"
+    )
     agents_config = "config/agents.yaml"
     tasks_config = "config/tasks.yaml"
 
-    # If you would like to add tools to your agents, you can learn more about it here:
-    # https://docs.crewai.com/concepts/agents#agent-tools
     @agent
-    def researcher(self) -> Agent:
-        return Agent(config=self.agents_config["researcher"], verbose=True)
+    def receiver_and_personnel_specialist(self) -> Agent:
+        return Agent(
+            config=self.agents_config["receiver_and_personnel_specialist"],
+            llm=self.llm,
+            verbose=True,
+        )
 
     @agent
-    def reporting_analyst(self) -> Agent:
-        return Agent(config=self.agents_config["reporting_analyst"], verbose=True)
+    def traffic_specialist(self) -> Agent:
+        return Agent(
+            config=self.agents_config["traffic_specialist"],
+            llm=self.llm,
+            verbose=True,
+        )
 
-    # To learn more about structured task outputs,
-    # task dependencies, and task callbacks, check out the documentation:
-    # https://docs.crewai.com/concepts/tasks#overview-of-a-task
-    @task
-    def research_task(self) -> Task:
-        return Task(
-            config=self.tasks_config["research_task"],
+    @agent
+    def dispatch_specialist(self) -> Agent:
+        return Agent(
+            config=self.agents_config["dispatch_specialist"],
+            llm=self.llm,
+            verbose=True,
         )
 
     @task
-    def reporting_task(self) -> Task:
-        return Task(config=self.tasks_config["reporting_task"], output_file="report.md")
+    def police_taskforce_assignment(self) -> Task:
+        return Task(
+            config=self.tasks_config["police_taskforce_assignment"],
+            output_pydantic=TaskforceAssignment,
+            output_file=os.path.join(
+                self.output_path, "police_taskforce_assignment.json"
+            ),
+        )
+
+    @task
+    def perimeter_control_planning(self) -> Task:
+        return Task(
+            config=self.tasks_config["perimeter_control_planning"],
+            output_pydantic=PerimeterControlPlanning,
+            output_file=os.path.join(
+                self.output_path, "perimeter_control_planning.json"
+            ),
+        )
+
+    @task
+    def patrol_vehicle_assignment(self) -> Task:
+        return Task(
+            config=self.tasks_config["patrol_vehicle_assignment"],
+            output_pydantic=PatrolSelection,
+            output_file=os.path.join(
+                self.output_path, "patrol_vehicle_assignment.json"
+            ),
+        )
+
+    @task
+    def patrol_route_planning(self) -> Task:
+        return Task(
+            config=self.tasks_config["patrol_route_planning"],
+            output_pydantic=RoutePlanning,
+            output_file=os.path.join(self.output_path, "patrol_route_planning.json"),
+        )
+
+    @task
+    def police_final_plan_compilation(self) -> Task:
+        return Task(
+            config=self.tasks_config["police_final_plan_compilation"],
+            output_pydantic=PolicePlanCompilation,
+            output_file=os.path.join(
+                self.output_path, "police_final_plan_compilation.json"
+            ),
+        )
 
     @crew
     def crew(self) -> Crew:
         """Creates the PoliceCrew crew"""
-        # To learn how to add knowledge sources to your crew, check out the documentation:
-        # https://docs.crewai.com/concepts/knowledge#what-is-knowledge
 
         return Crew(
             agents=self.agents,  # Automatically created by the @agent decorator
