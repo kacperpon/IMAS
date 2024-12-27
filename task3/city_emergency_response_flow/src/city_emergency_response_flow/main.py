@@ -58,6 +58,20 @@ class CityEmergencyResponseFlow(Flow[InitialInformation]):
             )
         )
 
+        # Access and assign information for each crew
+        for crew_info in result.pydantic.information_for_each_crew:
+            if crew_info.crew == "Firefighting":
+                self.state.firefighting_information = "\n".join(crew_info.information)
+            elif crew_info.crew == "Medical":
+                self.state.medical_information = "\n".join(crew_info.information)
+            elif crew_info.crew == "Police":
+                self.state.police_information = "\n".join(crew_info.information)
+
+        # Print the assigned variables
+        print(f"Firefighting Information: {self.state.firefighting_information}")
+        print(f"Medical Information: {self.state.medical_information}")
+        print(f"Police Information: {self.state.police_information}")
+
         if result.pydantic:  # TODO can be removed later
             self.state.medical_crew_required = result.pydantic.medical_crew_required
             print(f"Medical crew required: {result.pydantic.medical_crew_required}")
@@ -79,6 +93,8 @@ class CityEmergencyResponseFlow(Flow[InitialInformation]):
                 inputs={"firefighting_information": self.state.firefighting_information}
             )
         )
+
+        print("FIREFIGHTING OUTPUT:", result.raw)
 
     # @listen("meds_required")  # only when explicitly required
     # def create_medical_plan(self):
