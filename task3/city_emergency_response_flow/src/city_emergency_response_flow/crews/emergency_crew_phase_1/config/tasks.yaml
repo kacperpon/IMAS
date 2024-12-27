@@ -1,0 +1,6 @@
+emergency_alert_distribution:
+  description: >
+    Distribute emergency alerts and assign tasks to relevant crews.
+  expected_output: >
+    A list of distributed tasks and an explanation of the distribution logic.
+  agent: distributor

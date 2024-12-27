@@ -22,6 +22,10 @@ from .crews.police_crew.police_crew import PoliceCrew
 class InitialInformation(BaseModel):
     initial_emergency_report: str = ""
     final_report: str = ""
+    medical_crew_required: bool = True
+    firefighting_information: str = ""
+    medical_information: str = ""
+    police_information: str = ""
 
 
 # class PoemState(BaseModel):
@@ -40,14 +44,14 @@ class CityEmergencyResponseFlow(Flow[InitialInformation]):
     def read_emergency_characteristics(self):
         print("Reading emergency characteristics")
         self.state.initial_emergency_report = open("initial_report.md").read()
-        self.state.medical_crew_required = True
-        self.state.firefighting_information = ""
-        self.state.medical_information = ""
-        self.state.police_information = ""
 
     @listen(read_emergency_characteristics)
     def call_emergency_centre(self):
         print("Handling the reported emergency")
+
+        emergency_crew = EmergencyCrew().crew()
+
+
         result = (
             EmergencyCrew()
             .crew()
@@ -59,6 +63,21 @@ class CityEmergencyResponseFlow(Flow[InitialInformation]):
         # TODO
         print("Results for now", result.raw)
         self.state.final_report = result.raw
+
+    # @listen(read_emergency_characteristics)
+    # def call_emergency_centre(self):
+    #     print("Handling the reported emergency")
+    #     result = (
+    #         EmergencyCrew()
+    #         .crew()
+    #         .kickoff(
+    #             inputs={"initial_emergency_report": self.state.initial_emergency_report}
+    #         )
+    #     )
+
+    #     # TODO
+    #     print("Results for now", result.raw)
+    #     self.state.final_report = result.raw
 
     @router(call_emergency_centre)
     def medical_crew_required(self):
@@ -73,7 +92,7 @@ class CityEmergencyResponseFlow(Flow[InitialInformation]):
         result = (
             FirefightingCrew()
             .crew()
-            .kickoff_async(
+            .kickoff(
                 inputs={"firefighting_information": self.state.firefighting_information}
             )
         )
@@ -84,9 +103,7 @@ class CityEmergencyResponseFlow(Flow[InitialInformation]):
         result = (
             MedicalCrew()
             .crew()
-            .kickoff_async(
-                inputs={"medical_information": self.state.medical_information}
-            )
+            .kickoff(inputs={"medical_information": self.state.medical_information})
         )
 
     @listen(or_("meds_required", "meds_not_required"))
@@ -95,14 +112,8 @@ class CityEmergencyResponseFlow(Flow[InitialInformation]):
         result = (
             PoliceCrew()
             .crew()
-            .kickoff_async(inputs={"police_information": self.state.police_information})
+            .kickoff(inputs={"police_information": self.state.police_information})
         )
-
-    # @listen(start_emergency_pipeline)
-    # def save_poem(self):
-    #     print("Saving poem")
-    #     with open("poem.txt", "w") as f:
-    #         f.write(self.state.poem)
 
 
 def kickoff():
