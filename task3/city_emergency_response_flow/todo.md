@@ -11,6 +11,7 @@
 
 ---
 
+- [ ] Check if the contexts really work
 - [ ] resolve how the emergency crew can be called in the beginning and in the end
 - [ ] human input hospital capacity not implemented
 

@@ -103,6 +103,7 @@ class FirefightingCrew:
     def tool_selection(self) -> Task:
         return Task(
             config=self.tasks_config["tool_selection"],
+            context=[self.building_structure_assessment()],
             output_pydantic=ToolSelection,
             output_file=os.path.join(self.output_path, "tool_selection.json"),
         )
@@ -111,6 +112,7 @@ class FirefightingCrew:
     def fire_truck_selection(self) -> Task:
         return Task(
             config=self.tasks_config["fire_truck_selection"],
+            context=[self.extinguishing_tools_selection()],
             output_pydantic=FireTruckSelection,
             output_file=os.path.join(self.output_path, "fire_truck_selection.json"),
         )
@@ -119,6 +121,7 @@ class FirefightingCrew:
     def route_planning(self) -> Task:
         return Task(
             config=self.tasks_config["route_planning"],
+            context=[self.fire_truck_selection()],
             output_pydantic=RoutePlanning,
             output_file=os.path.join(self.output_path, "route_planning.json"),
         )
@@ -127,6 +130,15 @@ class FirefightingCrew:
     def final_plan_compilation(self) -> Task:
         return Task(
             config=self.tasks_config["final_plan_compilation"],
+            context=[
+                self.taskforce_assignment(),
+                self.extinguishing_tools_selection(),
+                self.building_structure_assessment(),
+                self.victim_rescue_planning(),
+                self.tool_selection(),
+                self.fire_truck_selection(),
+                self.route_planning(),
+            ],
             output_pydantic=FirePlanCompilation,
             output_file=os.path.join(self.output_path, "final_plan_compilation.json"),
         )
@@ -134,12 +146,10 @@ class FirefightingCrew:
     @crew
     def crew(self) -> Crew:
         """Creates the EmergencyCrew crew"""
-        # To learn how to add knowledge sources to your crew, check out the documentation:
-        # https://docs.crewai.com/concepts/knowledge#what-is-knowledge
 
         return Crew(
-            agents=self.agents,  # Automatically created by the @agent decorator
-            tasks=self.tasks,  # Automatically created by the @task decorator
+            agents=self.agents,
+            tasks=self.tasks,
             process=Process.sequential,
             verbose=True,
         )

@@ -13,7 +13,7 @@ class TaskforceAssignment(BaseModel):
     @classmethod
     def get_schema(cls) -> str:
         schema = "\n"
-        for field_name, field_instance in cls.__fields__.items():
+        for field_name, field_instance in cls.model_fields.items():
             schema += f"{field_name}, described as: {field_instance.description}\n"
         return schema
 
@@ -31,7 +31,7 @@ class ExtinguishingToolSelection(BaseModel):
     @classmethod
     def get_schema(cls) -> str:
         schema = "\n"
-        for field_name, field_instance in cls.__fields__.items():
+        for field_name, field_instance in cls.model_fields.items():
             schema += f"{field_name}, described as: {field_instance.description}\n"
         return schema
 
@@ -48,16 +48,28 @@ class AssessBuildingStructurePlanning(BaseModel):
     @classmethod
     def get_schema(cls) -> str:
         schema = "\n"
-        for field_name, field_instance in cls.__fields__.items():
+        for field_name, field_instance in cls.model_fields.items():
             schema += f"{field_name}, described as: {field_instance.description}\n"
         return schema
+
+
+# For VictimRescuePlanning
+class VictimInformation(BaseModel):
+    victim_id: str = Field(
+        ..., description="Identifier for the victim (e.g., Victim 1)"
+    )
+    condition: str = Field(..., description="Description of the victim's condition")
+    priority_level: str = Field(
+        ..., description="Rescue priority level (e.g., High, Medium, Low)"
+    )
 
 
 class VictimRescuePlanning(BaseModel):
     """Output for planning victim rescue."""
 
-    ordered_victim_rescue: List[str] = Field(
-        ..., description="List of victims ordered by rescue priority."
+    ordered_victim_rescue: List[VictimInformation] = Field(
+        ...,
+        description="List of victims ordered by rescue priority, including their details.",
     )
     action_details: str = Field(
         ..., description="Details of the rescue planning process."
@@ -66,8 +78,10 @@ class VictimRescuePlanning(BaseModel):
     @classmethod
     def get_schema(cls) -> str:
         schema = "\n"
-        for field_name, field_instance in cls.__fields__.items():
-            schema += f"{field_name}, described as: {field_instance.description}\n"
+        for field_name, field_instance in cls.model_fields.items():
+            schema += (
+                f"{field_name}, described as: {field_instance.field_info.description}\n"
+            )
         return schema
 
 
@@ -84,7 +98,7 @@ class ToolSelection(BaseModel):
     @classmethod
     def get_schema(cls) -> str:
         schema = "\n"
-        for field_name, field_instance in cls.__fields__.items():
+        for field_name, field_instance in cls.model_fields.items():
             schema += f"{field_name}, described as: {field_instance.description}\n"
         return schema
 
@@ -100,7 +114,7 @@ class FireTruckSelection(BaseModel):
     @classmethod
     def get_schema(cls) -> str:
         schema = "\n"
-        for field_name, field_instance in cls.__fields__.items():
+        for field_name, field_instance in cls.model_fields.items():
             schema += f"{field_name}, described as: {field_instance.description}\n"
         return schema
 
@@ -118,7 +132,7 @@ class RoutePlanning(BaseModel):
     @classmethod
     def get_schema(cls) -> str:
         schema = "\n"
-        for field_name, field_instance in cls.__fields__.items():
+        for field_name, field_instance in cls.model_fields.items():
             schema += f"{field_name}, described as: {field_instance.description}\n"
         return schema
 
@@ -139,6 +153,6 @@ class FirePlanCompilation(BaseModel):
     @classmethod
     def get_schema(cls) -> str:
         schema = "\n"
-        for field_name, field_instance in cls.__fields__.items():
+        for field_name, field_instance in cls.model_fields.items():
             schema += f"{field_name}, described as: {field_instance.description}\n"
         return schema

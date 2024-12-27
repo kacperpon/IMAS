@@ -13,7 +13,7 @@ class TaskforceAssignment(BaseModel):
     @classmethod
     def get_schema(cls) -> str:
         schema = "\n"
-        for field_name, field_instance in cls.__fields__.items():
+        for field_name, field_instance in cls.model_fields.items():
             schema += f"{field_name}, described as: {field_instance.description}\n"
         return schema
 
@@ -31,7 +31,7 @@ class MedicalSupplySelection(BaseModel):
     @classmethod
     def get_schema(cls) -> str:
         schema = "\n"
-        for field_name, field_instance in cls.__fields__.items():
+        for field_name, field_instance in cls.model_fields.items():
             schema += f"{field_name}, described as: {field_instance.description}\n"
         return schema
 
@@ -49,7 +49,7 @@ class HospitalCapacityCheck(BaseModel):
     @classmethod
     def get_schema(cls) -> str:
         schema = "\n"
-        for field_name, field_instance in cls.__fields__.items():
+        for field_name, field_instance in cls.model_fields.items():
             schema += f"{field_name}, described as: {field_instance.description}\n"
         return schema
 
@@ -65,7 +65,7 @@ class HospitalVoting(BaseModel):
     @classmethod
     def get_schema(cls) -> str:
         schema = "\n"
-        for field_name, field_instance in cls.__fields__.items():
+        for field_name, field_instance in cls.model_fields.items():
             schema += f"{field_name}, described as: {field_instance.description}\n"
         return schema
 
@@ -83,7 +83,7 @@ class InjuryVoting(BaseModel):
     @classmethod
     def get_schema(cls) -> str:
         schema = "\n"
-        for field_name, field_instance in cls.__fields__.items():
+        for field_name, field_instance in cls.model_fields.items():
             schema += f"{field_name}, described as: {field_instance.description}\n"
         return schema
 
@@ -99,7 +99,7 @@ class AmbulanceSelection(BaseModel):
     @classmethod
     def get_schema(cls) -> str:
         schema = "\n"
-        for field_name, field_instance in cls.__fields__.items():
+        for field_name, field_instance in cls.model_fields.items():
             schema += f"{field_name}, described as: {field_instance.description}\n"
         return schema
 
@@ -117,7 +117,7 @@ class RoutePlanning(BaseModel):
     @classmethod
     def get_schema(cls) -> str:
         schema = "\n"
-        for field_name, field_instance in cls.__fields__.items():
+        for field_name, field_instance in cls.model_fields.items():
             schema += f"{field_name}, described as: {field_instance.description}\n"
         return schema
 
@@ -138,6 +138,6 @@ class MedicalPlanCompilation(BaseModel):
     @classmethod
     def get_schema(cls) -> str:
         schema = "\n"
-        for field_name, field_instance in cls.__fields__.items():
+        for field_name, field_instance in cls.model_fields.items():
             schema += f"{field_name}, described as: {field_instance.description}\n"
         return schema

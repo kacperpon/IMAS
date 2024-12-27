@@ -30,28 +30,28 @@ victim_rescue_planning:
 
 tool_selection:
   description: >
-    Use the firefighting information ({firefighting_information}) and strategies developed to select additional firefighting tools required for rescue and fire suppression.
+    Use the firefighting information ({firefighting_information}) and strategies developed in the context to select additional firefighting tools required for rescue and fire suppression.
   expected_output: >
     A list of selected firefighting tools and an explanation of why they were chosen based on the situation.
   agent: tool_specialist
 
 fire_truck_selection:
   description: >
-    Assign fire trucks using the firefighting information ({firefighting_information}) to evaluate proximity and suitability for the tasks at hand.
+    Assign fire trucks using the firefighting information ({firefighting_information}) and the context which gives information about the necessary extinguishing tools which need to be installed on the truck to evaluate proximity and suitability for the tasks at hand.
   expected_output: >
     A list of selected fire trucks with a rationale for the selection process.
   agent: fire_truck_chief
 
 route_planning:
   description: >
-    Plan the most efficient routes for fire trucks using the firefighting information ({firefighting_information}), ensuring timely arrival at the emergency site.
+    Plan the most efficient routes for fire trucks using the firefighting information ({firefighting_information}) and the result of the fire truck selection in the context, ensuring timely arrival at the emergency site.
   expected_output: >
     Optimized routes along with a detailed explanation of the routing logic.
   agent: fire_truck_chief
 
 final_plan_compilation:
   description: >
-    Consolidate all outputs from previous tasks to create a comprehensive firefighting response plan using the firefighting information ({firefighting_information}). Include all strategies, tools, routes, and personnel information derived from the input.
+    Consolidate all outputs from previous tasks to create a comprehensive firefighting response plan using the firefighting information ({firefighting_information}) and all outputs of tasks from before given in the context. Include all strategies, tools, routes, and personnel information derived from the input.
   expected_output: >
     A complete firefighting response plan addressing all aspects of the operation along with ethical considerations if applicable.
   agent: fire_personnel_specialist
