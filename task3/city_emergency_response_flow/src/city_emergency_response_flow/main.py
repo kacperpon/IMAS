@@ -1,6 +1,6 @@
 #!/usr/bin/env python
-from random import randint
-import json
+from random import choice, randint
+import os
 
 from pydantic import BaseModel
 
@@ -45,7 +45,12 @@ class CityEmergencyResponseFlow(Flow[InitialInformation]):
     @start()
     def read_emergency_characteristics(self):
         print("Reading emergency characteristics")
-        self.state.initial_emergency_report = open("initial_report.md").read()
+
+        selected_file = os.path.join(
+            "tests", "initial_reports", choice(os.listdir("tests/initial_reports"))
+        )
+
+        self.state.initial_emergency_report = open(selected_file).read()
 
     @listen(read_emergency_characteristics)
     def call_emergency_centre(self):
@@ -81,19 +86,19 @@ class CityEmergencyResponseFlow(Flow[InitialInformation]):
         else:
             return "meds_not_required"
 
-    @listen(or_("meds_required", "meds_not_required"))
-    def create_fire_plan(self):
-        print("Develop a plan for the firefighting crew")
-        result = (
-            FirefightingCrew()
-            .crew()
-            .kickoff(
-                inputs={"firefighting_information": self.state.firefighting_information}
-            )
-        )
+    # @listen(or_("meds_required", "meds_not_required"))
+    # def create_fire_plan(self):
+    #     print("Develop a plan for the firefighting crew")
+    #     result = (
+    #         FirefightingCrew()
+    #         .crew()
+    #         .kickoff(
+    #             inputs={"firefighting_information": self.state.firefighting_information}
+    #         )
+    #     )
 
-        print("FIREFIGHTING OUTPUT:", result.raw)
-        # TODO save plan as state variable
+    #     print("FIREFIGHTING OUTPUT:", result.raw)
+    #     self.state.firefighting_plan = result.pydantic.response_plan
 
     @listen("meds_required")  # only when explicitly required
     def create_medical_plan(self):
@@ -103,6 +108,9 @@ class CityEmergencyResponseFlow(Flow[InitialInformation]):
             .crew()
             .kickoff(inputs={"medical_information": self.state.medical_information})
         )
+
+        print("MEDICAL OUTPUT:", result.raw)
+        self.state.medical_plan = result.pydantic.response_plan
 
     # @listen(or_("meds_required", "meds_not_required"))
     # def create_police_plan(self):

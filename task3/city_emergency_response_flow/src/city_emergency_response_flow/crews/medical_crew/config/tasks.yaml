@@ -1,57 +1,58 @@
 # Medical Crew Tasks
+
 medical_taskforce_assignment:
   description: >
-    Determine the number of doctors required for the medical emergency.
+    Analyze the provided medical information ({medical_information}) to assign the number of doctors required for the emergency. Inputs such as the number of injured individuals, location, and severity will determine the taskforce allocation.
   expected_output: >
-    A count of required doctors and an action plan for their deployment.
+    A count of doctors required along with a detailed action plan explaining the allocation decisions.
   agent: medical_personnel_specialist
 
 medical_supplies_preparation:
   description: >
-    Compile necessary medical supplies based on the emergency.
+    Use the provided medical information ({medical_information}) to select the necessary medical supplies based on the type and severity of injuries.
   expected_output: >
-    A list of medical supplies with justifications for their selection.
+    A list of medical supplies with an explanation of their relevance to the emergency.
   agent: equipment_specialist
 
 hospital_capacity_check:
   description: >
-    Evaluate hospital capacities to accommodate injured individuals.
+    Evaluate the capacities of nearby hospitals using the provided medical information ({medical_information}). Ensure available resources align with the requirements of the injured.
   expected_output: >
-    A list of hospital capacities and a detailed explanation of the evaluation process.
+    A list of hospitals with capacities and a detailed explanation of the assessment process.
   agent: hospital_coordinator
-  human_input: True
+  # human_input: True # TODO turn back on
 
 hospital_voting:
   description: >
-    Coordinate a voting mechanism to prioritize hospital choices based on capacity and severity of injuries.
+    Utilize the hospital capacity data from the medical information ({medical_information}) to prioritize hospital choices based on capacity and severity of injuries. Employ a voting mechanism between hospital and triage specialists. Additionally, please consider the context which includes information about the capacities for each hospital nearby.
   expected_output: >
-    A ranked list of hospitals with a detailed explanation of the voting process.
+    A ranked list of hospitals with a detailed explanation of the voting process and logic.
   agent: hospital_coordinator
 
 injury_voting:
   description: >
-    Map victims to hospitals based on severity of injuries and hospital availability using a voting process.
+    Use the medical information ({medical_information}) to map victims to hospitals based on injury severity and hospital availability. Leverage a voting system for prioritization.
   expected_output: >
-    A mapping of victims to hospitals and a detailed explanation of the prioritization strategy.
+    A mapping of victims to hospitals along with a detailed explanation of the prioritization strategy. The output should contain the hospitals by name.
   agent: triage_specialist
 
 ambulance_selection:
   description: >
-    Assign ambulances based on proximity and suitability for transporting injured individuals.
+    Based on the medical information ({medical_information}), assign ambulances for the transport of victims. Consider proximity and suitability for handling injuries. Furthermore, the results of the selection of medical supplies, given as context, should be considered.
   expected_output: >
-    A list of selected ambulances and an explanation of their allocation.
+    A list of selected ambulances with a rationale for their allocation.
   agent: ambulance_coordinator
 
 ambulance_route_planning:
   description: >
-    Plan the most efficient routes for ambulances to transport victims to hospitals.
+    Plan the most efficient routes for ambulances to transport victims to hospitals using the provided medical information ({medical_information}) and the context including the before specifically selected ambulances.
   expected_output: >
-    Optimized ambulance routes and a detailed routing plan.
+    Optimized routes with a detailed explanation of the routing logic.
   agent: ambulance_coordinator
 
 medical_final_plan_compilation:
   description: >
-    Compile all outputs into a comprehensive medical response plan.
+    Consolidate all outputs from previous tasks to create a comprehensive medical response plan using the provided medical information ({medical_information}) and outputs from other tasks. Include all strategies, tools, routes, and personnel information derived from the input. All outputs from previous tasks are given as context.
   expected_output: >
-    A complete medical response plan covering all aspects of the operation.
+    A complete medical response plan addressing all aspects of the operation, including ethical considerations if applicable.
   agent: medical_personnel_specialist
