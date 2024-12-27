@@ -67,14 +67,12 @@ class CityEmergencyResponseFlow(Flow[InitialInformation]):
             elif crew_info.crew == "Police":
                 self.state.police_information = "\n".join(crew_info.information)
 
-        # Print the assigned variables
-        print(f"Firefighting Information: {self.state.firefighting_information}")
-        print(f"Medical Information: {self.state.medical_information}")
-        print(f"Police Information: {self.state.police_information}")
+        # # Print the assigned variables
+        # print(f"Firefighting Information: {self.state.firefighting_information}")
+        # print(f"Medical Information: {self.state.medical_information}")
+        # print(f"Police Information: {self.state.police_information}")
 
-        if result.pydantic:  # TODO can be removed later
-            self.state.medical_crew_required = result.pydantic.medical_crew_required
-            print(f"Medical crew required: {result.pydantic.medical_crew_required}")
+        self.state.medical_crew_required = result.pydantic.medical_crew_required
 
     @router(call_emergency_centre)
     def medical_crew_required(self):
