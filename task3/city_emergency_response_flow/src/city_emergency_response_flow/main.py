@@ -97,7 +97,6 @@ class CityEmergencyResponseFlow(Flow[InitialInformation]):
     #         )
     #     )
 
-    #     print("FIREFIGHTING OUTPUT:", result.raw)
     #     self.state.firefighting_plan = result.pydantic.response_plan
 
     @listen("meds_required")  # only when explicitly required
@@ -109,7 +108,6 @@ class CityEmergencyResponseFlow(Flow[InitialInformation]):
             .kickoff(inputs={"medical_information": self.state.medical_information})
         )
 
-        print("MEDICAL OUTPUT:", result.raw)
         self.state.medical_plan = result.pydantic.response_plan
 
     # @listen(or_("meds_required", "meds_not_required"))
