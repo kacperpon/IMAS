@@ -27,7 +27,7 @@ class EmergencyCrewPhase1:
             config=self.tasks_config["emergency_alert_distribution"],
             output_pydantic=EmergencyAlertDistribution,
             output_file=os.path.join(
-                self.output_path, "emergency_alert_distribution.json"
+                self.output_path, "001_emergency_alert_distribution.json"
             ),
         )
 

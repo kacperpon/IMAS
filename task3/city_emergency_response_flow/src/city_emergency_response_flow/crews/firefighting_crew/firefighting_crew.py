@@ -68,7 +68,7 @@ class FirefightingCrew:
         return Task(
             config=self.tasks_config["taskforce_assignment"],
             output_pydantic=TaskforceAssignment,
-            output_file=os.path.join(self.output_path, "taskforce_assignment.json"),
+            output_file=os.path.join(self.output_path, "001_taskforce_assignment.json"),
         )
 
     @task
@@ -77,7 +77,7 @@ class FirefightingCrew:
             config=self.tasks_config["extinguishing_tools_selection"],
             output_pydantic=ExtinguishingToolSelection,
             output_file=os.path.join(
-                self.output_path, "extinguishing_tools_selection.json"
+                self.output_path, "002_extinguishing_tools_selection.json"
             ),
         )
 
@@ -87,7 +87,7 @@ class FirefightingCrew:
             config=self.tasks_config["building_structure_assessment"],
             output_pydantic=AssessBuildingStructurePlanning,
             output_file=os.path.join(
-                self.output_path, "building_structure_assessment.json"
+                self.output_path, "003_building_structure_assessment.json"
             ),
         )
 
@@ -96,7 +96,9 @@ class FirefightingCrew:
         return Task(
             config=self.tasks_config["victim_rescue_planning"],
             output_pydantic=VictimRescuePlanning,
-            output_file=os.path.join(self.output_path, "victim_rescue_planning.json"),
+            output_file=os.path.join(
+                self.output_path, "004_victim_rescue_planning.json"
+            ),
         )
 
     @task
@@ -105,7 +107,7 @@ class FirefightingCrew:
             config=self.tasks_config["tool_selection"],
             context=[self.building_structure_assessment()],
             output_pydantic=ToolSelection,
-            output_file=os.path.join(self.output_path, "tool_selection.json"),
+            output_file=os.path.join(self.output_path, "005_tool_selection.json"),
         )
 
     @task
@@ -114,7 +116,7 @@ class FirefightingCrew:
             config=self.tasks_config["fire_truck_selection"],
             context=[self.extinguishing_tools_selection()],
             output_pydantic=FireTruckSelection,
-            output_file=os.path.join(self.output_path, "fire_truck_selection.json"),
+            output_file=os.path.join(self.output_path, "006_fire_truck_selection.json"),
         )
 
     @task
@@ -123,7 +125,7 @@ class FirefightingCrew:
             config=self.tasks_config["route_planning"],
             context=[self.fire_truck_selection()],
             output_pydantic=RoutePlanning,
-            output_file=os.path.join(self.output_path, "route_planning.json"),
+            output_file=os.path.join(self.output_path, "007_route_planning.json"),
         )
 
     @task
@@ -140,7 +142,9 @@ class FirefightingCrew:
                 self.route_planning(),
             ],
             output_pydantic=FirePlanCompilation,
-            output_file=os.path.join(self.output_path, "final_plan_compilation.json"),
+            output_file=os.path.join(
+                self.output_path, "008_final_plan_compilation.json"
+            ),
         )
 
     @crew

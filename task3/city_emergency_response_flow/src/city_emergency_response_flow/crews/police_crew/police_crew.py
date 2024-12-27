@@ -45,7 +45,7 @@ class PoliceCrew:
             config=self.tasks_config["police_taskforce_assignment"],
             output_pydantic=TaskforceAssignment,
             output_file=os.path.join(
-                self.output_path, "police_taskforce_assignment.json"
+                self.output_path, "001_police_taskforce_assignment.json"
             ),
         )
 
@@ -55,7 +55,7 @@ class PoliceCrew:
             config=self.tasks_config["perimeter_control_planning"],
             output_pydantic=PerimeterControlPlanning,
             output_file=os.path.join(
-                self.output_path, "perimeter_control_planning.json"
+                self.output_path, "002_perimeter_control_planning.json"
             ),
         )
 
@@ -65,7 +65,7 @@ class PoliceCrew:
             config=self.tasks_config["patrol_vehicle_assignment"],
             output_pydantic=PatrolSelection,
             output_file=os.path.join(
-                self.output_path, "patrol_vehicle_assignment.json"
+                self.output_path, "003_patrol_vehicle_assignment.json"
             ),
         )
 
@@ -74,7 +74,9 @@ class PoliceCrew:
         return Task(
             config=self.tasks_config["patrol_route_planning"],
             output_pydantic=RoutePlanning,
-            output_file=os.path.join(self.output_path, "patrol_route_planning.json"),
+            output_file=os.path.join(
+                self.output_path, "004_patrol_route_planning.json"
+            ),
         )
 
     @task
@@ -83,7 +85,7 @@ class PoliceCrew:
             config=self.tasks_config["police_final_plan_compilation"],
             output_pydantic=PolicePlanCompilation,
             output_file=os.path.join(
-                self.output_path, "police_final_plan_compilation.json"
+                self.output_path, "005_police_final_plan_compilation.json"
             ),
         )
 

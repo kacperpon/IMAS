@@ -61,7 +61,7 @@ class MedicalCrew:
             config=self.tasks_config["medical_taskforce_assignment"],
             output_pydantic=TaskforceAssignment,
             output_file=os.path.join(
-                self.output_path, "medical_taskforce_assignment.json"
+                self.output_path, "001_medical_taskforce_assignment.json"
             ),
         )
 
@@ -71,7 +71,7 @@ class MedicalCrew:
             config=self.tasks_config["medical_supplies_preparation"],
             output_pydantic=MedicalSupplySelection,
             output_file=os.path.join(
-                self.output_path, "medical_supplies_preparation.json"
+                self.output_path, "002_medical_supplies_preparation.json"
             ),
         )
 
@@ -80,7 +80,9 @@ class MedicalCrew:
         return Task(
             config=self.tasks_config["hospital_capacity_check"],
             output_pydantic=HospitalCapacityCheck,
-            output_file=os.path.join(self.output_path, "hospital_capacity_check.json"),
+            output_file=os.path.join(
+                self.output_path, "003_hospital_capacity_check.json"
+            ),
         )
 
     @task
@@ -88,7 +90,7 @@ class MedicalCrew:
         return Task(
             config=self.tasks_config["hospital_voting"],
             output_pydantic=HospitalVoting,
-            output_file=os.path.join(self.output_path, "hospital_voting.json"),
+            output_file=os.path.join(self.output_path, "004_hospital_voting.json"),
         )
 
     @task
@@ -96,7 +98,7 @@ class MedicalCrew:
         return Task(
             config=self.tasks_config["injury_voting"],
             output_pydantic=InjuryVoting,
-            output_file=os.path.join(self.output_path, "injury_voting.json"),
+            output_file=os.path.join(self.output_path, "005_injury_voting.json"),
         )
 
     @task
@@ -104,7 +106,7 @@ class MedicalCrew:
         return Task(
             config=self.tasks_config["ambulance_selection"],
             output_pydantic=AmbulanceSelection,
-            output_file=os.path.join(self.output_path, "ambulance_selection.json"),
+            output_file=os.path.join(self.output_path, "006_ambulance_selection.json"),
         )
 
     @task
@@ -112,7 +114,9 @@ class MedicalCrew:
         return Task(
             config=self.tasks_config["ambulance_route_planning"],
             output_pydantic=RoutePlanning,
-            output_file=os.path.join(self.output_path, "ambulance_route_planning.json"),
+            output_file=os.path.join(
+                self.output_path, "007_ambulance_route_planning.json"
+            ),
         )
 
     @task
@@ -121,7 +125,7 @@ class MedicalCrew:
             config=self.tasks_config["medical_final_plan_compilation"],
             output_pydantic=MedicalPlanCompilation,
             output_file=os.path.join(
-                self.output_path, "medical_final_plan_compilation.json"
+                self.output_path, "008_medical_final_plan_compilation.json"
             ),
         )
 
