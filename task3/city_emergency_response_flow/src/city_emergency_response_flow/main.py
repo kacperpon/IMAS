@@ -3,9 +3,10 @@ from random import randint
 
 from pydantic import BaseModel
 
-from crewai.flow.flow import Flow, listen, start, router, or_
+from crewai.flow.flow import Flow, listen, start, router, or_, and_
 
-from .crews.emergency_crew.emergency_crew import EmergencyCrew
+from .crews.emergency_crew_phase_1.emergency_crew_phase_1 import EmergencyCrewPhase1
+from .crews.emergency_crew_phase_2.emergency_crew_phase_2 import EmergencyCrewPhase2
 from .crews.firefighting_crew.firefighting_crew import FirefightingCrew
 from .crews.medical_crew.medical_crew import MedicalCrew
 from .crews.police_crew.police_crew import PoliceCrew
@@ -23,14 +24,14 @@ class InitialInformation(BaseModel):
     initial_emergency_report: str = ""
     final_report: str = ""
     medical_crew_required: bool = True
+
     firefighting_information: str = ""
     medical_information: str = ""
     police_information: str = ""
 
-
-# class PoemState(BaseModel):
-#     sentence_count: int = 1
-#     poem: str = ""
+    firefighting_plan: str = ""
+    medical_plan: str = ""
+    police_plan: str = ""
 
 
 class CityEmergencyResponseFlow(Flow[InitialInformation]):
@@ -48,12 +49,8 @@ class CityEmergencyResponseFlow(Flow[InitialInformation]):
     @listen(read_emergency_characteristics)
     def call_emergency_centre(self):
         print("Handling the reported emergency")
-
-        emergency_crew = EmergencyCrew().crew()
-
-
         result = (
-            EmergencyCrew()
+            EmergencyCrewPhase1()
             .crew()
             .kickoff(
                 inputs={"initial_emergency_report": self.state.initial_emergency_report}
@@ -63,21 +60,6 @@ class CityEmergencyResponseFlow(Flow[InitialInformation]):
         # TODO
         print("Results for now", result.raw)
         self.state.final_report = result.raw
-
-    # @listen(read_emergency_characteristics)
-    # def call_emergency_centre(self):
-    #     print("Handling the reported emergency")
-    #     result = (
-    #         EmergencyCrew()
-    #         .crew()
-    #         .kickoff(
-    #             inputs={"initial_emergency_report": self.state.initial_emergency_report}
-    #         )
-    #     )
-
-    #     # TODO
-    #     print("Results for now", result.raw)
-    #     self.state.final_report = result.raw
 
     @router(call_emergency_centre)
     def medical_crew_required(self):
@@ -114,6 +96,21 @@ class CityEmergencyResponseFlow(Flow[InitialInformation]):
             .crew()
             .kickoff(inputs={"police_information": self.state.police_information})
         )
+
+    @listen(
+        (
+            and_(
+                "meds_required",
+                create_fire_plan,
+                create_medical_plan,
+                create_police_plan,
+            )
+        )
+        or (and_("meds_not_required", create_fire_plan, create_police_plan))
+    )
+    def merge_plans(self):
+        print("Merge each crew's plans into one final plan")
+        result = EmergencyCrewPhase2().crew().kickoff()
 
 
 def kickoff():
