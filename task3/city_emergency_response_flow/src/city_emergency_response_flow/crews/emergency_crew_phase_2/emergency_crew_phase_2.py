@@ -27,7 +27,7 @@ class EmergencyCrewPhase2:
             config=self.tasks_config["situation_report_compilation"],
             output_pydantic=SituationReportCompilation,
             output_file=os.path.join(
-                self.output_path, "situation_report_compilation.json"
+                self.output_path, "001_situation_report_compilation.json"
             ),
         )
 
@@ -36,7 +36,7 @@ class EmergencyCrewPhase2:
         return Task(
             config=self.tasks_config["ethical_consultation"],
             output_pydantic=FinalCompilation,
-            output_file=os.path.join(self.output_path, "ethical_consultation.json"),
+            output_file=os.path.join(self.output_path, "002_ethical_consultation.json"),
         )
 
     @crew
