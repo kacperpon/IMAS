@@ -76,7 +76,7 @@ class MedicalCrew:
         )
 
     @task
-    def hospital_capacity_check(self) -> Task:
+    def hospital_capacity_check(self) -> Task:  # TODO here human input
         return Task(
             config=self.tasks_config["hospital_capacity_check"],
             output_pydantic=HospitalCapacityCheck,
@@ -89,6 +89,7 @@ class MedicalCrew:
     def hospital_voting(self) -> Task:
         return Task(
             config=self.tasks_config["hospital_voting"],
+            context=[self.hospital_capacity_check()],
             output_pydantic=HospitalVoting,
             output_file=os.path.join(self.output_path, "004_hospital_voting.json"),
         )
@@ -105,6 +106,7 @@ class MedicalCrew:
     def ambulance_selection(self) -> Task:
         return Task(
             config=self.tasks_config["ambulance_selection"],
+            context=[self.medical_supplies_preparation()],
             output_pydantic=AmbulanceSelection,
             output_file=os.path.join(self.output_path, "006_ambulance_selection.json"),
         )
@@ -113,6 +115,7 @@ class MedicalCrew:
     def ambulance_route_planning(self) -> Task:
         return Task(
             config=self.tasks_config["ambulance_route_planning"],
+            context=[self.ambulance_selection()],
             output_pydantic=RoutePlanning,
             output_file=os.path.join(
                 self.output_path, "007_ambulance_route_planning.json"
@@ -123,6 +126,15 @@ class MedicalCrew:
     def medical_final_plan_compilation(self) -> Task:
         return Task(
             config=self.tasks_config["medical_final_plan_compilation"],
+            context=[
+                self.medical_taskforce_assignment(),
+                self.medical_supplies_preparation(),
+                self.hospital_capacity_check(),
+                self.hospital_voting(),
+                self.injury_voting(),
+                self.ambulance_selection(),
+                self.ambulance_route_planning(),
+            ],
             output_pydantic=MedicalPlanCompilation,
             output_file=os.path.join(
                 self.output_path, "008_medical_final_plan_compilation.json"
@@ -134,9 +146,8 @@ class MedicalCrew:
         """Creates the MedicalCrew crew"""
 
         return Crew(
-            agents=self.agents,  # Automatically created by the @agent decorator
-            tasks=self.tasks,  # Automatically created by the @task decorator
+            agents=self.agents,
+            tasks=self.tasks,
             process=Process.sequential,
             verbose=True,
-            # process=Process.hierarchical, # In case you wanna use that instead https://docs.crewai.com/how-to/Hierarchical/
         )
