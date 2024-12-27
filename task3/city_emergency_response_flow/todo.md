@@ -4,6 +4,7 @@
 
 - [ ] resolve distribution of tasks
 - [ ] resolve how the emergency crew can be called in the beginning and in the end
+- [ ] human input hospital capacity not implemented
 
 ## Priority 2
 

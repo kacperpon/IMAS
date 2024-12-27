@@ -1,6 +1,16 @@
 emergency_alert_distribution:
   description: >
-    Distribute emergency alerts and assign tasks to relevant crews.
+    Analyse the initial emergency report for all the relevant information. The goal is to later create lists with information relevant for each crew (firefighting, medical, police). If the initial report does not induce the need for the medical crew, please state explicitly in the output that the medical crew will not be needed.
+
+    The firefighters need information about the fire type, the location of the fire, the number of injured people and the estimated fire severity.
+
+    The medical crew needs information about the fire type, the fire location, the number of injured people, the estimated severity of the incident and information about how much capacity the hospital nearby have to accomodate incident victims. 
+
+    The police crew only needs information about the fire location and the estimated severity in order to plan the traffic control around that location.
+
+    Create organised outputs including the information for each crew. Please also justify why each information is necessary for each crew.
+
+    This is the initial emergency report: "{initial_emergency_report}"
   expected_output: >
-    A list of distributed tasks and an explanation of the distribution logic.
+    A list of distributed tasks, the confirmation if the medical crew is needed and an explanation of the distribution logic.
   agent: distributor
