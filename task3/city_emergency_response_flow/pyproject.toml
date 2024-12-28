@@ -2,16 +2,35 @@
 name = "city_emergency_response_flow"
 version = "0.1.0"
 description = "city_emergency_response_flow using crewAI"
-authors = [{ name = "Your Name", email = "you@example.com" }]
+authors = ["nikilong2000 <niklaslongschiefelbein@gmail.com>"]
+readme = "README.md"
 requires-python = ">=3.10,<=3.13"
 dependencies = [
-    "crewai[tools]>=0.86.0,<1.0.0",
+    "osmnx>=2.0.0",
+    "crewai[tools]>=0.86.0,<1.0.0"
 ]
 
 [project.scripts]
 kickoff = "city_emergency_response_flow.main:kickoff"
-plot = "city_emergency_response_flow.main:plot"
+plot    = "city_emergency_response_flow.main:plot"
+
+[tool.poetry]
+name = "city-emergency-response-flow"
+version = "0.1.0"
+description = "city_emergency_response_flow using crewAI"
+authors = ["nikilong2000 <niklaslongschiefelbein@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = ">=3.10,<=3.13"
+osmnx = "^2.0.0"
+crewai = { version = ">=0.86.0,<1.0.0", extras = ["tools"] }
+scikit-learn = "^1.6.0"
+
+[tool.poetry.scripts]
+kickoff = "city_emergency_response_flow.main:kickoff"
+plot    = "city_emergency_response_flow.main:plot"
 
 [build-system]
-requires = ["hatchling"]
-build-backend = "hatchling.build"
+requires = ["poetry-core>=1.2.0"]
+build-backend = "poetry.core.masonry.api"
