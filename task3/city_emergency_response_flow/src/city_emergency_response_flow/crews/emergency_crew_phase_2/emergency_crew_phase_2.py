@@ -16,6 +16,12 @@ class EmergencyCrewPhase2:
     tasks_config = "config/tasks.yaml"
 
     @agent
+    def distributor(self) -> Agent:
+        return Agent(
+            config=self.agents_config["distributor"], llm=self.llm, verbose=True
+        )
+
+    @agent
     def philosopher(self) -> Agent:
         return Agent(
             config=self.agents_config["philosopher"], llm=self.llm, verbose=True
