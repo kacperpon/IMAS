@@ -103,10 +103,25 @@ class ToolSelection(BaseModel):
         return schema
 
 
+# For FireTruckSelection
+class FireTruckInformation(BaseModel):
+    truck_id: str = Field(
+        ..., description="Identifier for the fire truck (e.g., Fire Truck SDV 2032)"
+    )
+    installed_equipment: List[str] = Field(
+        ..., description="List of equipment which the truck has"
+    )
+    truck_location: tuple[float, float] = Field(
+        ..., description="X and Y coordinates of the current fire truck location"
+    )
+
+
 class FireTruckSelection(BaseModel):
     """Output for selecting fire trucks."""
 
-    fire_trucks: List[str] = Field(..., description="List of selected fire trucks.")
+    fire_trucks: List[FireTruckInformation] = Field(
+        ..., description="List of selected fire trucks."
+    )
     action_details: str = Field(
         ..., description="Details of the fire truck selection process."
     )

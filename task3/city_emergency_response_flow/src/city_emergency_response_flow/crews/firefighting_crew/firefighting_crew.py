@@ -2,6 +2,7 @@ import os
 from crewai import Agent, Crew, Process, Task, LLM
 from crewai.project import CrewBase, agent, crew, task
 from .schemas.schemas import *
+from ...tools.emergency_route_tool import EmergencyRouteTool
 
 
 @CrewBase
@@ -124,6 +125,7 @@ class FirefightingCrew:
         return Task(
             config=self.tasks_config["route_planning"],
             context=[self.fire_truck_selection()],
+            tools=[EmergencyRouteTool()],
             output_pydantic=RoutePlanning,
             output_file=os.path.join(self.output_path, "007_route_planning.json"),
         )
