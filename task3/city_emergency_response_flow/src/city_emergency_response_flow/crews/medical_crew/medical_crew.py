@@ -2,6 +2,8 @@ import os
 from crewai import Agent, Crew, Process, Task, LLM
 from crewai.project import CrewBase, agent, crew, task
 from .schemas.schemas import *
+from crewai_tools import FileReadTool
+
 
 
 @CrewBase
@@ -11,6 +13,9 @@ class MedicalCrew:
     llm = LLM(model="ollama/llama3.1")
     output_path = os.path.join(
         os.path.dirname(os.path.relpath(__file__)), "crew_outputs"
+    )
+    vehicle_input_path = os.path.join(
+            "tests", "vehicle_positions", "ambulances.yaml"
     )
     agents_config = "config/agents.yaml"
     tasks_config = "config/tasks.yaml"
@@ -107,6 +112,7 @@ class MedicalCrew:
         return Task(
             config=self.tasks_config["ambulance_selection"],
             context=[self.medical_supplies_preparation()],
+            tools=[FileReadTool(file_path=self.vehicle_input_path)],
             output_pydantic=AmbulanceSelection,
             output_file=os.path.join(self.output_path, "006_ambulance_selection.json"),
         )

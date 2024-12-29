@@ -1,6 +1,8 @@
 import os
 from crewai import Agent, Crew, Process, Task, LLM
 from crewai.project import CrewBase, agent, crew, task
+from crewai_tools import FileReadTool
+
 from .schemas.schemas import *
 from ...tools.emergency_route_tool import EmergencyRouteTool
 
@@ -12,6 +14,9 @@ class FirefightingCrew:
     llm = LLM(model="ollama/llama3.1")
     output_path = os.path.join(
         os.path.dirname(os.path.relpath(__file__)), "crew_outputs"
+    )
+    vehicle_input_path = os.path.join(
+            "tests", "vehicle_positions", "firetrucks.yaml"
     )
     agents_config = "config/agents.yaml"
     tasks_config = "config/tasks.yaml"
@@ -116,6 +121,7 @@ class FirefightingCrew:
         return Task(
             config=self.tasks_config["fire_truck_selection"],
             context=[self.extinguishing_tools_selection()],
+            tools=[FileReadTool(file_path=self.vehicle_input_path)],
             output_pydantic=FireTruckSelection,
             output_file=os.path.join(self.output_path, "006_fire_truck_selection.json"),
         )

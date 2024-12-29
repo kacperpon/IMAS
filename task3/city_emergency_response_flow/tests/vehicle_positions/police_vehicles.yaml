@@ -1,0 +1,61 @@
+police_vehicles:
+  - id: 1
+    type: "Police Car"
+    location:
+      latitude: 36.520456
+      longitude: -6.283721
+    status: "Available"
+  - id: 2
+    type: "Motorcycle"
+    location:
+      latitude: 36.524114
+      longitude: -6.286088
+    status: "In Service"
+  - id: 3
+    type: "Police Van"
+    location:
+      latitude: 36.533285
+      longitude: -6.296589
+    status: "Available"
+  - id: 4
+    type: "Armored Vehicle"
+    location:
+      latitude: 36.517187
+      longitude: -6.277774
+    status: "In Service"
+  - id: 5
+    type: "Police Car"
+    location:
+      latitude: 36.511723
+      longitude: -6.271585
+    status: "Under Maintenance"
+  - id: 6
+    type: "Motorcycle"
+    location:
+      latitude: 36.504107
+      longitude: -6.273943
+    status: "Available"
+  - id: 7
+    type: "Police Car"
+    location:
+      latitude: 36.499231
+      longitude: -6.261965
+    status: "In Service"
+  - id: 8
+    type: "Police Van"
+    location:
+      latitude: 36.541871
+      longitude: -6.285121
+    status: "Available"
+  - id: 9
+    type: "Armored Vehicle"
+    location:
+      latitude: 36.528762
+      longitude: -6.304689
+    status: "In Service"
+  - id: 10
+    type: "Police Car"
+    location:
+      latitude: 36.532700
+      longitude: -6.302902
+    status: "Available"

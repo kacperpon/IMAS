@@ -37,7 +37,7 @@ tool_selection:
 
 fire_truck_selection:
   description: >
-    Assign fire trucks using the firefighting information ({firefighting_information}) and the context which gives information about the necessary extinguishing tools which need to be installed on the truck to evaluate proximity and suitability for the tasks at hand. Also find out the position of those fire trucks.
+    Assign fire trucks using the firefighting information ({firefighting_information}) and the context which gives information about the necessary extinguishing tools which you need to install on the trucks you select. Evaluate proximity and suitability of each truck for the tasks at hand. Also find out the position of those fire trucks.
   expected_output: >
     A list of selected fire trucks, each's equipment and their locations with a rationale for the selection process.
   agent: fire_truck_chief

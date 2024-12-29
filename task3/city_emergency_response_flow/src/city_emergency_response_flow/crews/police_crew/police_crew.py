@@ -2,6 +2,8 @@ import os
 from crewai import Agent, Crew, Process, Task, LLM
 from crewai.project import CrewBase, agent, crew, task
 from .schemas.schemas import *
+from crewai_tools import FileReadTool
+
 
 
 @CrewBase
@@ -11,6 +13,9 @@ class PoliceCrew:
     llm = LLM(model="ollama/llama3.1")
     output_path = os.path.join(
         os.path.dirname(os.path.relpath(__file__)), "crew_outputs"
+    )
+    vehicle_input_path = os.path.join(
+            "tests", "vehicle_positions", "police_vehicles.yaml"
     )
     agents_config = "config/agents.yaml"
     tasks_config = "config/tasks.yaml"
@@ -64,6 +69,7 @@ class PoliceCrew:
         return Task(
             config=self.tasks_config["patrol_vehicle_assignment"],
             context=[self.perimeter_control_planning()],
+            tools=[FileReadTool(file_path=self.vehicle_input_path)],
             output_pydantic=PatrolSelection,
             output_file=os.path.join(
                 self.output_path, "003_patrol_vehicle_assignment.json"

@@ -1,5 +1,5 @@
 from pydantic import BaseModel, Field
-from typing import List, Optional
+from typing import List, Optional, Tuple
 
 
 class TaskforceAssignment(BaseModel):
@@ -133,7 +133,7 @@ class AmbulanceSelection(BaseModel):
 class RoutePlanning(BaseModel):
     """Output for planning the route."""
 
-    routes: List[tuple[str, List[int]]] = Field(
+    routes: List[Tuple[str, List[int]]] = Field(
         ..., description="List of planned OSMnx routes for each ambulance."
     )
     action_details: str = Field(

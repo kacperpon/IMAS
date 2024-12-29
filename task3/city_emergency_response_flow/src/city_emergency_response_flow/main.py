@@ -16,7 +16,7 @@ from .crews.police_crew.police_crew import PoliceCrew
 # # TODO probably not necessary since first emergency crew agent extracts information from the markdown file
 # class InitialInformation(BaseModel):
 # fire_type: str
-# fire_location: tuple[str, str]
+# fire_location: Tuple[str, str]
 # fire_severity: str
 # injured_people: int
 
