@@ -23,6 +23,9 @@ from .crews.police_crew.police_crew import PoliceCrew
 
 class InitialInformation(BaseModel):
     initial_emergency_report: str = ""
+    
+    firefighting_vehicles: str = ""
+    
     final_report: str = ""
     medical_crew_required: bool = True
 
@@ -49,8 +52,14 @@ class CityEmergencyResponseFlow(Flow[InitialInformation]):
         selected_file = os.path.join(
             "tests", "initial_reports", choice(os.listdir("tests/initial_reports"))
         )
+        
+        fire_vehicles = os.path.join(
+            "tests", "vehicle_positions", "firetrucks.yaml"
+        )
+    
 
         self.state.initial_emergency_report = open(selected_file).read()
+        self.state.firefighting_vehicles = open(fire_vehicles).read()
 
     @listen(read_emergency_characteristics)
     def call_emergency_centre(self):
@@ -93,7 +102,8 @@ class CityEmergencyResponseFlow(Flow[InitialInformation]):
             FirefightingCrew()
             .crew()
             .kickoff(
-                inputs={"firefighting_information": self.state.firefighting_information}
+                inputs={"firefighting_information": self.state.firefighting_information,
+                        "firefighting_vehicles": self.state.firefighting_vehicles}
             )
         )
 
