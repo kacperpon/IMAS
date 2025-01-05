@@ -8,7 +8,10 @@ from .schemas.schemas import *
 class EmergencyCrewPhase2:
     """EmergencyCrewPhase2 crew"""
 
-    llm = LLM(model="ollama/llama3.1")
+    llm = LLM(
+       model= "gpt-4",
+        api_key=os.getenv("OPENAI_API_KEY")  # Get the API key from environment variable
+    )
     output_path = os.path.join(
         os.path.dirname(os.path.relpath(__file__)), "crew_outputs"
     )

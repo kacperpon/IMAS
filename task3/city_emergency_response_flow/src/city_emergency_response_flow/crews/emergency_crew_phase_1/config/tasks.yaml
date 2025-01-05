@@ -10,6 +10,8 @@ emergency_alert_distribution:
 
     Create organised outputs including the information for each crew. Please also justify why each information is necessary for each crew.
 
+    The locations should be specified only as coordinates, use the GetCoordinatesTool to convert any address into coordinates.
+
     This is the initial emergency report: "{initial_emergency_report}"
   expected_output: >
     A list of distributed tasks, the confirmation if the medical crew is needed and an explanation of the distribution logic.
