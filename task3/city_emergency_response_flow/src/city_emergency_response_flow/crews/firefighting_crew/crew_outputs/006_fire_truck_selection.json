@@ -1,0 +1,1 @@
+{"fire_trucks":[{"truck_id":1,"installed_tools":["tool1","tool2"],"truck_location":[10.0,20.0],"truck_status":"Available"}],"action_details":"The suitable vehicle for the task is Fire Truck with ID 1."}

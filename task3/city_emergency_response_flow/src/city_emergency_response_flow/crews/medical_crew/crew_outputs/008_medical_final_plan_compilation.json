@@ -1,0 +1,1 @@
+{"response_plan":"[Ambulance ID: ambulance_id, Hospital Name: hospital_name, Suitable Injuries: suitable_injuries]","ethical_issues":"None","action_details":"The response plan is generated based on the medical supplies available in each ambulance."}

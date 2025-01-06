@@ -1,0 +1,24 @@
+{
+  "information_for_each_crew": [
+    {
+      "crew": "Firefighting",
+      "information": [
+        "Divide the team into firefighting, medical response, and support roles.",
+        "Address the high-severity fire."
+      ]
+    },
+    {
+      "crew": "Medical Response",
+      "information": [
+        "Allocate resources efficiently.",
+        "Prioritize the needs of those affected."
+      ]
+    },
+    {
+      "crew": "Support Roles",
+      "information": []
+    }
+  ],
+  "medical_crew_required": true,
+  "action_details": "The plan outlines a comprehensive strategy for addressing the high-severity fire with three injured people."
+}

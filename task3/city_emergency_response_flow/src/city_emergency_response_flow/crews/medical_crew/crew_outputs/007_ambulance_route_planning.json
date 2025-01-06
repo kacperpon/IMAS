@@ -1,0 +1,47 @@
+{
+  "routes": [
+    (
+      "ambulance_id",
+      "Hospital A",
+      {
+        "type": ["cardiac arrest", "trauma"],
+        "location": {"latitude": 36.528762, "longitude": -6.304689},
+        "status": "Available"
+      },
+      {
+        "hospital_name": "Hospital A",
+        "distance": 10.5,
+        "time": 15
+      }
+    ),
+    (
+      "ambulance_id_2",
+      "Hospital B",
+      {
+        "type": ["respiratory distress", "burns"],
+        "location": {"latitude": 36.541871, "longitude": -6.285121},
+        "status": "In Service"
+      },
+      {
+        "hospital_name": "Hospital B",
+        "distance": 8.2,
+        "time": 12
+      }
+    ),
+    (
+      "ambulance_id_3",
+      "Hospital C",
+      {
+        "type": ["fractures", "sprains"],
+        "location": {"latitude": 36.499231, "longitude": -6.261965},
+        "status": "Available"
+      },
+      {
+        "hospital_name": "Hospital C",
+        "distance": 12.1,
+        "time": 18
+      }
+    )
+  ],
+  "action_details": "The most efficient routes for the ambulances to transport victims to hospitals have been planned, taking into account their current status and proximity to hospitals. Ambulance id_1 is assigned to Hospital A with a distance of 10.5 km and an estimated time of 15 minutes. Ambulance id_2 is assigned to Hospital B with a distance of 8.2 km and an estimated time of 12 minutes. Ambulance id_3 is assigned to Hospital C with a distance of 12.1 km and an estimated time of 18 minutes."
+}
