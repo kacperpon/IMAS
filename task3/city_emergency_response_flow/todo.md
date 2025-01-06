@@ -4,12 +4,12 @@
 
 - [ ] implement osmnx route calculation
 - [ ] Leverage ethical issues (probably in initial report)
-- [ ] Check if the contexts really work
 - [ ] human input hospital capacity not implemented
-- [ ] resolve how the emergency crew can be called in the beginning and in the end
 
 ---
 
+- [x] resolve how the emergency crew can be called in the beginning and in the end
+- [x] Check if the contexts really work
 - [x] add context field to each fire-task whenever depending on previous task
 - [x] add context field to each medical-task whenever depending on previous task
 - [x] add context field to each police-task whenever depending on previous task
@@ -19,6 +19,7 @@
 ## Priority 2
 
 - [ ] format all crews outputs in the same way (tell llm to "output as markdown with heading 1 being…")
+- [ ] check initial report if works with ONLY natural language (no bulletpoints)
 
 ---
 
