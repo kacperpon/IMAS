@@ -155,7 +155,7 @@ class MedicalPlanCompilation(BaseModel):
         ..., description="Compiled response plan for the medical operation."
     )
     ethical_issues: Optional[str] = Field(
-        None, description="Ethical issues considered in the plan."
+        None, description="Ethical issues (if any) considered in the plan."
     )
     action_details: str = Field(
         ..., description="Additional details of the overall medical plan."

@@ -40,10 +40,7 @@ class GetCoordinatesTool(BaseTool):
 class EmergencyCrewPhase1:
     """EmergencyCrewPhase1 crew"""
 
-    llm = LLM(
-       model= "gpt-4",
-        api_key=os.getenv("OPENAI_API_KEY")  # Get the API key from environment variable
-    )
+    llm = LLM(model="ollama/llama3.1")
     output_path = os.path.join(
         os.path.dirname(os.path.relpath(__file__)), "crew_outputs"
     )

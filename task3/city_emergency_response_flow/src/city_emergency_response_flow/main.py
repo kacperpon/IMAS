@@ -89,11 +89,6 @@ class CityEmergencyResponseFlow(Flow[InitialInformation]):
                 self.state.police_information = information
                 print("Police Information:")
                 print(self.state.police_information)
-
-        # # Print the assigned variables
-        # print(f"Firefighting Information: {self.state.firefighting_information}")
-        # print(f"Medical Information: {self.state.medical_information}")
-        # print(f"Police Information: {self.state.police_information}")
         
         self.state.medical_crew_required = result["medical_crew_required"]
 
@@ -116,42 +111,42 @@ class CityEmergencyResponseFlow(Flow[InitialInformation]):
             )
         )
 
-    #     self.state.firefighting_plan = result.pydantic.response_plan
+        self.state.firefighting_plan = result.pydantic.response_plan
 
-    # @listen("meds_required")  # only when explicitly required
-    # def create_medical_plan(self):
-    #     print("Develop a plan for the medical crew")
-    #     result = (
-    #         MedicalCrew()
-    #         .crew()
-    #         .kickoff(inputs={"medical_information": self.state.medical_information})
-    #     )
+    @listen("meds_required")  # only when explicitly required
+    def create_medical_plan(self):
+        print("Develop a plan for the medical crew")
+        result = (
+            MedicalCrew()
+            .crew()
+            .kickoff(inputs={"medical_information": self.state.medical_information})
+        )
 
-    #     self.state.medical_plan = result.pydantic.response_plan
+        self.state.medical_plan = result.pydantic.response_plan
 
-    # @listen(or_("meds_required", "meds_not_required"))
-    # def create_police_plan(self):
-    #     print("Develop a plan for the police crew")
-    #     result = (
-    #         PoliceCrew()
-    #         .crew()
-    #         .kickoff(inputs={"police_information": self.state.police_information})
-    #     )
+    @listen(or_("meds_required", "meds_not_required"))
+    def create_police_plan(self):
+        print("Develop a plan for the police crew")
+        result = (
+            PoliceCrew()
+            .crew()
+            .kickoff(inputs={"police_information": self.state.police_information})
+        )
 
-    # @listen(
-    #     (
-    #         and_(
-    #             "meds_required",
-    #             create_fire_plan,
-    #             create_medical_plan,
-    #             create_police_plan,
-    #         )
-    #     )
-    #     or (and_("meds_not_required", create_fire_plan, create_police_plan))
-    # )
-    # def merge_plans(self):
-    #     print("Merge each crew's plans into one final plan")
-    #     result = EmergencyCrewPhase2().crew().kickoff()
+    @listen(
+        (
+            and_(
+                "meds_required",
+                create_fire_plan,
+                create_medical_plan,
+                create_police_plan,
+            )
+        )
+        or (and_("meds_not_required", create_fire_plan, create_police_plan))
+    )
+    def merge_plans(self):
+        print("Merge each crew's plans into one final plan")
+        result = EmergencyCrewPhase2().crew().kickoff()
 
 
 def kickoff():
