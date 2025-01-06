@@ -1,2 +1,2 @@
 
-I’m reporting an emergency. There’s a high-severity electrical fire at Av. Campo del Sur, 262, 11002 Cádiz, Spain. The fire started from an electrical fault and is spreading quickly, with high flames and thick smoke everywhere. There are three injured people—one is unconscious, and the other two have burns and are coughing heavily. Please send help right away!
+I’m reporting an emergency. There’s a high-severity electrical fire at Av. Campo del Sur, 262, 11002 Cadiz, Spain. The fire started from an electrical fault and is spreading quickly, with high flames and thick smoke everywhere. There are three injured people—one is unconscious, and the other two have burns and are coughing heavily. Please send help right away!

@@ -30,6 +30,7 @@ class GetCoordinatesTool(BaseTool):
         """
         try:
             cleaned_address = unicodedata.normalize('NFKC', address)
+            print("cleaned address ", cleaned_address)
             point = ox.geocode(cleaned_address)
             return f"Coordinates of '{address}': {point[0]}, {point[1]}"
         except Exception as e:

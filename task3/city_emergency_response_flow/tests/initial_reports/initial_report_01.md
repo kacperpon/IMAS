@@ -7,4 +7,4 @@
 
 **Transcript:**
 
-_"Hello? This is an emergency! There’s a fire in Calle San Francisco, Cádiz. It looks like it started from an electrical fault, and it’s spreading really fast. The flames are really high, and there’s thick smoke everywhere! Three people are injured—one of them is unconscious, and the other two seem to have burns and are coughing a lot. Please send help quickly!"_
+_"Hello? This is an emergency! There’s a fire in Calle San Francisco, Cadiz. It looks like it started from an electrical fault, and it’s spreading really fast. The flames are really high, and there’s thick smoke everywhere! Three people are injured—one of them is unconscious, and the other two seem to have burns and are coughing a lot. Please send help quickly!"_

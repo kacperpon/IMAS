@@ -10,7 +10,9 @@ emergency_alert_distribution:
 
     Create organised outputs including the information for each crew. Please also justify why each information is necessary for each crew.
 
-    The locations should be specified only as coordinates, use the GetCoordinatesTool to convert any address into coordinates.
+    The location should be specified only as coordinates, if the coordinates are not provided, 
+    use the GetCoordinatesTool to convert any address into coordinates, the address should be passed to the tool
+    in utf-8.
 
     This is the initial emergency report: "{initial_emergency_report}"
   expected_output: >
