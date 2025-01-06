@@ -55,4 +55,6 @@ medical_final_plan_compilation:
     Consolidate all outputs from previous tasks to create a comprehensive medical response plan using the provided medical information ({medical_information}) and outputs from other tasks. Include all strategies, tools, routes, and personnel information derived from the input. All outputs from previous tasks are given as context.
   expected_output: >
     A complete medical response plan addressing all aspects of the operation, including ethical considerations if applicable.
+    Ethical issues are the cases in which the resources are not enough to save all the people and a decision has to be made whether to save one person or 
+    the other. Instead of deciding who to save, the ethical dilemma should be stated in the ethical issues section.
   agent: medical_personnel_specialist

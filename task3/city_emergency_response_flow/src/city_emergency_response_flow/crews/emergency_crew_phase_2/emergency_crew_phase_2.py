@@ -18,7 +18,7 @@ class EmergencyCrewPhase2:
     @agent
     def distributor(self) -> Agent:
         return Agent(
-            config=self.agents_config["distributor"], llm=self.llm, verbose=True
+            config=self.agents_config["plan_compiler"], llm=self.llm, verbose=True
         )
 
     @agent
@@ -32,6 +32,7 @@ class EmergencyCrewPhase2:
         return Task(
             config=self.tasks_config["situation_report_compilation"],
             output_pydantic=SituationReportCompilation,
+            tools=[FileReadTool()],
             output_file=os.path.join(
                 self.output_path, "001_situation_report_compilation.json"
             ),
@@ -42,6 +43,7 @@ class EmergencyCrewPhase2:
         return Task(
             config=self.tasks_config["ethical_consultation"],
             output_pydantic=FinalCompilation,
+            tools=[FileReadTool(file_path="ethics.txt")],
             output_file=os.path.join(self.output_path, "002_ethical_consultation.json"),
         )
 

@@ -2,7 +2,7 @@
 name = "city_emergency_response_flow"
 version = "0.1.0"
 description = "city_emergency_response_flow using crewAI"
-authors = ["nikilong2000 <niklaslongschiefelbein@gmail.com>"]
+authors = [{name = "niki"}]
 readme = "README.md"
 requires-python = ">=3.10,<=3.13"
 dependencies = [

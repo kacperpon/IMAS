@@ -80,9 +80,6 @@ class PolicePlanCompilation(BaseModel):
     response_plan: str = Field(
         ..., description="Compiled response plan for the police operation."
     )
-    ethical_issues: Optional[str] = Field(
-        None, description="Ethical issues considered in the plan."
-    )
     action_details: str = Field(
         ..., description="Additional details of the overall police plan."
     )
