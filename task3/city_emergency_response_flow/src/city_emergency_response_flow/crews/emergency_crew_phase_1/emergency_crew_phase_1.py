@@ -8,7 +8,7 @@ from .schemas.schemas import *
 class EmergencyCrewPhase1:
     """EmergencyCrewPhase1 crew"""
 
-    llm = LLM(model="ollama/llama3.1:8b")
+    llm = LLM(model="ollama/llama3.1")
     output_path = os.path.join(
         os.path.dirname(os.path.relpath(__file__)), "crew_outputs"
     )
