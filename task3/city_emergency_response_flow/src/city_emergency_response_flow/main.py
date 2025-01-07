@@ -58,8 +58,8 @@ class CityEmergencyResponseFlow(Flow[InitialInformation]):
         )
     
 
-        self.state.initial_emergency_report = open(selected_file, encoding="utf-8").read()
-        self.state.firefighting_vehicles = open(fire_vehicles, encoding="utf-8").read()
+        self.state.initial_emergency_report = open(selected_file).read()
+        self.state.firefighting_vehicles = open(fire_vehicles).read()
 
     @listen(read_emergency_characteristics)
     def call_emergency_centre(self):
@@ -73,24 +73,20 @@ class CityEmergencyResponseFlow(Flow[InitialInformation]):
         )
 
         # Access and assign information for each crew
-        for crew_info in result['information_for_each_crew']:
-            type_of_crew = crew_info['crew']
-            information = "\n".join(crew_info['information'])
+        for crew_info in result.pydantic.information_for_each_crew:
+            if crew_info.crew == "Firefighting":
+                self.state.firefighting_information = "\n".join(crew_info.information)
+            elif crew_info.crew == "Medical":
+                self.state.medical_information = "\n".join(crew_info.information)
+            elif crew_info.crew == "Police":
+                self.state.police_information = "\n".join(crew_info.information)
 
-            if type_of_crew == "firefighters":
-                self.state.firefighting_information = information
-                print("Firefighting Information:")
-                print(self.state.firefighting_information)
-            elif type_of_crew == "medical":
-                self.state.medical_information = information
-                print("Medical Information:")
-                print(self.state.medical_information)
-            elif type_of_crew == "police":
-                self.state.police_information = information
-                print("Police Information:")
-                print(self.state.police_information)
-        
-        self.state.medical_crew_required = result["medical_crew_required"]
+        # # Print the assigned variables
+        # print(f"Firefighting Information: {self.state.firefighting_information}")
+        # print(f"Medical Information: {self.state.medical_information}")
+        # print(f"Police Information: {self.state.police_information}")
+
+        self.state.medical_crew_required = result.pydantic.medical_crew_required
 
     @router(call_emergency_centre)
     def medical_crew_required(self):
