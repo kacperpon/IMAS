@@ -30,3 +30,18 @@
 - [ ] resolve the redundant declaration of @classmethod get_schema
 
 ---
+
+## Report
+
+- Show how we organised the code
+- Explain all adjustments which we have done
+- Use Cases at least for routing (1 with meds, 1 without)
+- Include final output/results to report and talk about it (what couldve been better, whats going well, specific moments of particular interest)
+
+---
+
+## Presentation
+
+- Show how we organised the code
+- Explain all adjustments which we have done
+- No execution during presentation
