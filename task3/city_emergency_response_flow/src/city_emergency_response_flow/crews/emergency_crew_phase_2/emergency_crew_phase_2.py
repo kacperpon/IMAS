@@ -1,6 +1,7 @@
 import os
 from crewai import Agent, Crew, Process, Task, LLM
 from crewai.project import CrewBase, agent, crew, task
+from crewai_tools import FileReadTool
 from .schemas.schemas import *
 
 
@@ -8,7 +9,7 @@ from .schemas.schemas import *
 class EmergencyCrewPhase2:
     """EmergencyCrewPhase2 crew"""
 
-    llm = LLM(model="ollama/llama3.1:8b")
+    llm = LLM(model="ollama/llama3.1")
     output_path = os.path.join(
         os.path.dirname(os.path.relpath(__file__)), "crew_outputs"
     )
@@ -18,7 +19,7 @@ class EmergencyCrewPhase2:
     @agent
     def distributor(self) -> Agent:
         return Agent(
-            config=self.agents_config["distributor"], llm=self.llm, verbose=True
+            config=self.agents_config["plan_compiler"], llm=self.llm, verbose=True
         )
 
     @agent
@@ -42,6 +43,7 @@ class EmergencyCrewPhase2:
         return Task(
             config=self.tasks_config["ethical_consultation"],
             output_pydantic=FinalCompilation,
+            tools=[FileReadTool(file_path="ethics.txt")],
             output_file=os.path.join(self.output_path, "002_ethical_consultation.json"),
         )
 

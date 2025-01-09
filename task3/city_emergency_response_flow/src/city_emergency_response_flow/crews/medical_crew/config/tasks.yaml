@@ -53,6 +53,8 @@ ambulance_route_planning:
 medical_final_plan_compilation:
   description: >
     Consolidate all outputs from previous tasks to create a comprehensive medical response plan using the provided medical information ({medical_information}) and outputs from other tasks. Include all strategies, tools, routes, and personnel information derived from the input. All outputs from previous tasks are given as context.
+    The ethical issues considered should ONLY regard cases where the resources are not enough for the problem, if there is a situation where you have to choose between saving one person 
+    or the other, no decision should be made, instead the ethical dilemma should be stated in the ethical issues output.
   expected_output: >
     A complete medical response plan addressing all aspects of the operation, including ethical considerations if applicable.
   agent: medical_personnel_specialist

@@ -52,6 +52,8 @@ route_planning:
 final_plan_compilation:
   description: >
     Consolidate all outputs from previous tasks to create a comprehensive firefighting response plan using the firefighting information ({firefighting_information}) and all outputs of tasks from before given in the context. Include all strategies, tools, routes, and personnel information derived from the input.
+    The ethical issues considered should ONLY regard cases where the resources are not enough for the problem, if there is a situation where you have to choose between saving one person 
+    or the other, no decision should be made, instead the ethical dilemma should be stated in the ethical issues output.
   expected_output: >
     A complete firefighting response plan addressing all aspects of the operation along with ethical considerations if applicable.
   agent: fire_personnel_specialist

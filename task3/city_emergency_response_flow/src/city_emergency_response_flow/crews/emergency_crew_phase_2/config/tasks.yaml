@@ -7,7 +7,9 @@ situation_report_compilation:
 
 ethical_consultation:
   description: >
-    Evaluate the consolidated plans for ethical concerns and provide recommendations.
+    Evaluate the consolidated plans for ethical concerns and provide recommendations. Ethical issues are the cases in which the resources are not enough to 
+    save all the people and a decision has to be made whether to save one person or the other. If there are ethical issues use the FileReadTool to get the
+    ethics book. Solve the ethics issues ONLY using the contents of the ethics book.
   expected_output: >
     A finalized situation report addressing ethical concerns.
   agent: philosopher

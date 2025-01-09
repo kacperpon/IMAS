@@ -1,16 +1,8 @@
-emergency_alert_distribution:
+situation_report_compilation:
   description: >
-    Analyse the initial emergency report for all the relevant information. The goal is to later create lists with information relevant for each crew (firefighting, medical, police). If the initial report does not induce the need for the medical crew, please state explicitly in the output that the medical crew will not be needed.
-
-    The firefighters need information about the fire type, the location of the fire, the number of injured people and the estimated fire severity.
-
-    The medical crew needs information about the fire type, the fire location, the number of injured people, the estimated severity of the incident and information about how much capacity the hospital nearby have to accomodate incident victims. 
-
-    The police crew only needs information about the fire location and the estimated severity in order to plan the traffic control around that location.
-
-    Create organised outputs including the information for each crew. Please also justify why each information is necessary for each crew.
-
-    This is the initial emergency report: "{initial_emergency_report}"
+    Consolidate subplans from all crews into a comprehensive situation report. If the other crews have raised ethical issues, combine them in the ethical_issues 
+    field, ethical issues are the cases in which the resources are not enough to save all the people and a decision has to be made whether to save one person or 
+    the other.
   expected_output: >
-    A list of distributed tasks, the confirmation if the medical crew is needed and an explanation of the distribution logic.
+    A detailed situation report/plan covering all aspects of the emergency and how to solve it, including ethical dilemmas if there are any.
   agent: distributor
