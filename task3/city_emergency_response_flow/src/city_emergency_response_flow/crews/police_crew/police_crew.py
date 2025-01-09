@@ -10,7 +10,7 @@ from crewai_tools import FileReadTool
 class PoliceCrew:
     """PoliceCrew crew"""
 
-    llm = LLM(model="ollama/llama3.1")
+    llm = LLM(model="ollama/llama3.1:8b")
     output_path = os.path.join(
         os.path.dirname(os.path.relpath(__file__)), "crew_outputs"
     )
