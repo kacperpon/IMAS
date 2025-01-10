@@ -19,6 +19,7 @@
 ## Priority 2
 
 - [ ] change ambulance routes to go from emergency to hospitals, not from ambulance pos to emergency??
+- [ ] output route statistics such as duration, etc.
 - [ ] format all crews outputs in the same way (tell llm to "output as markdown with heading 1 being…")
 - [ ] check initial report if works with ONLY natural language (no bulletpoints)
 
