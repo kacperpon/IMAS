@@ -1,61 +1,61 @@
 firefighting_vehicles:
   - truck_id: 1
     truck_type: "Fire Truck"
-    truck_truck_location:
+    truck_location:
       - 36.532700
       - -6.302902
-    status: "Available"
+    truck_status: "Available"
   - truck_id: 2
     truck_type: "Rescue Vehicle"
     truck_location:
       - 36.533285
       - -6.296589
-    status: "In Service"
+    truck_status: "In Service"
   - truck_id: 3
     truck_type: "Fire Truck"
     truck_location:
       - 36.524114
       - -6.286088
-    status: "Available"
+    truck_status: "Available"
   - truck_id: 4
     truck_type: "Water Tanker"
     truck_location:
       - 36.520456
       - -6.283721
-    status: "In Service"
+    truck_status: "In Service"
   - truck_id: 5
     truck_type: "Ladder Truck"
     truck_location:
       - 36.517187
       - -6.277774
-    status: "Under Maintenance"
+    truck_status: "Under Maintenance"
   - truck_id: 6
     truck_type: "Fire Truck"
     truck_location:
       - 36.511723
       - -6.271585
-    status: "Available"
+    truck_status: "Available"
   - truck_id: 7
     truck_type: "Ambulance"
     truck_location:
       - 36.504107
       - -6.273943
-    status: "In Service"
+    truck_status: "In Service"
   - truck_id: 8
     truck_type: "Rescue Vehicle"
     truck_location:
       - 36.499231
       - -6.261965
-    status: "Available"
+    truck_status: "Available"
   - truck_id: 9
     truck_type: "Fire Truck"
     truck_location:
       - 36.541871
       - -6.285121
-    status: "In Service"
+    truck_status: "In Service"
   - truck_id: 10
     truck_type: "Water Tanker"
     truck_location:
       - 36.528762
       - -6.304689
-    status: "Available"
+    truck_status: "Available"

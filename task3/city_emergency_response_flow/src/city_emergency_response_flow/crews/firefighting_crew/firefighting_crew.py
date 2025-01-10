@@ -6,12 +6,16 @@ from crewai_tools import FileReadTool
 from .schemas.schemas import *
 from ...tools.emergency_route_tool import EmergencyRouteTool
 
+import configparser as ConfigParser
 
 @CrewBase
 class FirefightingCrew:
     """FirefightingCrew crew"""
 
-    llm = LLM(model="ollama/llama3.1")
+    config = ConfigParser.RawConfigParser()
+    config.read(os.path.join(os.getcwd(), "src/city_emergency_response_flow/config/config.properties"))
+    
+    llm = LLM(model=config.get('LLM', 'model'), base_url=config.get('LLM', 'base_url'))    
     output_path = os.path.join(
         os.path.dirname(os.path.relpath(__file__)), "crew_outputs"
     )

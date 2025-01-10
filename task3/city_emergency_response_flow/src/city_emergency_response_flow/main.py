@@ -13,6 +13,9 @@ from .crews.medical_crew.medical_crew import MedicalCrew
 from .crews.police_crew.police_crew import PoliceCrew
 
 
+# import litellm
+# litellm.set_verbose = True
+
 # # TODO probably not necessary since first emergency crew agent extracts information from the markdown file
 # class InitialInformation(BaseModel):
 # fire_type: str
@@ -52,14 +55,8 @@ class CityEmergencyResponseFlow(Flow[InitialInformation]):
         selected_file = os.path.join(
             "tests", "initial_reports", choice(os.listdir("tests/initial_reports"))
         )
-        
-        fire_vehicles = os.path.join(
-            "tests", "vehicle_positions", "firetrucks.yaml"
-        )
-    
 
         self.state.initial_emergency_report = open(selected_file).read()
-        self.state.firefighting_vehicles = open(fire_vehicles).read()
 
     @listen(read_emergency_characteristics)
     def call_emergency_centre(self):
@@ -102,47 +99,46 @@ class CityEmergencyResponseFlow(Flow[InitialInformation]):
             FirefightingCrew()
             .crew()
             .kickoff(
-                inputs={"firefighting_information": self.state.firefighting_information,
-                        "firefighting_vehicles": self.state.firefighting_vehicles}
+                inputs={"firefighting_information": self.state.firefighting_information}
             )
         )
 
         self.state.firefighting_plan = result.pydantic.response_plan
 
-    @listen("meds_required")  # only when explicitly required
-    def create_medical_plan(self):
-        print("Develop a plan for the medical crew")
-        result = (
-            MedicalCrew()
-            .crew()
-            .kickoff(inputs={"medical_information": self.state.medical_information})
-        )
+    # @listen("meds_required")  # only when explicitly required
+    # def create_medical_plan(self):
+    #     print("Develop a plan for the medical crew")
+    #     result = (
+    #         MedicalCrew()
+    #         .crew()
+    #         .kickoff(inputs={"medical_information": self.state.medical_information})
+    #     )
 
-        self.state.medical_plan = result.pydantic.response_plan
+    #     self.state.medical_plan = result.pydantic.response_plan
 
-    @listen(or_("meds_required", "meds_not_required"))
-    def create_police_plan(self):
-        print("Develop a plan for the police crew")
-        result = (
-            PoliceCrew()
-            .crew()
-            .kickoff(inputs={"police_information": self.state.police_information})
-        )
+    # @listen(or_("meds_required", "meds_not_required"))
+    # def create_police_plan(self):
+    #     print("Develop a plan for the police crew")
+    #     result = (
+    #         PoliceCrew()
+    #         .crew()
+    #         .kickoff(inputs={"police_information": self.state.police_information})
+    #     )
 
-    @listen(
-        (
-            and_(
-                "meds_required",
-                create_fire_plan,
-                create_medical_plan,
-                create_police_plan,
-            )
-        )
-        or (and_("meds_not_required", create_fire_plan, create_police_plan))
-    )
-    def merge_plans(self):
-        print("Merge each crew's plans into one final plan")
-        result = EmergencyCrewPhase2().crew().kickoff()
+    # @listen(
+    #     (
+    #         and_(
+    #             "meds_required",
+    #             create_fire_plan,
+    #             create_medical_plan,
+    #             create_police_plan,
+    #         )
+    #     )
+    #     or (and_("meds_not_required", create_fire_plan, create_police_plan))
+    # )
+    # def merge_plans(self):
+    #     print("Merge each crew's plans into one final plan")
+    #     result = EmergencyCrewPhase2().crew().kickoff()
 
 
 def kickoff():

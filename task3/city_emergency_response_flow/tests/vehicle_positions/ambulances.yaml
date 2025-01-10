@@ -1,61 +1,61 @@
 ambulances:
-  - id: 1
-    type: "Ambulance"
-    location:
-      latitude: 36.528762
-      longitude: -6.304689
-    status: "Available"
-  - id: 2
-    type: "Ambulance"
-    location:
-      latitude: 36.541871
-      longitude: -6.285121
-    status: "In Service"
-  - id: 3
-    type: "Ambulance"
-    location:
-      latitude: 36.499231
-      longitude: -6.261965
-    status: "Available"
-  - id: 4
-    type: "Ambulance"
-    location:
-      latitude: 36.504107
-      longitude: -6.273943
-    status: "In Service"
-  - id: 5
-    type: "Ambulance"
-    location:
-      latitude: 36.511723
-      longitude: -6.271585
-    status: "Under Maintenance"
-  - id: 6
-    type: "Ambulance"
-    location:
-      latitude: 36.517187
-      longitude: -6.277774
-    status: "Available"
-  - id: 7
-    type: "Ambulance"
-    location:
-      latitude: 36.520456
-      longitude: -6.283721
-    status: "In Service"
-  - id: 8
-    type: "Ambulance"
-    location:
-      latitude: 36.524114
-      longitude: -6.286088
-    status: "Available"
-  - id: 9
-    type: "Ambulance"
-    location:
-      latitude: 36.533285
-      longitude: -6.296589
-    status: "In Service"
-  - id: 10
-    type: "Ambulance"
-    location:
-      latitude: 36.532700
-      longitude: -6.302902
-    status: "Available"
+  - ambulance_id: 1
+    ambulance_type: "Ambulance"
+    ambulance_location:
+      - 36.528762
+      - -6.304689
+    ambulance_status: "Available"
+  - ambulance_id: 2
+    ambulance_type: "Ambulance"
+    ambulance_location:
+      - 36.541871
+      - -6.285121
+    ambulance_status: "In Service"
+  - ambulance_id: 3
+    ambulance_type: "Ambulance"
+    ambulance_location:
+      - 36.499231
+      - -6.261965
+    ambulance_status: "Available"
+  - ambulance_id: 4
+    ambulance_type: "Ambulance"
+    ambulance_location:
+      - 36.504107
+      - -6.273943
+    ambulance_status: "In Service"
+  - ambulance_id: 5
+    ambulance_type: "Ambulance"
+    ambulance_location:
+      - 36.511723
+      - -6.271585
+    ambulance_status: "Under Maintenance"
+  - ambulance_id: 6
+    ambulance_type: "Ambulance"
+    ambulance_location:
+      - 36.517187
+      - -6.277774
+    ambulance_status: "Available"
+  - ambulance_id: 7
+    ambulance_type: "Ambulance"
+    ambulance_location:
+      - 36.520456
+      - -6.283721
+    ambulance_status: "In Service"
+  - ambulance_id: 8
+    ambulance_type: "Ambulance"
+    ambulance_location:
+      - 36.524114
+      - -6.286088
+    ambulance_status: "Available"
+  - ambulance_id: 9
+    ambulance_type: "Ambulance"
+    ambulance_location:
+      - 36.533285
+      - -6.296589
+    ambulance_status: "In Service"
+  - ambulance_id: 10
+    ambulance_type: "Ambulance"
+    ambulance_location:
+      - 36.532700
+      - -6.302902
+    ambulance_status: "Available"

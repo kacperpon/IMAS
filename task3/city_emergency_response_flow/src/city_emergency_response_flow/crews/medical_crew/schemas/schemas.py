@@ -114,10 +114,26 @@ class InjuryVoting(BaseModel):
         return schema
 
 
+# For AmbulanceSelection
+class AmbulanceInformation(BaseModel):
+    AmbulanceInformation_id: int = Field(
+        ..., description="ambulance_id of the selected ambulance. (Eg: 1)"
+    )
+    installed_supplies: List[str] = Field(
+        ..., description="List of medical supplies which will be installed in the selected ambulance."
+    )
+    ambulance_location: Tuple[float, float] = Field(
+        ..., description="ambulance_location (composed of latitude and longitude values) of the selected ambulance location."
+    )
+    ambulance_status: str = Field(
+        ..., description="ambulance_status of the selected truck (Eg: Available, In Service)"
+    )
+
+
 class AmbulanceSelection(BaseModel):
     """Output for selecting ambulances."""
 
-    ambulances: List[str] = Field(..., description="List of selected ambulances.")
+    ambulances: List[AmbulanceInformation] = Field(..., description="List of selected ambulances.")
     action_details: str = Field(
         ..., description="Details of the ambulance selection process."
     )

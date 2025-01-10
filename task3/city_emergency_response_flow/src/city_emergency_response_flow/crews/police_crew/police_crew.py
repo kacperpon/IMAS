@@ -4,13 +4,15 @@ from crewai.project import CrewBase, agent, crew, task
 from .schemas.schemas import *
 from crewai_tools import FileReadTool
 
+import configparser as ConfigParser
 
 
 @CrewBase
 class PoliceCrew:
     """PoliceCrew crew"""
 
-    llm = LLM(model="ollama/llama3.1")
+    config = ConfigParser.RawConfigParser()
+    config.read(os.path.join(os.getcwd(), "src/city_emergency_response_flow/config/config.properties"))
     output_path = os.path.join(
         os.path.dirname(os.path.relpath(__file__)), "crew_outputs"
     )
@@ -68,7 +70,6 @@ class PoliceCrew:
     def patrol_vehicle_assignment(self) -> Task:
         return Task(
             config=self.tasks_config["patrol_vehicle_assignment"],
-            context=[self.perimeter_control_planning()],
             tools=[FileReadTool(file_path=self.vehicle_input_path)],
             output_pydantic=PatrolSelection,
             output_file=os.path.join(

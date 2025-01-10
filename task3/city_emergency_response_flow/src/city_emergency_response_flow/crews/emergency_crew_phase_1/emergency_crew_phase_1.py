@@ -3,12 +3,16 @@ from crewai import Agent, Crew, Process, Task, LLM
 from crewai.project import CrewBase, agent, crew, task
 from .schemas.schemas import *
 
+import configparser as ConfigParser
 
 @CrewBase
 class EmergencyCrewPhase1:
     """EmergencyCrewPhase1 crew"""
 
-    llm = LLM(model="ollama/llama3.1")
+    config = ConfigParser.RawConfigParser()
+    config.read(os.path.join(os.getcwd(), "src/city_emergency_response_flow/config/config.properties"))
+
+    llm = LLM(model=config.get('LLM', 'model'), base_url=config.get('LLM', 'base_url'))
     output_path = os.path.join(
         os.path.dirname(os.path.relpath(__file__)), "crew_outputs"
     )

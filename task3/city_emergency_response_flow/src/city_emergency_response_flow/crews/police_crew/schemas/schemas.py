@@ -36,12 +36,25 @@ class PerimeterControlPlanning(BaseModel):
         for field_name, field_instance in cls.model_fields.items():
             schema += f"{field_name}, described as: {field_instance.description}\n"
         return schema
+    
+# For PatrolSelection
+class PatrolInformation(BaseModel):
+    patrol_id: int = Field(
+        ..., description="patrol_id of the selected patrol. (Eg: 1)"
+    )
+  
+    patrol_location: Tuple[float, float] = Field(
+        ..., description="patrol_location (composed of latitude and longitude values) of the selected patrol location."
+    )
+    patrol_status: str = Field(
+        ..., description="patrol_status of the selected patrol (Eg: Available, In Service)"
+    )
 
 
 class PatrolSelection(BaseModel):
     """Output for assigning vehicles."""
 
-    patrol_vehicles: List[str] = Field(
+    patrol_vehicles: List[PatrolInformation] = Field(
         ..., description="List of assigned patrol vehicles."
     )
     action_details: str = Field(

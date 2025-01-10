@@ -15,7 +15,7 @@ perimeter_control_planning:
 
 patrol_vehicle_assignment:
   description: >
-    Assign patrol vehicles to monitor perimeters and support evacuation. For those, select the ones that are available and as close to the site as possible. Utilize the provided information ({police_information}) and the context including the results of the perimeter control planning.
+    Assign patrol vehicles using the police information ({police_information}) and the available patrol vehicles provided by the FileReading tool. Evaluate proximity and suitability of each patrol for the tasks at hand. Also find out the position of those selected patrol vehicles. IMPORTANT: Selected patrols must have patrol_status: Available
   expected_output: >
     A list of assigned vehicles and an explanation of their allocation.
   agent: dispatch_specialist

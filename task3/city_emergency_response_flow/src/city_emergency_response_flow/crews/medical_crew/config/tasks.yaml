@@ -38,7 +38,7 @@ injury_voting:
 
 ambulance_selection:
   description: >
-    Based on the medical information ({medical_information}), assign ambulances for the transport of victims. Consider proximity and suitability for handling injuries. Furthermore, the results of the selection of medical supplies, given as context, should be considered.
+    Assign ambulances using the medical information ({medical_information}) and the available ambulances provided by the FileReading tool. Evaluate proximity and suitability of each ambulance for the tasks at hand. Also find out the position of those ambulances. Finally, add the medical supplies included on each ambulance considering only the output of the medical supplies preparation task (context). IMPORTANT: Selected ambulances must have ambulance_status: Available
   expected_output: >
     A list of selected ambulances with a rationale for their allocation.
   agent: ambulance_coordinator

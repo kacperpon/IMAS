@@ -27,6 +27,7 @@ python = ">=3.10,<=3.13"
 osmnx = "^2.0.0"
 crewai = { version = ">=0.86.0,<1.0.0", extras = ["tools"] }
 scikit-learn = "^1.6.0"
+configparser = "^7.1.0"
 
 [tool.poetry.scripts]
 kickoff = "city_emergency_response_flow.main:kickoff"
