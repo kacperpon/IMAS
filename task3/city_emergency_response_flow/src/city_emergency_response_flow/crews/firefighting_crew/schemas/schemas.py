@@ -105,14 +105,17 @@ class ToolSelection(BaseModel):
 
 # For FireTruckSelection
 class FireTruckInformation(BaseModel):
-    truck_id: str = Field(
-        ..., description="Identifier for the fire truck (e.g., Fire Truck SDV 2032)"
+    truck_id: int = Field(
+        ..., description="truck_id of the selected fire truck. (Eg: 1)"
     )
-    installed_equipment: List[str] = Field(
-        ..., description="List of equipment which the truck has"
+    installed_tools: List[str] = Field(
+        ..., description="List of tools which will be installed in the selected truck."
     )
     truck_location: Tuple[float, float] = Field(
-        ..., description="X and Y coordinates of the current fire truck location"
+        ..., description="truck_location (composed of latitude and longitude values) of the selected truck location."
+    )
+    truck_status: str = Field(
+        ..., description="truck_status of the selected truck (Eg: Available, In Service)"
     )
 
 

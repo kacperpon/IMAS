@@ -1,61 +1,61 @@
 firefighting_vehicles:
-  - id: 1
-    type: "Fire Truck"
-    location:
-      latitude: 36.532700
-      longitude: -6.302902
+  - truck_id: 1
+    truck_type: "Fire Truck"
+    truck_truck_location:
+      - 36.532700
+      - -6.302902
     status: "Available"
-  - id: 2
-    type: "Rescue Vehicle"
-    location:
-      latitude: 36.533285
-      longitude: -6.296589
+  - truck_id: 2
+    truck_type: "Rescue Vehicle"
+    truck_location:
+      - 36.533285
+      - -6.296589
     status: "In Service"
-  - id: 3
-    type: "Fire Truck"
-    location:
-      latitude: 36.524114
-      longitude: -6.286088
+  - truck_id: 3
+    truck_type: "Fire Truck"
+    truck_location:
+      - 36.524114
+      - -6.286088
     status: "Available"
-  - id: 4
-    type: "Water Tanker"
-    location:
-      latitude: 36.520456
-      longitude: -6.283721
+  - truck_id: 4
+    truck_type: "Water Tanker"
+    truck_location:
+      - 36.520456
+      - -6.283721
     status: "In Service"
-  - id: 5
-    type: "Ladder Truck"
-    location:
-      latitude: 36.517187
-      longitude: -6.277774
+  - truck_id: 5
+    truck_type: "Ladder Truck"
+    truck_location:
+      - 36.517187
+      - -6.277774
     status: "Under Maintenance"
-  - id: 6
-    type: "Fire Truck"
-    location:
-      latitude: 36.511723
-      longitude: -6.271585
+  - truck_id: 6
+    truck_type: "Fire Truck"
+    truck_location:
+      - 36.511723
+      - -6.271585
     status: "Available"
-  - id: 7
-    type: "Ambulance"
-    location:
-      latitude: 36.504107
-      longitude: -6.273943
+  - truck_id: 7
+    truck_type: "Ambulance"
+    truck_location:
+      - 36.504107
+      - -6.273943
     status: "In Service"
-  - id: 8
-    type: "Rescue Vehicle"
-    location:
-      latitude: 36.499231
-      longitude: -6.261965
+  - truck_id: 8
+    truck_type: "Rescue Vehicle"
+    truck_location:
+      - 36.499231
+      - -6.261965
     status: "Available"
-  - id: 9
-    type: "Fire Truck"
-    location:
-      latitude: 36.541871
-      longitude: -6.285121
+  - truck_id: 9
+    truck_type: "Fire Truck"
+    truck_location:
+      - 36.541871
+      - -6.285121
     status: "In Service"
-  - id: 10
-    type: "Water Tanker"
-    location:
-      latitude: 36.528762
-      longitude: -6.304689
+  - truck_id: 10
+    truck_type: "Water Tanker"
+    truck_location:
+      - 36.528762
+      - -6.304689
     status: "Available"
