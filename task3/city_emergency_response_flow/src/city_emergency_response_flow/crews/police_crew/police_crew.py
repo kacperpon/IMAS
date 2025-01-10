@@ -3,6 +3,7 @@ from crewai import Agent, Crew, Process, Task, LLM
 from crewai.project import CrewBase, agent, crew, task
 from .schemas.schemas import *
 from crewai_tools import FileReadTool
+from ...tools.emergency_route_tool import EmergencyRouteTool
 
 import configparser as ConfigParser
 
@@ -82,6 +83,7 @@ class PoliceCrew:
         return Task(
             config=self.tasks_config["patrol_route_planning"],
             context=[self.patrol_vehicle_assignment()],
+            tools=[RoutePlanningTool(result_as_answer=True)],
             output_pydantic=RoutePlanning,
             output_file=os.path.join(
                 self.output_path, "004_patrol_route_planning.json"

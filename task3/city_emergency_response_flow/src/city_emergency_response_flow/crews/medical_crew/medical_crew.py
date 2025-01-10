@@ -3,6 +3,7 @@ from crewai import Agent, Crew, Process, Task, LLM
 from crewai.project import CrewBase, agent, crew, task
 from .schemas.schemas import *
 from crewai_tools import FileReadTool
+from ...tools.emergency_route_tool import EmergencyRouteTool
 
 import configparser as ConfigParser
 
@@ -126,6 +127,7 @@ class MedicalCrew:
         return Task(
             config=self.tasks_config["ambulance_route_planning"],
             context=[self.ambulance_selection()],
+            tools=[EmergencyRouteTool(result_as_answer=True)],
             output_pydantic=RoutePlanning,
             output_file=os.path.join(
                 self.output_path, "007_ambulance_route_planning.json"

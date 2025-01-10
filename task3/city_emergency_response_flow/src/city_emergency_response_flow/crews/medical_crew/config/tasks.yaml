@@ -45,7 +45,7 @@ ambulance_selection:
 
 ambulance_route_planning:
   description: >
-    Plan the most efficient routes for ambulances to transport victims to hospitals using the provided medical information ({medical_information}) and the context including the before specifically selected ambulances.
+    Plan the most efficient routes for ambulances using the medical information ({medical_information}) and the result of the ambulance selection in the context, ensuring timely arrival at the emergency site. For this, the Emergency Route Tool should be used. The input to such tools should be a stringified list of the selected ambulance Ids, their latitudes, and longitudes; along with floats for the emergency site's latitude and longitude.
   expected_output: >
     Optimized routes with a detailed explanation of the routing logic.
   agent: ambulance_coordinator

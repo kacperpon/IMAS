@@ -22,7 +22,7 @@ patrol_vehicle_assignment:
 
 patrol_route_planning:
   description: >
-    Plan efficient patrol routes to ensure safety perimeters are monitored effectively. Starting point for those routes are the current locations of the selected patrol vehicles and the destination is the emergency site. The given information are in the given context and in ({police_information}).
+    Plan the most efficient routes for police vehicles using the police information ({police_information}) and the result of the police vehicle selection in the context, ensuring timely arrival at the emergency site. For this, the Emergency Route Tool should be used. The input to such tools should be a stringified list of the selected patrol Ids, their latitudes, and longitudes; along with floats for the emergency site's latitude and longitude.
   expected_output: >
     Optimized patrol routes and a routing strategy explanation.
   agent: dispatch_specialist

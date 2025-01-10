@@ -2,9 +2,9 @@
 
 ## Priority 1
 
-- [ ] implement osmnx route calculation
+- [x] implement osmnx route calculation
 - [ ] Leverage ethical issues (probably in initial report)
-- [ ] human input hospital capacity not implemented
+- [in progress] human input hospital capacity not implemented
 
 ---
 
@@ -18,6 +18,7 @@
 
 ## Priority 2
 
+- [ ] change ambulance routes to go from emergency to hospitals, not from ambulance pos to emergency??
 - [ ] format all crews outputs in the same way (tell llm to "output as markdown with heading 1 being…")
 - [ ] check initial report if works with ONLY natural language (no bulletpoints)
 
