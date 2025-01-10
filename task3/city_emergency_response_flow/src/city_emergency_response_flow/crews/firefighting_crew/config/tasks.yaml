@@ -44,7 +44,7 @@ fire_truck_selection:
 
 route_planning:
   description: >
-    Plan the most efficient routes for fire trucks using the firefighting information ({firefighting_information}) and the result of the fire truck selection in the context, ensuring timely arrival at the emergency site.
+    Plan the most efficient routes for fire trucks using the firefighting information ({firefighting_information}) and the result of the fire truck selection in the context, ensuring timely arrival at the emergency site. For this, the Emergency Route Tool should be used. The input to such tools should be a stringified list of the selected fire trucks Ids, their latitudes, and longitudes; along with floats for the emergency site's latitude and longitude.
   expected_output: >
     Optimized routes along with a detailed explanation of the routing logic.
   agent: fire_truck_chief

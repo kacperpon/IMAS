@@ -141,7 +141,7 @@ class RoutePlanning(BaseModel):
     """Output for planning the route."""
 
     routes: List[Tuple[str, List[int]]] = Field(
-        ..., description="List of planned OSMnx routes for each fire truck."
+        ..., description="List of planned OSMnx routes for each vehicle."
     )
     action_details: str = Field(
         ..., description="Additional information on route planning."
