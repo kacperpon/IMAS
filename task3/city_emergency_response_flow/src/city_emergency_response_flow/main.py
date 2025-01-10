@@ -92,6 +92,11 @@ class CityEmergencyResponseFlow(Flow[InitialInformation]):
         else:
             return "meds_not_required"
 
+
+    #####################
+    # FIREFIGHTING CREW #
+    #####################
+    
     @listen(or_("meds_required", "meds_not_required"))
     def create_fire_plan(self):
         print("Develop a plan for the firefighting crew")
@@ -105,6 +110,10 @@ class CityEmergencyResponseFlow(Flow[InitialInformation]):
 
         self.state.firefighting_plan = result.pydantic.response_plan
 
+    ################
+    # MEDICAL CREW #
+    ################
+    
     @listen("meds_required")  # only when explicitly required
     def create_medical_plan(self):
         print("Develop a plan for the medical crew")
@@ -116,6 +125,11 @@ class CityEmergencyResponseFlow(Flow[InitialInformation]):
 
         self.state.medical_plan = result.pydantic.response_plan
 
+
+    ###############
+    # POLICE CREW #
+    ###############
+    
     @listen(or_("meds_required", "meds_not_required"))
     def create_police_plan(self):
         print("Develop a plan for the police crew")

@@ -14,9 +14,19 @@ class PoliceCrew:
 
     config = ConfigParser.RawConfigParser()
     config.read(os.path.join(os.getcwd(), "src/city_emergency_response_flow/config/config.properties"))
+    
     output_path = os.path.join(
         os.path.dirname(os.path.relpath(__file__)), "crew_outputs"
     )
+    
+    # Create the output directory if it does not exist, clean it if it exists
+    if not os.path.exists(output_path):
+        os.makedirs(output_path)
+    else:
+        for file in os.listdir(output_path):
+            os.remove(os.path.join(output_path, file))
+            
+            
     vehicle_input_path = os.path.join(
             "tests", "vehicle_positions", "police_vehicles.yaml"
     )
