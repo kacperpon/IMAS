@@ -132,7 +132,7 @@ class EmergencyRouteTool(BaseTool):
 
                 
                 # 6. Plotting the route
-                
+                print("Plotting the route, for vehicle_type: ", vehicle_type)
                 try: 
                     fig, ax = ox.plot_graph_route(G, route, node_size=0)
                     if vehicle_type == "firetruck":
@@ -141,7 +141,7 @@ class EmergencyRouteTool(BaseTool):
                     elif vehicle_type == "ambulance":
                         path = os.path.join("src", "city_emergency_response_flow", "crews", "medical_crew", "crew_outputs", f"ambulance_{vehicle_id}_route.png")
                     elif vehicle_type == "patrol":
-                        path = os.path.join("src", "city_emergency_response_flow", "crews", "patrol_crew", "crew_outputs", f"patrol_{vehicle_id}_route.png")
+                        path = os.path.join("src", "city_emergency_response_flow", "crews", "police_crew", "crew_outputs", f"patrol_{vehicle_id}_route.png")
                     else:
                         raise( f"Invalid vehicle type: {vehicle_type}")
                     

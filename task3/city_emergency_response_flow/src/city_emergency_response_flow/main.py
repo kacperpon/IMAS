@@ -114,30 +114,30 @@ class CityEmergencyResponseFlow(Flow[InitialInformation]):
     # MEDICAL CREW #
     ################
     
-    @listen("meds_required")  # only when explicitly required
-    def create_medical_plan(self):
-        print("Develop a plan for the medical crew")
-        result = (
-            MedicalCrew()
-            .crew()
-            .kickoff(inputs={"medical_information": self.state.medical_information})
-        )
+    # @listen("meds_required")  # only when explicitly required
+    # def create_medical_plan(self):
+    #     print("Develop a plan for the medical crew")
+    #     result = (
+    #         MedicalCrew()
+    #         .crew()
+    #         .kickoff(inputs={"medical_information": self.state.medical_information})
+    #     )
 
-        self.state.medical_plan = result.pydantic.response_plan
+    #     self.state.medical_plan = result.pydantic.response_plan
 
 
     ###############
     # POLICE CREW #
     ###############
     
-    # @listen(or_("meds_required", "meds_not_required"))
-    # def create_police_plan(self):
-    #     print("Develop a plan for the police crew")
-    #     result = (
-    #         PoliceCrew()
-    #         .crew()
-    #         .kickoff(inputs={"police_information": self.state.police_information})
-    #     )
+    @listen(or_("meds_required", "meds_not_required"))
+    def create_police_plan(self):
+        print("Develop a plan for the police crew")
+        result = (
+            PoliceCrew()
+            .crew()
+            .kickoff(inputs={"police_information": self.state.police_information})
+        )
 
     # @listen(
     #     (

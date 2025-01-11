@@ -68,15 +68,14 @@ class PatrolSelection(BaseModel):
             schema += f"{field_name}, described as: {field_instance.description}\n"
         return schema
 
-
 class RoutePlanning(BaseModel):
-    """Output for planning patrol routes."""
+    """Output for planning the route."""
 
-    patrol_routes: List[Tuple[str, List[int]]] = Field(
-        ..., description="List of planned patrol routes."
+    routes: List[Tuple[str, List[int]]] = Field(
+        ..., description="List of planned OSMnx routes for each vehicle."
     )
     action_details: str = Field(
-        ..., description="Details of the route planning process."
+        ..., description="Additional information on route planning."
     )
 
     @classmethod

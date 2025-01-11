@@ -15,6 +15,8 @@ class PoliceCrew:
     config = ConfigParser.RawConfigParser()
     config.read(os.path.join(os.getcwd(), "src/city_emergency_response_flow/config/config.properties"))
     
+    llm = LLM(model=config.get('LLM', 'model'), base_url=config.get('LLM', 'base_url')) 
+    
     output_path = os.path.join(
         os.path.dirname(os.path.relpath(__file__)), "crew_outputs"
     )
@@ -93,7 +95,7 @@ class PoliceCrew:
         return Task(
             config=self.tasks_config["patrol_route_planning"],
             context=[self.patrol_vehicle_assignment()],
-            tools=[RoutePlanningTool(result_as_answer=True)],
+            tools=[EmergencyRouteTool(result_as_answer=True)],
             output_pydantic=RoutePlanning,
             output_file=os.path.join(
                 self.output_path, "004_patrol_route_planning.json"

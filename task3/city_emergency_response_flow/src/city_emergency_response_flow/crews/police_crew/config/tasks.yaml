@@ -15,14 +15,14 @@ perimeter_control_planning:
 
 patrol_vehicle_assignment:
   description: >
-    Assign patrol vehicles using the police information ({police_information}) and the available patrol vehicles provided by the FileReading tool. Evaluate proximity and suitability of each patrol for the tasks at hand. Also find out the position of those selected patrol vehicles. IMPORTANT: Selected patrols must have patrol_status: Available
+    Assign patrol vehicles using the police information ({police_information}) and the available patrol vehicles provided by the FileReading tool. Choose the vehicles under your criteria. Also find out the position of those selected patrol vehicles. IMPORTANT: Selected patrols must have patrol_status: Available. Remember to give an explanation of the selection process, and output it in the actin_details field.
   expected_output: >
     A list of assigned vehicles and an explanation of their allocation.
   agent: dispatch_specialist
 
 patrol_route_planning:
   description: >
-    Plan the most efficient routes for police vehicles using the police information ({police_information}) and the result of the police vehicle selection in the context, ensuring timely arrival at the emergency site. For this, the Emergency Route Tool should be used. The input to such tools should be a stringified list of the selected patrol Ids, their latitudes, and longitudes; along with floats for the emergency site's latitude and longitude.
+    Plan the most efficient routes only for the selected police vehicles using the police information to get the emergency location (destination) ({police_information}) and the result of the police vehicle selection passed via context. For this, the Emergency Route Tool should be used. The input to such tools should be a stringified list of the selected patrol Ids, their latitudes, and longitudes; along with floats for the emergency site's latitude and longitude.
   expected_output: >
     Optimized patrol routes and a routing strategy explanation.
   agent: dispatch_specialist

@@ -29,12 +29,12 @@ police_vehicles:
       - 36.511723
       - -6.271585
     patrol_status: "Under Maintenance"
-  - patrol_id: 6
-    patrol_type: "Motorcycle"
-    patrol_location:
-      - 36.504107
-      - -6.273943
-    patrol_status: "Available"
+  # - patrol_id: 6
+  #   patrol_type: "Motorcycle"
+  #   patrol_location:
+  #     - 36.504107
+  #     - -6.273943
+  #   patrol_status: "Available"
   - patrol_id: 7
     patrol_type: "Police Car"
     patrol_location:
