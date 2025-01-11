@@ -7,14 +7,14 @@
     },
     {
       "victim_id": 2,
-      "hospital_name": "Hospital Pascual San Rafael",
+      "hospital_name": "Hospital Universitario Puerta del Mar",
       "total_votes": 3
     },
     {
       "victim_id": 3,
-      "hospital_name": "Hospital Dr López Cano",
+      "hospital_name": "Hospital Universitario Puerta del Mar",
       "total_votes": 3
     }
   ],
-  "action_details": "To determine the final hospital assignment for each victim, we consolidate the voting outputs from both tasks. The total number of votes for each hospital is calculated by summing the vote counts from the hospital voting and injury voting tasks. This results in Hospital Universitario Puerta del Mar being assigned to Victim 1 with a total of 3 votes, Hospital Pascual San Rafael being assigned to Victim 2 also with a total of 3 votes, and Hospital Dr López Cano being assigned to Victim 3 with the same total of 3 votes. This allocation takes into account the severity of each victim's injuries and the capacity of each hospital."
+  "action_details": "To prioritize hospital choices based on capacity and severity of injuries, I considered the available bed capacity and specializations of each hospital. Hospital Universitario Puerta del Mar received 3 votes due to its high available bed capacity of 28 and diverse specializations including Trauma, Cardiology, and Neurology. Hospital Dr López Cano received 2 votes with an available bed capacity of 22 and relevant specializations such as Emergency, Intensive Care Unit, and Cardiology. Hospital Pascual San Rafael received 1 vote, having a moderate available bed capacity of 19 and specializations in Trauma, Burn Unit, and Oncology. Hospital Quirónsalud Campo de Gibraltar received 0 votes due to its limited available bed capacity of 12 and less relevant specializations for the given context. This voting mechanism ensures that hospitals with higher capacities and more relevant specializations are prioritized for victim allocation. The final hospital assignment was determined by summing the votes from the hospital voting and injury voting tasks for each injured individual. Since all victims had the same voting pattern, they were all assigned to Hospital Universitario Puerta del Mar, which had the highest total votes."
 }

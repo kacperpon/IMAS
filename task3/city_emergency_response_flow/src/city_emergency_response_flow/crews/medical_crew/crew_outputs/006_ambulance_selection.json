@@ -1,1 +1,105 @@
-{"ambulances":[{"ambulance_id":1,"installed_supplies":["Supply1","Supply2"],"ambulance_location":[40.7128,-74.006],"ambulance_status":"Available"}],"action_details":"The list of available medical supplies for the ambulances is not provided in the given observations. However, based on the observation of \"ambulances:\" and its contents, we can infer that the list of available medical supplies would be related to the ambulances' status, location, and type."}
+{
+  "ambulances": [
+    {
+      "ambulance_id": 1,
+      "installed_supplies": [
+        "Bandages",
+        "Gauze pads",
+        "Antiseptic wipes",
+        "Medical tape",
+        "Stethoscopes",
+        "Blood pressure cuffs",
+        "Oxygen tanks and masks",
+        "Defibrillators",
+        "Surgical kits",
+        "Orthopedic equipment such as splints and casts"
+      ],
+      "ambulance_location": [
+        36.528762,
+        -6.304689
+      ],
+      "ambulance_status": "Available"
+    },
+    {
+      "ambulance_id": 3,
+      "installed_supplies": [
+        "Bandages",
+        "Gauze pads",
+        "Antiseptic wipes",
+        "Medical tape",
+        "Stethoscopes",
+        "Blood pressure cuffs",
+        "Oxygen tanks and masks",
+        "Defibrillators",
+        "Surgical kits",
+        "Orthopedic equipment such as splints and casts"
+      ],
+      "ambulance_location": [
+        36.499231,
+        -6.261965
+      ],
+      "ambulance_status": "Available"
+    },
+    {
+      "ambulance_id": 6,
+      "installed_supplies": [
+        "Bandages",
+        "Gauze pads",
+        "Antiseptic wipes",
+        "Medical tape",
+        "Stethoscopes",
+        "Blood pressure cuffs",
+        "Oxygen tanks and masks",
+        "Defibrillators",
+        "Surgical kits",
+        "Orthopedic equipment such as splints and casts"
+      ],
+      "ambulance_location": [
+        36.517187,
+        -6.277774
+      ],
+      "ambulance_status": "Available"
+    },
+    {
+      "ambulance_id": 8,
+      "installed_supplies": [
+        "Bandages",
+        "Gauze pads",
+        "Antiseptic wipes",
+        "Medical tape",
+        "Stethoscopes",
+        "Blood pressure cuffs",
+        "Oxygen tanks and masks",
+        "Defibrillators",
+        "Surgical kits",
+        "Orthopedic equipment such as splints and casts"
+      ],
+      "ambulance_location": [
+        36.524114,
+        -6.286088
+      ],
+      "ambulance_status": "Available"
+    },
+    {
+      "ambulance_id": 10,
+      "installed_supplies": [
+        "Bandages",
+        "Gauze pads",
+        "Antiseptic wipes",
+        "Medical tape",
+        "Stethoscopes",
+        "Blood pressure cuffs",
+        "Oxygen tanks and masks",
+        "Defibrillators",
+        "Surgical kits",
+        "Orthopedic equipment such as splints and casts"
+      ],
+      "ambulance_location": [
+        36.5327,
+        -6.302902
+      ],
+      "ambulance_status": "Available"
+    }
+  ],
+  "action_description": "Based on the provided information, we have selected five available ambulances to transport victims to the hospital. Each ambulance will be equipped with essential medical supplies."
+}
