@@ -3,9 +3,10 @@ from crewai import Agent, Crew, Process, Task, LLM
 from crewai.project import CrewBase, agent, crew, task
 from .schemas.schemas import *
 from crewai_tools import FileReadTool
-from ...tools.emergency_route_tool import EmergencyRouteTool
+from ...tools.hospital_route_tool import HospitalRouteTool
 
 import configparser as ConfigParser
+import random
 
 
 @CrewBase
@@ -96,9 +97,11 @@ class MedicalCrew:
         )
 
     @task
-    def hospital_capacity_check(self) -> Task:  # TODO here human input
+    def hospital_capacity_check(self) -> Task:
+        random_number = random.randint(0, 2)
         return Task(
             config=self.tasks_config["hospital_capacity_check"],
+            tools=[FileReadTool(file_path=f"tests/hospitals/hospitals_{random_number}.yaml")],
             output_pydantic=HospitalCapacityCheck,
             output_file=os.path.join(
                 self.output_path, "003_hospital_capacity_check.json"
@@ -136,11 +139,25 @@ class MedicalCrew:
     def ambulance_route_planning(self) -> Task:
         return Task(
             config=self.tasks_config["ambulance_route_planning"],
-            context=[self.ambulance_selection()],
-            tools=[EmergencyRouteTool(result_as_answer=True)],
+            context=[self.hospital_capacity_check()],
+            tools=[HospitalRouteTool(result_as_answer=True)],
             output_pydantic=RoutePlanning,
             output_file=os.path.join(
                 self.output_path, "007_ambulance_route_planning.json"
+            ),
+        )
+    
+    @task
+    def vote_compilation(self) -> Task:
+        return Task(
+            config=self.tasks_config["vote_compilation"],
+            context=[
+                self.hospital_voting(),
+                self.injury_voting(),
+            ],
+            output_pydantic=VoteCompilation,
+            output_file=os.path.join(
+                self.output_path, "008_vote_compilation.json"
             ),
         )
 
@@ -159,7 +176,7 @@ class MedicalCrew:
             ],
             output_pydantic=MedicalPlanCompilation,
             output_file=os.path.join(
-                self.output_path, "008_medical_final_plan_compilation.json"
+                self.output_path, "009_medical_final_plan_compilation.json"
             ),
         )
 

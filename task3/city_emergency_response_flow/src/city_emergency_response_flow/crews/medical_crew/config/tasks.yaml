@@ -20,35 +20,42 @@ hospital_capacity_check:
   expected_output: >
     A list of hospitals with capacities and a detailed explanation of the assessment process.
   agent: hospital_coordinator
-  # human_input: True # TODO turn back on
+  # human_input: True
 
 hospital_voting:
   description: >
-    Utilize the hospital capacity data from the medical information ({medical_information}) to prioritize hospital choices based on capacity and severity of injuries. Employ a voting mechanism between hospital and triage specialists. Additionally, please consider the context which includes information about the capacities for each hospital nearby.
+    Utilize the hospital capacity data from the medical information ({medical_information}) to prioritize hospital choices based on capacity and severity of injuries. Employ a voting mechanism where you give up to three votes for the top ranked hospital, and lower quantities to the rest, several hospitals can have zero votes. Additionally, please consider the context which includes information about the capacities for each hospital nearby. Important: all the hospitals should be included in the output, even if they have zero votes.
   expected_output: >
     A ranked list of hospitals with a detailed explanation of the voting process and logic.
   agent: hospital_coordinator
 
 injury_voting:
   description: >
-    Use the medical information ({medical_information}) to map victims to hospitals based on injury severity and hospital availability. Leverage a voting system for prioritization.
+    Use the medical information ({medical_information}) to map each injured individual to the most convenient hospital the injured individuals based on the severity of their injuries. Employ a voting mechanism where you give up to three votes for the most convenient hospital and lower quantities to the rest of hospitals, several hospitals can have zero votes. Additionally, please consider the context which includes information about the injuries of each victim. Important: all the victims and hospitals should be included in the output, even if they have zero votes.
   expected_output: >
     A mapping of victims to hospitals along with a detailed explanation of the prioritization strategy. The output should contain the hospitals by name.
   agent: triage_specialist
 
 ambulance_selection:
   description: >
-    Assign ambulances using the medical information ({medical_information}) and the available ambulances provided by the FileReading tool. Evaluate proximity and suitability of each ambulance for the tasks at hand. Also find out the position of those ambulances. Finally, add the medical supplies included on each ambulance considering only the output of the medical supplies preparation task (context). IMPORTANT: Selected ambulances must have ambulance_status: Available
+    Assign ambulances using the medical information ({medical_information}) and the available ambulances provided by the FileReading tool. Select ambulances under your criteria. Find out the position of those ambulances. Finally, add the medical supplies included on each ambulance considering only the output of the medical supplies preparation task (context). IMPORTANT: Selected ambulances must have ambulance_status: Available
   expected_output: >
     A list of selected ambulances with a rationale for their allocation.
   agent: ambulance_coordinator
 
 ambulance_route_planning:
   description: >
-    Plan the most efficient routes for ambulances using the medical information ({medical_information}) and the result of the ambulance selection in the context, ensuring timely arrival at the emergency site. For this, the Emergency Route Tool should be used. The input to such tools should be a stringified list of the selected ambulance Ids, their latitudes, and longitudes; along with floats for the emergency site's latitude and longitude.
+    Plan the most efficient routes to get from the emergency location each of the hospitals using the emergency location in ({medical_information}) and the different hospitals passed as context. Each hospital should have a route towards it. For this, the Emergency Route Tool should be used. The input to such tools should be a stringified list of the hospital names, their latitudes, and longitudes; along with floats for the emergency site's latitude and longitude. Important: You should only use the tool once.
   expected_output: >
     Optimized routes with a detailed explanation of the routing logic.
   agent: ambulance_coordinator
+
+vote_compilation:
+  description: >
+    Consolidate all voting outputs from previous tasks. For each of the injured individuals, sum the votes from the hospital voting and injury voting tasks to determine the final hospital assignment. The context includes the outputs from the hospital voting and injury voting tasks.
+  expected_output: >
+    A list of victims with their hospital assignation and the total votes, all voting results with a detailed explanation of the voting process.
+  agent: hospital_coordinator
 
 medical_final_plan_compilation:
   description: >

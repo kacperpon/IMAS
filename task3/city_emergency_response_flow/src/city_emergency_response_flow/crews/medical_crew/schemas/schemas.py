@@ -38,20 +38,15 @@ class MedicalSupplySelection(BaseModel):
 
 class HospitalInformation(BaseModel):
     hospital_name: str = Field(..., description="Official name of the hospital")
-    hospital_id: int = Field(
-        ..., description="Integer index to effectively refer to a nearby hospital"
-    )
-    capacity: int = Field(..., description="Number of available beds in that hospital")
+    available_bed_capacity: int = Field(..., description="Number of available beds in that hospital")
+    hospital_location: Tuple[float, float] = Field(..., description="Location of the hospital (latitude, longitude)")
+    specializations: List[str] = Field(..., description="List of specializations of the hospital")
 
 
 class HospitalCapacityCheck(BaseModel):
     """Output for checking hospital capacity."""
 
     hospitals: List[HospitalInformation] = Field(..., description="List of hospitals.")
-    action_details: str = Field(
-        ...,
-        description="Details of the nearby hospitals including each's capacity check.",
-    )
 
     @classmethod
     def get_schema(cls) -> str:
@@ -62,8 +57,8 @@ class HospitalCapacityCheck(BaseModel):
 
 
 class VotesPerHospital(BaseModel):
-    hospital_id: int = Field(
-        ..., description="Integer index to effectively refer to a nearby hospital"
+    hospital_name: str = Field(
+        ..., description="Official name of the hospital"
     )
     vote_count: int = Field(
         ..., description="Integer number including the votes for that hospital"
@@ -88,18 +83,15 @@ class HospitalVoting(BaseModel):
         return schema
 
 
-class VictimToHospitalMap(BaseModel):
+class VictimToHospitalVotes(BaseModel):
     victim_id: int = Field(..., description="Unique identifier for the victim")
-    hospital_id: int = Field(..., description="ID of the hospital mapped to the victim")
-    priority_score: float = Field(
-        ..., description="Priority score for the victim-hospital mapping"
-    )
+    hospital_votes: List[VotesPerHospital] = Field(..., description="Votes for each hospital for the victim")
 
 
 class InjuryVoting(BaseModel):
     """Output for victim-injury voting."""
 
-    victim_hospital_mappings: List[VictimToHospitalMap] = Field(
+    victim_hospital_mappings: List[VictimToHospitalVotes] = Field(
         ..., description="List of mappings between victims and hospitals."
     )
     action_details: str = Field(
@@ -116,7 +108,7 @@ class InjuryVoting(BaseModel):
 
 # For AmbulanceSelection
 class AmbulanceInformation(BaseModel):
-    AmbulanceInformation_id: int = Field(
+    ambulance_id: int = Field(
         ..., description="ambulance_id of the selected ambulance. (Eg: 1)"
     )
     installed_supplies: List[str] = Field(
@@ -150,7 +142,7 @@ class RoutePlanning(BaseModel):
     """Output for planning the route."""
 
     routes: List[Tuple[str, List[int]]] = Field(
-        ..., description="List of planned OSMnx routes for each ambulance."
+        ..., description="List of planned OSMnx routes for each hospital."
     )
     action_details: str = Field(
         ..., description="Details of the route planning process."
@@ -163,6 +155,31 @@ class RoutePlanning(BaseModel):
             schema += f"{field_name}, described as: {field_instance.description}\n"
         return schema
 
+class VictimToHospitalMap(BaseModel):
+    """Mapping between the victim and the hospital it must be sent to."""
+
+    victim_id: int = Field(..., description="Unique identifier for the victim")
+    hospital_name: str = Field(..., description="Official name of the hospital")
+    total_votse: int = Field(..., description="Total votes for the winning hospital")
+
+
+class VoteCompilation(BaseModel):
+    """Voting results, mapping between the victim and the hospital it must be sent to."""
+
+    
+    victim_hospital_mappings: List[VictimToHospitalMap] = Field(
+        ..., description="List of mappings between victims and hospitals."
+    )
+    action_details: str = Field(
+        ..., description="Details of the vote compilation process."
+    )
+
+    @classmethod
+    def get_schema(cls) -> str:
+        schema = "\n"
+        for field_name, field_instance in cls.model_fields.items():
+            schema += f"{field_name}, described as: {field_instance.description}\n"
+        return schema
 
 class MedicalPlanCompilation(BaseModel):
     """Comprehensive output for compiling the final plan."""

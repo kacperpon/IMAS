@@ -2,9 +2,19 @@
 
 ## Priority 1
 
+- [x] firefighting crew first implementation
+- [ in progress ] medical crew first implementation
+    - [x] hospital info in file (hospital tier, capacity, location)
+    - [x] first voting in text, improve task description
+    - [ ] second voting in text, improve task description
+    - [ ] tool to sum to votes as input to the last task.
+    - [ ] vehicle selection revision for medical crew?
+
+- [ ] police crew first implementation
+- [ ] final plan collection first implementation
+
 - [x] implement osmnx route calculation
 - [ ] Leverage ethical issues (probably in initial report)
-- [in progress] human input hospital capacity not implemented
 
 ---
 
