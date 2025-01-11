@@ -1,0 +1,1 @@
+{"ambulances":[{"ambulance_id":1,"installed_supplies":["supply1","supply2"],"ambulance_location":[10.0,20.0],"ambulance_status":"Available"},{"ambulance_id":6,"installed_supplies":["supply3","supply4"],"ambulance_location":[30.0,40.0],"ambulance_status":"In Service"}],"action_details":"The closest ambulances to the emergency location are Ambulance 1 and Ambulance 6."}

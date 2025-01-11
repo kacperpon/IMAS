@@ -3,5 +3,5 @@ __pycache__/
 lib/
 
 # do not track crew outputs
-*.json
-*.png
+# *.json
+# *.png

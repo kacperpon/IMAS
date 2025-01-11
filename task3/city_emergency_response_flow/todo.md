@@ -6,9 +6,9 @@
 - [ in progress ] medical crew first implementation
     - [x] hospital info in file (hospital tier, capacity, location)
     - [x] first voting in text, improve task description
-    - [ ] second voting in text, improve task description
-    - [ ] tool to sum to votes as input to the last task.
-    - [ ] vehicle selection revision for medical crew?
+    - [x] second voting in text, improve task description
+    - [x] add a new task to sum the votes and declare the winner
+    - [x] vehicle selection revision for medical crew?
 
 - [ ] police crew first implementation
 - [ ] final plan collection first implementation
@@ -28,7 +28,7 @@
 
 ## Priority 2
 
-- [ ] change ambulance routes to go from emergency to hospitals, not from ambulance pos to emergency??
+- [x] change ambulance routes to go from emergency to hospitals, not from ambulance pos to emergency??
 - [ ] output route statistics such as duration, etc.
 - [ ] format all crews outputs in the same way (tell llm to "output as markdown with heading 1 being…")
 - [ ] check initial report if works with ONLY natural language (no bulletpoints)

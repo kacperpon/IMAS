@@ -5,7 +5,7 @@ import osmnx as ox
 import networkx as nx
 import json, os
 
-from city_emergency_response_flow.crews.firefighting_crew.schemas.schemas import RoutePlanning
+from city_emergency_response_flow.crews.medical_crew.schemas.schemas import RoutePlanning
 
 class HospitalRouteToolInput(BaseModel):
     """
@@ -162,7 +162,8 @@ class HospitalRouteTool(BaseTool):
                 return f"Error occurred while calculating route: {str(e)}"
                 
                 
-
+        print("Tool output: ")
+        print(tuples)
         new_route = RoutePlanning(
             routes=tuples,
             action_details="Route planning successful.",
