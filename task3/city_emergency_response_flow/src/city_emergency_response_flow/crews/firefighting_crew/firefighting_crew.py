@@ -8,18 +8,23 @@ from ...tools.emergency_route_tool import EmergencyRouteTool
 
 import configparser as ConfigParser
 
+
 @CrewBase
 class FirefightingCrew:
     """FirefightingCrew crew"""
 
     config = ConfigParser.RawConfigParser()
-    config.read(os.path.join(os.getcwd(), "src/city_emergency_response_flow/config/config.properties"))
-    
-    llm = LLM(model=config.get('LLM', 'model'), base_url=config.get('LLM', 'base_url'))    
+    config.read(
+        os.path.join(
+            os.getcwd(), "src/city_emergency_response_flow/config/config.properties"
+        )
+    )
+
+    llm = LLM(model=config.get("LLM", "model"), base_url=config.get("LLM", "base_url"))
     output_path = os.path.join(
         os.path.dirname(os.path.relpath(__file__)), "crew_outputs"
     )
-    
+
     # Create the output directory if it does not exist, clean it if it exists
     if not os.path.exists(output_path):
         os.makedirs(output_path)
@@ -27,10 +32,7 @@ class FirefightingCrew:
         for file in os.listdir(output_path):
             os.remove(os.path.join(output_path, file))
 
-    
-    vehicle_input_path = os.path.join(
-            "tests", "vehicle_positions", "firetrucks.yaml"
-    )
+    vehicle_input_path = os.path.join("tests", "vehicle_positions", "firetrucks.yaml")
     agents_config = "config/agents.yaml"
     tasks_config = "config/tasks.yaml"
 

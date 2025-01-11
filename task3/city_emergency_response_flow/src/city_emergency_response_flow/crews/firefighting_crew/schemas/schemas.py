@@ -112,10 +112,12 @@ class FireTruckInformation(BaseModel):
         ..., description="List of tools which will be installed in the selected truck."
     )
     truck_location: Tuple[float, float] = Field(
-        ..., description="truck_location (composed of latitude and longitude values) of the selected truck location."
+        ...,
+        description="truck_location (composed of latitude and longitude values) of the selected truck location.",
     )
     truck_status: str = Field(
-        ..., description="truck_status of the selected truck (Eg: Available, In Service)"
+        ...,
+        description="truck_status of the selected truck (Eg: Available, In Service)",
     )
 
 
@@ -159,7 +161,8 @@ class FirePlanCompilation(BaseModel):
     """Comprehensive output for compiling the final plan."""
 
     response_plan: str = Field(
-        ..., description="Compiled response plan for the firefighter operation."
+        ...,
+        description="Compiled response plan including all outputs from before tasks for the firefighter operation.",
     )
     ethical_issues: Optional[str] = Field(
         None, description="Ethical issues considered in the plan."
