@@ -2,7 +2,7 @@ import os
 from crewai import Agent, Crew, Process, Task, LLM
 from crewai.project import CrewBase, agent, crew, task
 from .schemas.schemas import *
-from crewai_tools import FileReadTool
+from crewai_tools import FileReadTool, DirectoryReadTool
 from ...tools.hospital_route_tool import HospitalRouteTool
 
 import configparser as ConfigParser
@@ -14,25 +14,25 @@ class MedicalCrew:
     """MedicalCrew crew"""
 
     config = ConfigParser.RawConfigParser()
-    config.read(os.path.join(os.getcwd(), "src/city_emergency_response_flow/config/config.properties"))
-    
-    
-    llm = LLM(model=config.get('LLM', 'model'), base_url=config.get('LLM', 'base_url')) 
+    config.read(
+        os.path.join(
+            os.getcwd(), "src/city_emergency_response_flow/config/config.properties"
+        )
+    )
+
+    llm = LLM(model=config.get("LLM", "model"), base_url=config.get("LLM", "base_url"))
     output_path = os.path.join(
         os.path.dirname(os.path.relpath(__file__)), "crew_outputs"
     )
-    
+
     # Create the output directory if it does not exist, clean it if it exists
     if not os.path.exists(output_path):
         os.makedirs(output_path)
     else:
         for file in os.listdir(output_path):
             os.remove(os.path.join(output_path, file))
-    
-    
-    vehicle_input_path = os.path.join(
-            "tests", "vehicle_positions", "ambulances.yaml"
-    )
+
+    vehicle_input_path = os.path.join("tests", "vehicle_positions", "ambulances.yaml")
     agents_config = "config/agents.yaml"
     tasks_config = "config/tasks.yaml"
 
@@ -101,7 +101,11 @@ class MedicalCrew:
         random_number = random.randint(0, 2)
         return Task(
             config=self.tasks_config["hospital_capacity_check"],
-            tools=[FileReadTool(file_path=f"tests/hospitals/hospitals_{random_number}.yaml")],
+            tools=[
+                FileReadTool(
+                    file_path=f"tests/hospitals/hospitals_{random_number}.yaml"
+                )
+            ],
             output_pydantic=HospitalCapacityCheck,
             output_file=os.path.join(
                 self.output_path, "003_hospital_capacity_check.json"
@@ -146,7 +150,7 @@ class MedicalCrew:
                 self.output_path, "007_ambulance_route_planning.json"
             ),
         )
-    
+
     @task
     def vote_compilation(self) -> Task:
         return Task(
@@ -156,15 +160,14 @@ class MedicalCrew:
                 self.injury_voting(),
             ],
             output_pydantic=VoteCompilation,
-            output_file=os.path.join(
-                self.output_path, "008_vote_compilation.json"
-            ),
+            output_file=os.path.join(self.output_path, "008_vote_compilation.json"),
         )
 
     @task
     def medical_final_plan_compilation(self) -> Task:
         return Task(
             config=self.tasks_config["medical_final_plan_compilation"],
+            tools=[DirectoryReadTool(directory=self.output_path)],
             context=[
                 self.medical_taskforce_assignment(),
                 self.medical_supplies_preparation(),

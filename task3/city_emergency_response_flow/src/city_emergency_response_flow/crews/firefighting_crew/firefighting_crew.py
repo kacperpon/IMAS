@@ -1,7 +1,7 @@
 import os
 from crewai import Agent, Crew, Process, Task, LLM
 from crewai.project import CrewBase, agent, crew, task
-from crewai_tools import FileReadTool
+from crewai_tools import FileReadTool, DirectoryReadTool
 
 from .schemas.schemas import *
 from ...tools.emergency_route_tool import EmergencyRouteTool
@@ -155,6 +155,7 @@ class FirefightingCrew:
     def final_plan_compilation(self) -> Task:
         return Task(
             config=self.tasks_config["final_plan_compilation"],
+            tools=[DirectoryReadTool(directory=self.output_path)],
             context=[
                 self.taskforce_assignment(),
                 self.extinguishing_tools_selection(),

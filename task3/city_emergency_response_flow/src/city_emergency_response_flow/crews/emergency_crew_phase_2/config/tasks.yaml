@@ -4,10 +4,10 @@ situation_report_compilation:
     field, ethical issues are the cases in which the resources are not enough to save all the people and a decision has to be made whether to save one person or 
     the other.
 
-    The subplans are in the files:
-    ["task3\city_emergency_response_flow\src\city_emergency_response_flow\crews\firefighting_crew\crew_outputs\008_final_plan_compilation.json",
-    "task3\city_emergency_response_flow\src\city_emergency_response_flow\crews\medical_crew\crew_outputs\008_medical_final_plan_compilation.json",
-    "task3\city_emergency_response_flow\src\city_emergency_response_flow\crews\police_crew\crew_outputs\005_police_final_plan_compilation.json"]
+    The subplans are as the key "response_plan" in each of the respective files:
+    ["src/city_emergency_response_flow/crews/firefighting_crew/crew_outputs/008_final_plan_compilation.json",
+    "src/city_emergency_response_flow/crews/medical_crew/crew_outputs/009_medical_final_plan_compilation.json",
+    "src/city_emergency_response_flow/crews/police_crew/crew_outputs/005_police_final_plan_compilation.json"]
 
     read them using the FileReadTool.
   expected_output: >
@@ -16,9 +16,7 @@ situation_report_compilation:
 
 ethical_consultation:
   description: >
-    Evaluate the consolidated plans for ethical concerns and provide recommendations. Ethical issues are the cases in which the resources are not enough to 
-    save all the people and a decision has to be made whether to save one person or the other. If there are ethical issues use the FileReadTool to get the
-    ethics book. Solve the ethics issues ONLY using the contents of the ethics book.
+    Evaluate the consolidated plans for ethical concerns and provide recommendations. Ethical issues are the cases in which the resources are not enough to save all the people and a decision has to be made whether to save one person or the other. If there are ethical issues use the FileReadTool to get the ethics book. Solve the ethics issues ONLY using the contents of the ethics book.
   expected_output: >
-    A finalized situation report addressing ethical concerns.
+    A flowing, precise text that includes every relevant step and detail from emergency_crew_phase_1, firefighting_crew, medical_crew, police_crew, and finally emergency_crew_phase_2. Arrange these steps in paragraphs following the given order or a clear chronological sequence, ensuring all details from the input plan data are included. If any ethical concerns are noted (e.g., resource scarcity decisions), address them within the text as well.
   agent: philosopher

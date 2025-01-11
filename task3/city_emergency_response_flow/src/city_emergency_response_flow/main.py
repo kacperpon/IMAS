@@ -119,7 +119,9 @@ class CityEmergencyResponseFlow(Flow[InitialInformation]):
         result = (
             MedicalCrew()
             .crew()
-            .kickoff(inputs={"medical_information": self.state.medical_information})
+            .kickoff(
+                inputs={"medical_information": self.state.medical_information}
+            )
         )
 
         self.state.medical_plan = result.pydantic.response_plan
