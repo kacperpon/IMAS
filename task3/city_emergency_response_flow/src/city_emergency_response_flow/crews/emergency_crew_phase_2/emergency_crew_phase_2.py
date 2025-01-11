@@ -52,8 +52,15 @@ class EmergencyCrewPhase2:
     def ethical_consultation(self) -> Task:
         return Task(
             config=self.tasks_config["ethical_consultation"],
+            context=[
+                self.situation_report_compilation(),
+            ],
             output_pydantic=FinalCompilation,
-            tools=[FileReadTool(file_path="ethics.txt")],
+            tools=[
+                FileReadTool(
+                    file_path="src/city_emergency_response_flow/crews/emergency_crew_phase_2/ethics.txt"
+                )
+            ],
             output_file=os.path.join(self.output_path, "002_ethical_consultation.json"),
         )
 

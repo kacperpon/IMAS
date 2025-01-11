@@ -1,0 +1,20 @@
+{
+  "victim_hospital_mappings": [
+    {
+      "victim_id": 1,
+      "hospital_name": "Hospital Universitario Puerta del Mar",
+      "total_votes": 3
+    },
+    {
+      "victim_id": 2,
+      "hospital_name": "Hospital Pascual San Rafael",
+      "total_votes": 3
+    },
+    {
+      "victim_id": 3,
+      "hospital_name": "Hospital Dr López Cano",
+      "total_votes": 3
+    }
+  ],
+  "action_details": "To determine the final hospital assignment for each victim, we consolidate the voting outputs from both tasks. The total number of votes for each hospital is calculated by summing the vote counts from the hospital voting and injury voting tasks. This results in Hospital Universitario Puerta del Mar being assigned to Victim 1 with a total of 3 votes, Hospital Pascual San Rafael being assigned to Victim 2 also with a total of 3 votes, and Hospital Dr López Cano being assigned to Victim 3 with the same total of 3 votes. This allocation takes into account the severity of each victim's injuries and the capacity of each hospital."
+}

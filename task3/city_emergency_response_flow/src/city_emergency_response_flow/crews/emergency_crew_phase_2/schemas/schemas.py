@@ -5,7 +5,10 @@ from typing import List, Optional
 class SituationReportCompilation(BaseModel):
     """Output for compiling the situation report."""
 
-    situation_report: str = Field(..., description="Compiled situation report.")
+    situation_report: str = Field(
+        ...,
+        description="Compiled situation report incorporating the firefighting, medical and police plans.",
+    )
     ethical_issues: Optional[str] = Field(
         None, description="Ethical issues identified in the situation report."
     )
@@ -22,7 +25,8 @@ class FinalCompilation(BaseModel):
     """Output for ethical consultation and final compilation."""
 
     situation_report: str = Field(
-        ..., description="Finalised situation report after ethical consultation."
+        ...,
+        description="Finalised situation report incorporating all information from before including ethical consultation results.",
     )
 
     @classmethod

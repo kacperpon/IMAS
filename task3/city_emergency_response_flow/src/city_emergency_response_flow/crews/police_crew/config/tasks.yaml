@@ -29,7 +29,7 @@ patrol_route_planning:
 
 police_final_plan_compilation:
   description: >
-    Compile all outputs into a comprehensive police response plan. This final plan must include all outputs from before tasks. The context includes all outputs of prior tasks and ({police_information}) includes the initial information which has been passed in the beginning.
+    Compile all outputs into a comprehensive police response plan. This final plan must include all outputs from before tasks. The context includes all outputs of prior tasks and ({police_information}) includes the initial information which has been passed in the beginning. The prior outputs are also provided by the DirectoryReadTool.
   expected_output: >
     A complete police response plan addressing all aspects of the operation.
   agent: receiver_and_personnel_specialist

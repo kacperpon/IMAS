@@ -1,1 +1,34 @@
-{"fire_trucks":[{"truck_id":1,"installed_tools":[],"truck_location":[36.5327,-6.3029],"truck_status":"Available"},{"truck_id":3,"installed_tools":[],"truck_location":[36.524114,-6.286088],"truck_status":"Available"},{"truck_id":6,"installed_tools":[],"truck_location":[36.511723,-6.271585],"truck_status":"Available"},{"truck_id":8,"installed_tools":[],"truck_location":[36.499231,-6.261965],"truck_status":"Available"},{"truck_id":10,"installed_tools":[],"truck_location":[36.528762,-6.304689],"truck_status":"Available"}],"action_details":""}
+{
+  "selected_trucks": [
+    {
+      "truck_id": 1,
+      "truck_type": "Fire Truck",
+      "tools": [
+        "fire_extinguisher",
+        "first_aid_kit"
+      ],
+      "distance_to_location": 0.5
+    },
+    {
+      "truck_id": 3,
+      "truck_type": "Fire Truck",
+      "tools": [
+        "fire_extinguisher",
+        "hose"
+      ],
+      "distance_to_location": 1.2
+    }
+  ],
+  "unavailable_trucks": [
+    {
+      "truck_id": 5,
+      "truck_type": "Ladder Truck",
+      "reason": "under_maintenance"
+    },
+    {
+      "truck_id": 7,
+      "truck_type": "Ambulance",
+      "reason": "in_service"
+    }
+  ]
+}
