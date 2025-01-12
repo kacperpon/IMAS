@@ -2,7 +2,6 @@ import os
 from crewai import Agent, Crew, Process, Task, LLM
 from crewai.project import CrewBase, agent, crew, task
 from crewai_tools import FileReadTool
-from .schemas.schemas import *
 
 import configparser as ConfigParser
 
