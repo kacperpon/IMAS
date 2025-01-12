@@ -1,6 +1,8 @@
 ethical_consultation:
   description: >
-    Evaluate the consolidated plans (given with the FileReadTool reading the report_plan.md) for ethical concerns and provide recommendations. Ethical issues are the cases in which the resources are not enough to save all the people and a decision has to be made whether to save one person or the other. If there are ethical issues use the FileReadTool to get the ethics book (ethics.txt file). Solve the ethics issues ONLY using the contents of the ethics book.
+    Find ethical issues in the following emergency plan. Use the ethics book using the FileReadTool to help you in this process:
+
+    {emergency_plan}
   expected_output: >
     A flowing, precise text that includes all identified ethics issues and how they should be resolved. Arrange these steps in paragraphs following the given order or a clear chronological sequence, ensuring all details from the input plan data are included. If any ethical concerns are noted (e.g., resource scarcity decisions), address them within the text as well.
   agent: philosopher

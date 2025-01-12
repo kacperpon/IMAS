@@ -173,7 +173,9 @@ class CityEmergencyResponseFlow(Flow[InitialInformation]):
         result = (
             EmergencyCrewPhase2()
             .crew()
-            .kickoff()
+            .kickoff(
+                inputs={"final_report": merged_content}
+            )
         )
 
      
