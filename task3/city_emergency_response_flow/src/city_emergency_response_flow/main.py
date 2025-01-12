@@ -174,7 +174,7 @@ class CityEmergencyResponseFlow(Flow[InitialInformation]):
             EmergencyCrewPhase2()
             .crew()
             .kickoff(
-                inputs={"final_report": merged_content}
+                inputs={"emergency_plan": merged_content}
             )
         )
 
