@@ -1,20 +1,36 @@
-The high-severity electrical fire in a residential area with three injured people (one unconscious and two with burns) requires an immediate response. 
+**Fire Response Report for Calle San Francisco, Cádiz**
 
-1. **Victim Rescue**: Assign four firefighters for initial damage control, two for medical assistance and patient care, and four more for further extinguishing the fire while protecting adjacent areas.
-2. **Firefighting Tools**:
-   - The Dry Chemical Extinguisher is suitable for Class A, B, and C fires, making it an initial choice.
-   - For high-severity electrical fires with involved fuel sources, the Water Mist Extinguisher is highly effective due to its ability to cool the surrounding area quickly and effectively suppress flames without spreading water damage.
-   - In cases where flammable liquids are present or there's a risk of fire spreading, the Foam Extinguisher can be used due to its excellent performance against Class B fires.
+**Situation Summary:**
+A gas fire has been reported in Calle San Francisco, Cádiz. Given its location and type, immediate action is required to contain and extinguish the fire while ensuring safety for both firefighters and civilians.
 
-3. **Fire Trucks**:
-   - Three fire trucks with necessary tools for high-severity electrical fires and available for deployment: 
-     - Truck 1 (Truck ID: 1) has a Dry Chemical Extinguisher, Water Mist Extinguisher, is located at [36.5327,-6.302902], and its status is "Available".
-     - Truck 3 (Truck ID: 3) has a Dry Chemical Extinguisher, Foam Extinguisher, is located at [36.524114,-6.286088], and its status is "Available".
-     - Truck 6 (Truck ID: 6) has a Water Mist Extinguisher, Dry Chemical Extinguisher, is located at [36.511723,-6.271585], and its status is "Available".
+**Assessment and Strategy:**
 
-4. **Route Planning**: Route planning was successful with estimated durations:
-   - The duration from the starting point to Truck 1 (Truck ID: 1) would be approximately 3.35 minutes.
-   - The duration from the starting point to Truck 3 (Truck ID: 3) would be approximately 2.85 minutes.
-   - The duration from the starting point to Truck 6 (Truck ID: 6) would be approximately 5.3 minutes.
+1.  **Fire Type and Location:** The fire involves flammable liquids (Class B) and gas, located in an urban setting with potential risks from gas leaks and confined spaces.
+2.  **Structural Assessment:** Conduct a thorough assessment of the building's structure to identify any vulnerabilities or hazards that could complicate firefighting efforts.
+3.  **Firefighting Tools and Resources:**
+    *   Halogenated extinguishers for effective targeting against Class B fires involving gas and flammable liquids.
+    *   Water mist systems for controlling heat release rates in confined spaces like Calle San Francisco, Cádiz.
+    *   Inert gases (CO2 or N2) to smother the fire by displacing oxygen.
+    *   Foam agents for portable extinguishers as a precaution against potential electrical component ignition or escalated situations.
+4.  **Firefighting Team Allocation:** Allocate 6 firefighters based on specific roles:
+    *   2 officers for overseeing operations and assessing the situation.
+    *   2 firefighters for structural ventilation and fire containment, considering urban location risks.
+    *   1 firefighter for operating gas detection equipment.
+    *   1 additional support firefighter as needed.
 
-This comprehensive approach prioritizes both safety and effective firefighting, ensuring a timely response to the high-severity electrical fire in a residential area with three injured people.
+**Fire Truck Selection:**
+Selected fire trucks based on availability and tool suitability:
+*   Truck 1 (Halogenated extinguishers).
+*   Truck 3 (Water mist systems).
+*   Truck 10 (Inert gases and portable foam agents).
+
+**Additional Measures:**
+
+1.  **Ventilation:** Utilize powerful fans for thorough ventilation of the area to reduce smoke and heat.
+2.  **Gas Detection and Monitoring:** Ensure proper gas detection equipment operation to monitor evolving conditions during response.
+3.  **Contingency Planning:** Be prepared for escalated situations, especially electrical ignition risks.
+
+**Conclusion:**
+This comprehensive plan addresses the unique challenges posed by a Class B fire in an urban setting. By prioritizing tool selection based on the specific type of gas involved and ensuring proper allocation of firefighting resources, we aim to contain the fire efficiently while maintaining safety protocols for both responders and bystanders.
+
+This report aims to guide the emergency response efforts effectively, emphasizing strategic use of tools and resources tailored to the specific needs of this situation.

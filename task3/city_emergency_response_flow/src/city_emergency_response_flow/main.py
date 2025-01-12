@@ -57,7 +57,7 @@ class CityEmergencyResponseFlow(Flow[InitialInformation]):
         # )
         
         selected_file = os.path.join(
-            "tests", "initial_reports", "initial_report_02.md"
+            "tests", "initial_reports", "initial_report_03.md"
         )
 
         self.state.initial_emergency_report = open(selected_file).read()
@@ -94,6 +94,12 @@ class CityEmergencyResponseFlow(Flow[InitialInformation]):
         if self.state.medical_crew_required:
             return "meds_required"
         else:
+            medical_plan_path = os.path.join(os.getcwd(), "src", "city_emergency_response_flow", "crews", "medical_crew", "crew_outputs/")
+            for filename in os.listdir(medical_plan_path):
+                file_path = os.path.join(medical_plan_path, filename)
+                if os.path.isfile(file_path):
+                    os.remove(file_path)
+            
             return "meds_not_required"
 
     #####################
@@ -145,13 +151,10 @@ class CityEmergencyResponseFlow(Flow[InitialInformation]):
     @listen(
         (
             and_(
-                "meds_required",
-                create_fire_plan,
-                create_medical_plan,
+                create_fire_plan,   
                 create_police_plan,
             )
         )
-        or (and_("meds_not_required", create_fire_plan, create_police_plan))
     )
     def merge_plans(self):
         print("Merge each crew's plans into one final plan")

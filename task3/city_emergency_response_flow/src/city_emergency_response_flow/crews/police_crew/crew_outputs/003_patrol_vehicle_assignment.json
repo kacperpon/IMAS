@@ -1,1 +1,23 @@
-{"patrol_vehicles":[{"patrol_id":1,"patrol_location":[0.0,0.0],"patrol_status":"Available"},{"patrol_id":3,"patrol_location":[0.0,0.0],"patrol_status":"Available"},{"patrol_id":8,"patrol_location":[0.0,0.0],"patrol_status":"Available"},{"patrol_id":10,"patrol_location":[0.0,0.0],"patrol_status":"Available"}],"action_details":"The following vehicles have been assigned for deployment: Patrol ID 1 (Police Car), Patrol ID 3 (Police Van), Patrol ID 8 (Police Van), and Patrol ID 10 (Police Car)."}
+{
+  "status": "success",
+  "patrol_vehicles": [
+    {
+      "id": 1,
+      "type": "Police Car",
+      "location": [
+        36.511723,
+        -6.271585
+      ],
+      "status": "Available"
+    },
+    {
+      "id": 3,
+      "type": "Police Van",
+      "location": [
+        36.541871,
+        -6.285121
+      ],
+      "status": "Available"
+    }
+  ]
+}
