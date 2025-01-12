@@ -80,6 +80,10 @@ poetry run crewai flow kickoff
 
 Change the last parameter of the path in main.py in line 35 to either "initial_report_01.md" or "initial_report_02.md" or "initial_report_03.md". The test-cases mentioned in the report incorporate the second and the third file.
 
+###  Selection Ollama model and server
+
+Change the configuration parameters at `task3/city_emergency_response_flow/src/city_emergency_response_flow/config/config.properties` to change the Ollama server location and Ollama LLM model for all the Crews.
+
 ## Project Structure
 
 ```
