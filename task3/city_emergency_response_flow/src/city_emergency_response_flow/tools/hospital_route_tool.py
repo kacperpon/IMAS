@@ -5,7 +5,10 @@ import osmnx as ox
 import networkx as nx
 import json, os
 
-from city_emergency_response_flow.crews.medical_crew.schemas.schemas import RoutePlanning
+from city_emergency_response_flow.crews.medical_crew.schemas.schemas import (
+    RoutePlanning,
+)
+
 
 class HospitalRouteToolInput(BaseModel):
     """
@@ -17,7 +20,7 @@ class HospitalRouteToolInput(BaseModel):
         destination_lats (List[float]): List of the Latitudes of all hosptial locations.
         destination_lons (List[float]): List of the Longitudes of all hospital locations.
     """
-    
+
     hospital_names: str = Field(
         ...,
         description="Stringified list of the hospital names.",
@@ -55,29 +58,27 @@ class HospitalRouteTool(BaseTool):
         """
         Internal method to run the route calculation. It returns pydantic model RoutePlanning.
         """
-        
+
         print("Received values:")
         print(hospital_names)
         print(destination_lats)
         print(destination_lons)
- 
+
         try:
             hospital_names = json.loads(hospital_names)
             destination_lons = json.loads(destination_lons)
             destination_lats = json.loads(destination_lats)
-  
+
         except Exception as e:
             return f"Error occurred while parsing input: {str(e)}"
-        
+
         total_times = list()
-        
+
         for idx, hospital_name in enumerate(hospital_names):
             print("Calculatin route for hospital: ", hospital_name)
             destination_lat = destination_lats[idx]
             destination_lon = destination_lons[idx]
-            
-        
-            
+
             try:
                 # 1. Create a drivable street network around the vehicle's origin.
                 # Adjust 'dist' to expand or limit the search area.
@@ -89,8 +90,10 @@ class HospitalRouteTool(BaseTool):
 
                 # 2. Identify the nodes in the graph nearest to the origin and destination.
                 orig_node = ox.distance.nearest_nodes(G, origin_lon, origin_lat)
-                dest_node = ox.distance.nearest_nodes(G, destination_lon, destination_lat)
-                
+                dest_node = ox.distance.nearest_nodes(
+                    G, destination_lon, destination_lat
+                )
+
                 G = ox.routing.add_edge_speeds(G)
                 G = ox.routing.add_edge_travel_times(G)
 
@@ -110,48 +113,61 @@ class HospitalRouteTool(BaseTool):
                     "route_nodes": route,
                     "route_coordinates": route_coordinates,
                 }
-                
+
                 # Only used for ambulances.
                 vehicle_type = "ambulance"
-                
-                
-                
+
                 # 6. Plotting the route
-                
-                try: 
+
+                try:
                     fig, ax = ox.plot_graph_route(G, route, node_size=0)
                     if vehicle_type == "firetruck":
-                        path = os.path.join("src", "city_emergency_response_flow", "crews", "firefighting_crew", "crew_outputs", f"firetruck_{hospital_name}_route.png")
-                        
+                        path = os.path.join(
+                            "src",
+                            "city_emergency_response_flow",
+                            "crews",
+                            "firefighting_crew",
+                            "crew_outputs",
+                            f"firetruck_{hospital_name}_route.png",
+                        )
+
                     elif vehicle_type == "ambulance":
-                        path = os.path.join("src", "city_emergency_response_flow", "crews", "medical_crew", "crew_outputs", f"ambulance_{hospital_name}_route.png")
+                        path = os.path.join(
+                            "src",
+                            "city_emergency_response_flow",
+                            "crews",
+                            "medical_crew",
+                            "crew_outputs",
+                            f"ambulance_{hospital_name}_route.png",
+                        )
                     elif vehicle_type == "patrol":
-                        path = os.path.join("src", "city_emergency_response_flow", "crews", "patrol_crew", "crew_outputs", f"patrol_{hospital_name}_route.png")
+                        path = os.path.join(
+                            "src",
+                            "city_emergency_response_flow",
+                            "crews",
+                            "patrol_crew",
+                            "crew_outputs",
+                            f"patrol_{hospital_name}_route.png",
+                        )
                     else:
-                        raise( f"Invalid vehicle type: {vehicle_type}")
-                    
+                        raise (f"Invalid vehicle type: {vehicle_type}")
+
                     os.makedirs(os.path.dirname(path), exist_ok=True)
                     fig.savefig(path)
-                
+
                 except Exception as e:
                     print(f"Error occurred while plotting route: {str(e)}")
-                
-                total_time = round(sum(ox.routing.route_to_gdf(G, route)['travel_time'])) # In seconds
-                total_time = total_time / 60 # In minutes
+
+                total_time = round(
+                    sum(ox.routing.route_to_gdf(G, route)["travel_time"])
+                )  # In seconds
+                total_time = total_time / 60  # In minutes
                 total_times.append(total_time)
                 print(f"Total time for vehicle {hospital_name}: {total_time} minutes")
 
-                
-                
-                
-                
-                
-                
             except Exception as e:
                 return f"Error occurred while calculating route: {str(e)}"
-                
-                
-        
+
         new_route = RoutePlanning(
             route_duration_min=total_time,
             action_details="Route planning successful.",
@@ -159,4 +175,3 @@ class HospitalRouteTool(BaseTool):
 
         # Return the result as JSON string.
         return new_route.model_dump_json()
-        

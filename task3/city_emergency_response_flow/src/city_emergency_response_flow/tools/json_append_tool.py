@@ -16,12 +16,16 @@ class FixedFileReadToolSchema(BaseModel):
 class JSONFileReadSchema(FixedFileReadToolSchema):
     """Input for FileReadTool."""
 
-    dir_path: str = Field(..., description="Mandatory directory full path to read the JSON files.")
+    dir_path: str = Field(
+        ..., description="Mandatory directory full path to read the JSON files."
+    )
 
 
 class JSONAppendTool(BaseTool):
     name: str = "Read several JSON files and append them."
-    description: str = "A tool that can be used to read several JSON files in a directory and append their contents."
+    description: str = (
+        "A tool that can be used to read several JSON files in a directory and append their contents."
+    )
     args_schema: Type[BaseModel] = JSONFileReadSchema
     dir_path: Optional[str] = None
 
@@ -40,7 +44,7 @@ class JSONAppendTool(BaseTool):
         try:
             dir_path = self.dir_path
             if os.path.isdir(dir_path):
-                
+
                 json_contents = []
                 for filename in os.listdir(dir_path):
                     if filename.endswith(".json"):
@@ -48,6 +52,6 @@ class JSONAppendTool(BaseTool):
                         with open(file_path, "r") as file:
                             json_contents.append(file.read())
                 return json_contents
-            
+
         except Exception as e:
             return f"Fail to read the JSON files in  {dir_path}. Error: {e}"

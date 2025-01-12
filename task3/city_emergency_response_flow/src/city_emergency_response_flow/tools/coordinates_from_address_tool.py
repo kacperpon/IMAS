@@ -7,11 +7,15 @@ from typing import Type
 
 class GetCoordinatesInput(BaseModel):
     """Input schema for GetCoordinatesTool."""
+
     address: str = Field(..., description="The address to retrieve coordinates for.")
+
 
 class GetCoordinatesTool(BaseTool):
     name: str = "get_coordinates"
-    description: str = "Fetches the latitude and longitude of a given address using OSMnx."
+    description: str = (
+        "Fetches the latitude and longitude of a given address using OSMnx."
+    )
     args_schema: Type[BaseModel] = GetCoordinatesInput
 
     def _run(self, address: str) -> str:
@@ -25,7 +29,7 @@ class GetCoordinatesTool(BaseTool):
             str: The coordinates in the format 'latitude, longitude' or an error message.
         """
         try:
-            cleaned_address = unicodedata.normalize('NFKC', address)
+            cleaned_address = unicodedata.normalize("NFKC", address)
             print("cleaned address ", cleaned_address)
             point = ox.geocode(cleaned_address)
             return {point[0]}, {point[1]}

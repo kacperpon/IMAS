@@ -13,14 +13,11 @@ from .crews.medical_crew.medical_crew import MedicalCrew
 from .crews.police_crew.police_crew import PoliceCrew
 
 
-
-
 class InitialInformation(BaseModel):
     initial_emergency_report: str = ""
+    final_report: str = ""
 
     firefighting_vehicles: str = ""
-
-    final_report: str = ""
     medical_crew_required: bool = True
 
     firefighting_information: str = ""
@@ -42,11 +39,8 @@ class CityEmergencyResponseFlow(Flow[InitialInformation]):
     @start()
     def read_emergency_characteristics(self):
         print("Reading emergency characteristics")
-        
-        
-        selected_file = os.path.join(
-            "tests", "initial_reports", "initial_report_03.md"
-        )
+
+        selected_file = os.path.join("tests", "initial_reports", "initial_report_03.md")
 
         self.state.initial_emergency_report = open(selected_file).read()
 
@@ -77,12 +71,19 @@ class CityEmergencyResponseFlow(Flow[InitialInformation]):
         if self.state.medical_crew_required:
             return "meds_required"
         else:
-            medical_plan_path = os.path.join(os.getcwd(), "src", "city_emergency_response_flow", "crews", "medical_crew", "crew_outputs/")
+            medical_plan_path = os.path.join(
+                os.getcwd(),
+                "src",
+                "city_emergency_response_flow",
+                "crews",
+                "medical_crew",
+                "crew_outputs/",
+            )
             for filename in os.listdir(medical_plan_path):
                 file_path = os.path.join(medical_plan_path, filename)
                 if os.path.isfile(file_path):
                     os.remove(file_path)
-            
+
             return "meds_not_required"
 
     #####################
@@ -110,12 +111,9 @@ class CityEmergencyResponseFlow(Flow[InitialInformation]):
         result = (
             MedicalCrew()
             .crew()
-            .kickoff(
-                inputs={"medical_information": self.state.medical_information}
-            )
+            .kickoff(inputs={"medical_information": self.state.medical_information})
         )
 
-    
     ###############
     # POLICE CREW #
     ###############
@@ -129,24 +127,45 @@ class CityEmergencyResponseFlow(Flow[InitialInformation]):
             .kickoff(inputs={"police_information": self.state.police_information})
         )
 
-
-
     @listen(
         (
             and_(
-                create_fire_plan,   
+                create_fire_plan,
                 create_police_plan,
             )
         )
     )
     def merge_plans(self):
         print("Merge each crew's plans into one final plan")
-        
-        
-        firefighting_plan_path = os.path.join(os.getcwd(), "src", "city_emergency_response_flow", "crews", "firefighting_crew", "crew_outputs", "008_final_plan_compilation.md")
-        medical_plan_path = os.path.join(os.getcwd(), "src", "city_emergency_response_flow", "crews", "medical_crew", "crew_outputs", "008_final_plan_compilation.md")
-        police_plan_path = os.path.join(os.getcwd(), "src", "city_emergency_response_flow", "crews", "police_crew", "crew_outputs", "008_final_plan_compilation.md")
-        
+
+        firefighting_plan_path = os.path.join(
+            os.getcwd(),
+            "src",
+            "city_emergency_response_flow",
+            "crews",
+            "firefighting_crew",
+            "crew_outputs",
+            "008_final_plan_compilation.md",
+        )
+        medical_plan_path = os.path.join(
+            os.getcwd(),
+            "src",
+            "city_emergency_response_flow",
+            "crews",
+            "medical_crew",
+            "crew_outputs",
+            "008_final_plan_compilation.md",
+        )
+        police_plan_path = os.path.join(
+            os.getcwd(),
+            "src",
+            "city_emergency_response_flow",
+            "crews",
+            "police_crew",
+            "crew_outputs",
+            "008_final_plan_compilation.md",
+        )
+
         # Read and concatenate the contents of three markdown files
         files_to_merge = [firefighting_plan_path, medical_plan_path, police_plan_path]
         merged_content = ""
@@ -159,14 +178,11 @@ class CityEmergencyResponseFlow(Flow[InitialInformation]):
         # Save the concatenated content into final_report.md
         with open("final_report.md", "w") as final_file:
             final_file.write(merged_content)
-        
-        
+
         result = (
             EmergencyCrewPhase2()
             .crew()
-            .kickoff(
-                inputs={"emergency_plan": merged_content}
-            )
+            .kickoff(inputs={"emergency_plan": merged_content})
         )
 
 
