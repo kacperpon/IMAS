@@ -35,9 +35,6 @@ class EmergencyCrewPhase2:
     def ethical_consultation(self) -> Task:
         return Task(
             config=self.tasks_config["ethical_consultation"],
-            context=[
-                self.situation_report_compilation(),
-            ],
             tools=[
                 FileReadTool(
                     file_path=os.path.join(os.getcwd(), "final_report.md")
