@@ -145,9 +145,9 @@ class HospitalRouteTool(BaseTool):
                             "src",
                             "city_emergency_response_flow",
                             "crews",
-                            "patrol_crew",
+                            "police_crew",
                             "crew_outputs",
-                            f"patrol_{hospital_name}_route.png",
+                            f"police_{hospital_name}_route.png",
                         )
                     else:
                         raise (f"Invalid vehicle type: {vehicle_type}")
