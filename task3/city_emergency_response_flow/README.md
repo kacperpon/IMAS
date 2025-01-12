@@ -19,12 +19,15 @@ A multi-agent system for handling city emergency responses using CrewAI framewor
 ## Poetry Installation
 
 ### 1. Check if Poetry is Already Installed
+
 Run the following command to check if Poetry is installed:
+
 ```bash
 poetry --version
 ```
 
 ### 2. Install Poetry
+
 If Poetry is not installed, use the official installer instructions:
 
 ```bash
@@ -40,22 +43,24 @@ source ~/.bashrc
 ```
 
 ### 3. Verify Installation
+
 Check that Poetry is installed and working:
 
 ```bash
 poetry --version
 ```
 
-
 ## Installation
 
 1. Clone the repository:
+
 ```bash
 git clone https://github.com/kacperpon/IMAS.git
 cd city_emergency_response_flow
 ```
 
 2. Set up the Python environment with Poetry:
+
 ```bash
 poetry env use python3.12
 poetry install
@@ -66,10 +71,14 @@ poetry install
 ### Running the Emergency Response Simulation
 
 Start the emergency response flow:
+
 ```bash
-poetry run kickoff
+poetry run crewai flow kickoff
 ```
 
+### Selecting the test-case
+
+Change the last parameter of the path in main.py in line 35 to either "initial_report_01.md" or "initial_report_02.md" or "initial_report_03.md". The test-cases mentioned in the report incorporate the second and the third file.
 
 ## Project Structure
 
@@ -91,6 +100,3 @@ city_emergency_response_flow/
 - **Firefighting Crew**: Handles fire suppression and rescue
 - **Medical Crew**: Provides medical assistance and transport
 - **Police Crew**: Manages traffic and evacuation
-
-
-
