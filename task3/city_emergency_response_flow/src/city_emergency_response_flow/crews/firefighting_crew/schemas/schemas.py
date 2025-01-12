@@ -162,14 +162,12 @@ class FirePlanCompilation(BaseModel):
 
     response_plan: str = Field(
         ...,
-        description="Compiled response plan including all outputs from before tasks for the firefighter operation.",
+        description="Summarized response plan including all outputs from before tasks for the firefighter operation.",
     )
     ethical_issues: Optional[str] = Field(
         None, description="Ethical issues considered in the plan."
     )
-    action_details: str = Field(
-        ..., description="Additional details of the overall firefighter plan."
-    )
+    
 
     @classmethod
     def get_schema(cls) -> str:

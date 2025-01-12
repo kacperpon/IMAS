@@ -1,1 +1,55 @@
-{"victim_hospital_mappings":[{"victim_id":1,"hospital_name":"Hospital Pascual San Rafael","total_votse":3},{"victim_id":2,"hospital_name":"Hospital Pascual San Rafael","total_votse":3},{"victim_id":3,"hospital_name":"Hospital Universitario Puerta del Mar","total_votse":4}],"action_details":"The final hospital assignments for each victim are determined by summing the votes from the hospital voting and injury voting tasks. Victim 1 is assigned to Hospital Pascual San Rafael with a total of 3 votes, as it has the highest vote count in both tasks and relevant specializations. Victim 2 also receives 3 votes, solidifying its assignment to Hospital Pascual San Rafael. However, due to the high estimated severity of injuries for victim 3 (electrical fire), and considering the available options after maximizing the bed capacity at Hospital Pascual San Rafael, victim 3 is redirected to Hospital Universitario Puerta del Mar with a total vote count of 4."}
+{
+  "victim_hospital_mappings": [
+    {
+      "victim_id": 1,
+      "hospital_name": "Hospital Universitario Puerta del Mar",
+      "total_votes": 3
+    },
+    {
+      "victim_id": 2,
+      "hospital_name": "Hospital Universitario Puerta del Mar",
+      "total_votes": 3
+    },
+    {
+      "victim_id": 3,
+      "hospital_name": "Hospital Universitario Puerta del Mar",
+      "total_votes": 3
+    },
+    {
+      "victim_id": 4,
+      "hospital_name": "Hospital Universitario Puerta del Mar",
+      "total_votes": 3
+    },
+    {
+      "victim_id": 5,
+      "hospital_name": "Hospital Universitario Puerta del Mar",
+      "total_votes": 3
+    },
+    {
+      "victim_id": 6,
+      "hospital_name": "Hospital Universitario Puerta del Mar",
+      "total_votes": 0
+    },
+    {
+      "victim_id": 7,
+      "hospital_name": "Hospital Pascual San Rafael",
+      "total_votes": 2
+    },
+    {
+      "victim_id": 8,
+      "hospital_name": "Hospital Dr López Cano",
+      "total_votes": 1
+    },
+    {
+      "victim_id": 9,
+      "hospital_name": "Hospital Pascual San Rafael",
+      "total_votes": 2
+    },
+    {
+      "victim_id": 10,
+      "hospital_name": "Hospital Dr López Cano",
+      "total_votes": 1
+    }
+  ],
+  "action_details": "To determine the hospital with the most votes, we first consider the available bed capacity for each hospital. Hospital Universitario Puerta del Mar has a capacity of 32 beds, making it the highest among all hospitals. Next, we look at the severity of injuries. Since all hospitals have some level of specialization in trauma care, this is not a deciding factor. However, considering their other specializations and available bed capacity, Hospital Universitario Puerta del Mar gets three votes. Hospital Pascual San Rafael comes next with 23 available beds and gets two votes. Hospital Dr López Cano has 18 available beds and gets one vote. Lastly, Hospital Quirónsalud Campo de Gibraltar has only five available beds and does not receive any votes. We have mapped each victim to the most convenient hospital based on the severity of their injuries. Since all victims have varying levels of injury, we prioritized them based on available bed capacity and other specializations for Hospital Universitario Puerta del Mar, followed by Hospital Pascual San Rafael and then Hospital Dr López Cano."
+}

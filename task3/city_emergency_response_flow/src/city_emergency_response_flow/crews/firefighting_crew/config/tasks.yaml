@@ -51,7 +51,9 @@ route_planning:
 
 final_plan_compilation:
   description: >
-    Consolidate all outputs from previous tasks to create a comprehensive firefighting response plan using the firefighting information ({firefighting_information}) and all outputs of tasks from before given in the context. Include all strategies, tools, routes, and personnel information derived from the input. The prior outputs are also provided by the DirectoryReadTool.
+    Use the JSONAppendTool to compile the plans.
+
+     
   expected_output: >
-    A complete firefighting response plan addressing all aspects of the operation incorporating all outputs of before executed tasks in the firefighting crew along with ethical issues if applicable. Ethical issues are the cases in which the resources are not enough to save all the people and a decision has to be made whether to save one person or the other. Instead of deciding who to save, the ethical dilemma should be stated in the ethical issues section.
+    A complete firefighting response plan report addressing all aspects of the operation incorporating all detailed outputs of before executed subplans in the firefighting crew along with ethical issues if applicable.
   agent: fire_personnel_specialist
