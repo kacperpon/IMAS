@@ -21,10 +21,6 @@ class InitialInformation(BaseModel):
     medical_information: str = ""
     police_information: str = ""
 
-    firefighting_plan: str = ""
-    medical_plan: str = ""
-    police_plan: str = ""
-
 
 class CityEmergencyResponseFlow(Flow[InitialInformation]):
     # 1. Input initial information to the emergency
@@ -36,9 +32,7 @@ class CityEmergencyResponseFlow(Flow[InitialInformation]):
     @start()
     def read_emergency_characteristics(self):
         print("Reading emergency characteristics")
-
         selected_file = os.path.join("tests", "initial_reports", "initial_report_03.md")
-
         self.state.initial_emergency_report = open(selected_file).read()
 
     @listen(read_emergency_characteristics)
@@ -65,6 +59,8 @@ class CityEmergencyResponseFlow(Flow[InitialInformation]):
 
     @router(call_emergency_centre)
     def medical_crew_required(self):
+        print("Deciding if the medical crew is required")
+
         if self.state.medical_crew_required:
             return "meds_required"
         else:
@@ -90,12 +86,9 @@ class CityEmergencyResponseFlow(Flow[InitialInformation]):
     @listen(or_("meds_required", "meds_not_required"))
     def create_fire_plan(self):
         print("Develop a plan for the firefighting crew")
-        result = (
-            FirefightingCrew()
-            .crew()
-            .kickoff(
-                inputs={"firefighting_information": self.state.firefighting_information}
-            )
+
+        FirefightingCrew().crew().kickoff(
+            inputs={"firefighting_information": self.state.firefighting_information}
         )
 
     ################
@@ -105,10 +98,8 @@ class CityEmergencyResponseFlow(Flow[InitialInformation]):
     @listen("meds_required")  # only when explicitly required
     def create_medical_plan(self):
         print("Develop a plan for the medical crew")
-        result = (
-            MedicalCrew()
-            .crew()
-            .kickoff(inputs={"medical_information": self.state.medical_information})
+        MedicalCrew().crew().kickoff(
+            inputs={"medical_information": self.state.medical_information}
         )
 
     ###############
@@ -118,10 +109,9 @@ class CityEmergencyResponseFlow(Flow[InitialInformation]):
     @listen(or_("meds_required", "meds_not_required"))
     def create_police_plan(self):
         print("Develop a plan for the police crew")
-        result = (
-            PoliceCrew()
-            .crew()
-            .kickoff(inputs={"police_information": self.state.police_information})
+
+        PoliceCrew().crew().kickoff(
+            inputs={"police_information": self.state.police_information}
         )
 
     @listen(
@@ -176,11 +166,7 @@ class CityEmergencyResponseFlow(Flow[InitialInformation]):
         with open("final_report.md", "w") as final_file:
             final_file.write(merged_content)
 
-        result = (
-            EmergencyCrewPhase2()
-            .crew()
-            .kickoff(inputs={"emergency_plan": merged_content})
-        )
+        EmergencyCrewPhase2().crew().kickoff(inputs={"emergency_plan": merged_content})
 
 
 def kickoff():
