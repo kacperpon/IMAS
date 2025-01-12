@@ -19,28 +19,19 @@ A multi-agent system for handling city emergency responses using CrewAI framewor
 ## Poetry Installation
 
 ### 1. Check if Poetry is Already Installed
-
 Run the following command to check if Poetry is installed:
-
 ```bash
 poetry --version
 ```
 
 ### 2. Install Poetry
-
-If Poetry is not installed, use the official installer:
-
-```bash
-curl -sSL https://install.python-poetry.org | python3 -
-```
-
-### 3. Configure Path (if necessary)
-
-After installation, ensure Poetry is accessible by adding it to your system's PATH:
+If Poetry is not installed, use the official installer instructions:
 
 ```bash
-export PATH="$HOME/.local/bin:$PATH"
+https://python-poetry.org/docs/#installation
 ```
+
+Ensure Poetry is accessible by being contained in the system's PATH.
 
 Reload your shell configuration:
 
@@ -48,25 +39,23 @@ Reload your shell configuration:
 source ~/.bashrc
 ```
 
-### 4. Verify Installation
-
+### 3. Verify Installation
 Check that Poetry is installed and working:
 
 ```bash
 poetry --version
 ```
 
+
 ## Installation
 
 1. Clone the repository:
-
 ```bash
 git clone https://github.com/kacperpon/IMAS.git
 cd city_emergency_response_flow
 ```
 
 2. Set up the Python environment with Poetry:
-
 ```bash
 poetry env use python3.12
 poetry install
@@ -77,10 +66,10 @@ poetry install
 ### Running the Emergency Response Simulation
 
 Start the emergency response flow:
-
 ```bash
-poetry run crewai flow kickoff
+poetry run kickoff
 ```
+
 
 ## Project Structure
 
@@ -91,7 +80,7 @@ city_emergency_response_flow/
 ├── notes.md              # Development notes and documentation
 └── src/
     └── city_emergency_response_flow/
-        ├── agents/       # Agent implementations
+        ├── crews/       # Crew implementations
         ├── tools/        # Custom tools for agents
         └── main.py       # Entry point
 ```
@@ -99,15 +88,9 @@ city_emergency_response_flow/
 ## Key Components
 
 - **Emergency Crew**: Handles initial response coordination
-- **Ethics Crew**: Manages ethical decision-making
 - **Firefighting Crew**: Handles fire suppression and rescue
 - **Medical Crew**: Provides medical assistance and transport
 - **Police Crew**: Manages traffic and evacuation
 
-## Dependencies
 
-- crewAI >= 0.86.0
-- OSMnx >= 2.0.0
-- matplotlib
-- scikit-learn
-- configparser
+
