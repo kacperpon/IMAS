@@ -1,11 +1,8 @@
 #!/usr/bin/env python
 from random import choice, randint
 import os
-
 from pydantic import BaseModel
-
 from crewai.flow.flow import Flow, listen, start, router, or_, and_
-
 from .crews.emergency_crew_phase_1.emergency_crew_phase_1 import EmergencyCrewPhase1
 from .crews.emergency_crew_phase_2.emergency_crew_phase_2 import EmergencyCrewPhase2
 from .crews.firefighting_crew.firefighting_crew import FirefightingCrew
