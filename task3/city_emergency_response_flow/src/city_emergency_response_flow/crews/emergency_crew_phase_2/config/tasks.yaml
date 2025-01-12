@@ -1,6 +1,6 @@
 ethical_consultation:
   description: >
-    Find ethical issues in the following emergency plan. Use the ethics book using the FileReadTool to help you in this process:
+    Find ethical issues in the following emergency plan.
 
     {emergency_plan}
   expected_output: >
