@@ -26,26 +26,9 @@ class EmergencyCrewPhase2:
     tasks_config = "config/tasks.yaml"
 
     @agent
-    def distributor(self) -> Agent:
-        return Agent(
-            config=self.agents_config["plan_compiler"], llm=self.llm, verbose=True
-        )
-
-    @agent
     def philosopher(self) -> Agent:
         return Agent(
             config=self.agents_config["philosopher"], llm=self.llm, verbose=True
-        )
-
-    @task
-    def situation_report_compilation(self) -> Task:
-        return Task(
-            config=self.tasks_config["situation_report_compilation"],
-            output_pydantic=SituationReportCompilation,
-            tools=[FileReadTool()],
-            output_file=os.path.join(
-                self.output_path, "001_situation_report_compilation.json"
-            ),
         )
 
     @task
@@ -55,13 +38,15 @@ class EmergencyCrewPhase2:
             context=[
                 self.situation_report_compilation(),
             ],
-            output_pydantic=FinalCompilation,
             tools=[
                 FileReadTool(
-                    file_path="src/city_emergency_response_flow/crews/emergency_crew_phase_2/ethics.txt"
+                    file_path=os.path.join(os.getcwd(), "final_report.md")
+                ),
+                FileReadTool(
+                    file_path=os.path.join(os.path.relpath(__file__), "ethics.txt")
                 )
             ],
-            output_file=os.path.join(self.output_path, "002_ethical_consultation.json"),
+            output_file=os.path.join(self.output_path, "001_ethical_report.md"),
         )
 
     @crew

@@ -178,22 +178,13 @@ class CityEmergencyResponseFlow(Flow[InitialInformation]):
             final_file.write(merged_content)
         
         
-        # result = (
-        #     EmergencyCrewPhase2()
-        #     .crew()
-        #     .kickoff(
-        #         inputs={
-        #             "firefighting_plan": self.state.firefighting_plan,
-        #             "medical_plan": self.state.medical_plan,
-        #             "police_plan": self.state.police_plan,
-        #         }
-        #     )
-        # )
+        result = (
+            EmergencyCrewPhase2()
+            .crew()
+            .kickoff()
+        )
 
-        # self.state.final_report = result.pydantic.situation_report
-        # print(self.state.final_report)
-        # with open("final_report.txt", "w") as f:
-        #     f.write(self.state.final_report)
+     
 
 
 def kickoff():
@@ -207,4 +198,6 @@ def plot():
 
 
 if __name__ == "__main__":
-    kickoff()
+    # kickoff()
+    city_emergency_response_flow = CityEmergencyResponseFlow()
+    city_emergency_response_flow.merge_plans()
