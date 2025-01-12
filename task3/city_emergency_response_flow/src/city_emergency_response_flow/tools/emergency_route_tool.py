@@ -66,27 +66,13 @@ class EmergencyRouteTool(BaseTool):
         print(origin_lats)
         print(origin_lons)
         
-        # print("Received dtypes:")
-        # print(type(vehicle_ids))
-        # print(type(origin_lats))
-        # print(type(origin_lons))
         
         try:
             vehicle_ids = json.loads(vehicle_ids)
             vehicle_ids = [str(vehicle_id) for vehicle_id in vehicle_ids]
             origin_lats = json.loads(origin_lats)
             origin_lons = json.loads(origin_lons)
-            
-            # print("Parsed values:")
-            # print(vehicle_ids)
-            # print(origin_lats)
-            # print(origin_lons)
-            
-            # print("Parsed dtypes:")
-            # print(type(vehicle_ids))
-            # print(type(origin_lats))
-            # print(type(origin_lons))
-            
+
             
         except Exception as e:
             return f"Error occurred while parsing input: {str(e)}"
@@ -155,10 +141,7 @@ class EmergencyRouteTool(BaseTool):
                     fig.savefig(path)
                 
                 except Exception as e:
-                    print(f"Error occurred while plotting route: {str(e)}")
-                
-                # tuples.append((vehicle_id, route))
-                
+                    print(f"Error occurred while plotting route: {str(e)}")                
                 
                 total_time = round(sum(ox.routing.route_to_gdf(G, route)['travel_time'])) # In seconds
                 total_time = total_time / 60 # In minutes

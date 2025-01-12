@@ -157,16 +157,6 @@ class FirefightingCrew:
         return Task(
             config=self.tasks_config["final_plan_compilation"],
             tools=[JSONAppendTool(dir_path=self.output_path)],
-            # context=[ # wait for all tasks to finish
-            #     self.taskforce_assignment(),
-            #     self.extinguishing_tools_selection(),
-            #     self.building_structure_assessment(),
-            #     self.victim_rescue_planning(),
-            #     self.tool_selection(),
-            #     self.fire_truck_selection(),
-            #     self.route_planning(),
-            # ],
-            # output_pydantic=FirePlanCompilation,
             output_file=os.path.join(
                 self.output_path, "008_final_plan_compilation.md"
             ),

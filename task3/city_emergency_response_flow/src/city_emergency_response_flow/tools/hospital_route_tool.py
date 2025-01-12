@@ -18,10 +18,6 @@ class HospitalRouteToolInput(BaseModel):
         destination_lons (List[float]): List of the Longitudes of all hospital locations.
     """
     
-    # vehicle_type: str = Field(
-    #     ...,
-    #     description="Type of the vehicle. CAN ONLY BE firetruck, ambulance, or patrol.",
-    # )
     hospital_names: str = Field(
         ...,
         description="Stringified list of the hospital names.",
@@ -64,28 +60,12 @@ class HospitalRouteTool(BaseTool):
         print(hospital_names)
         print(destination_lats)
         print(destination_lons)
-        
-        # print("Received dtypes:")
-        # print(type(vehicle_ids))
-        # print(type(origin_lats))
-        # print(type(origin_lons))
-        
+ 
         try:
             hospital_names = json.loads(hospital_names)
             destination_lons = json.loads(destination_lons)
             destination_lats = json.loads(destination_lats)
-            
-            # print("Parsed values:")
-            # print(vehicle_ids)
-            # print(origin_lats)
-            # print(origin_lons)
-            
-            # print("Parsed dtypes:")
-            # print(type(vehicle_ids))
-            # print(type(origin_lats))
-            # print(type(origin_lons))
-            
-            
+  
         except Exception as e:
             return f"Error occurred while parsing input: {str(e)}"
         
