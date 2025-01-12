@@ -2,7 +2,7 @@ import os
 from crewai import Agent, Crew, Process, Task, LLM
 from crewai.project import CrewBase, agent, crew, task
 from .schemas.schemas import *
-from crewai_tools import FileReadTool, DirectoryReadTool
+from crewai_tools import FileReadTool
 from ...tools.emergency_route_tool import EmergencyRouteTool
 from ...tools.json_append_tool import JSONAppendTool
 import configparser as ConfigParser
@@ -19,7 +19,11 @@ class PoliceCrew:
         )
     )
 
-    llm = LLM(model=config.get("LLM", "model"), base_url=config.get("LLM", "base_url"), max_tokens=4096)
+    llm = LLM(
+        model=config.get("LLM", "model"),
+        base_url=config.get("LLM", "base_url"),
+        max_tokens=4096,
+    )
 
     output_path = os.path.join(
         os.path.dirname(os.path.relpath(__file__)), "crew_outputs"
@@ -110,9 +114,7 @@ class PoliceCrew:
         return Task(
             config=self.tasks_config["police_final_plan_compilation"],
             tools=[JSONAppendTool(dir_path=self.output_path)],
-            output_file=os.path.join(
-                self.output_path, "008_final_plan_compilation.md"
-            ),
+            output_file=os.path.join(self.output_path, "008_final_plan_compilation.md"),
         )
 
     @crew
