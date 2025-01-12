@@ -48,7 +48,7 @@ class CityEmergencyResponseFlow(Flow[InitialInformation]):
     # 4. Feed outputs of those three crews back to emergency crew
     # 5. Emergency crew outputs the final plan in the end
 
-    @start()
+    # @start()
     def read_emergency_characteristics(self):
         print("Reading emergency characteristics")
 
@@ -148,14 +148,15 @@ class CityEmergencyResponseFlow(Flow[InitialInformation]):
 
 
 
-    @listen(
-        (
-            and_(
-                create_fire_plan,   
-                create_police_plan,
-            )
-        )
-    )
+    # @listen(
+    #     (
+    #         and_(
+    #             create_fire_plan,   
+    #             create_police_plan,
+    #         )
+    #     )
+    # )
+    @start()
     def merge_plans(self):
         print("Merge each crew's plans into one final plan")
         
@@ -198,6 +199,4 @@ def plot():
 
 
 if __name__ == "__main__":
-    # kickoff()
-    city_emergency_response_flow = CityEmergencyResponseFlow()
-    city_emergency_response_flow.merge_plans()
+    kickoff()
