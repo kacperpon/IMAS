@@ -91,7 +91,7 @@ class EmergencyRouteTool(BaseTool):
         except Exception as e:
             return f"Error occurred while parsing input: {str(e)}"
         
-        tuples = list()
+        total_times = list()
         
         for idx, vehicle_id in enumerate(vehicle_ids):
             print("Calculatin route for vehicle: ", vehicle_id)
@@ -110,6 +110,9 @@ class EmergencyRouteTool(BaseTool):
                 # 2. Identify the nodes in the graph nearest to the origin and destination.
                 orig_node = ox.distance.nearest_nodes(G, origin_lon, origin_lat)
                 dest_node = ox.distance.nearest_nodes(G, destination_lon, destination_lat)
+                
+                G = ox.routing.add_edge_speeds(G)
+                G = ox.routing.add_edge_travel_times(G)
 
                 # 3. Calculate the shortest path (by length) between these two nodes.
                 route = nx.shortest_path(G, orig_node, dest_node, weight="length")
@@ -127,6 +130,9 @@ class EmergencyRouteTool(BaseTool):
                     "route_nodes": route,
                     "route_coordinates": route_coordinates,
                 }
+                
+                
+
                 
                 
 
@@ -151,10 +157,13 @@ class EmergencyRouteTool(BaseTool):
                 except Exception as e:
                     print(f"Error occurred while plotting route: {str(e)}")
                 
-                tuples.append((vehicle_id, route))
+                # tuples.append((vehicle_id, route))
                 
                 
-                
+                total_time = round(sum(ox.routing.route_to_gdf(G, route)['travel_time'])) # In seconds
+                total_time = total_time / 60 # In minutes
+                total_times.append(total_time)
+                print(f"Total time for vehicle {vehicle_id}: {total_time} minutes")
                 
             except Exception as e:
                 return f"Error occurred while calculating route: {str(e)}"
@@ -162,7 +171,7 @@ class EmergencyRouteTool(BaseTool):
                 
 
         new_route = RoutePlanning(
-            routes=tuples,
+            route_duration_min=total_times,
             action_details="Route planning successful.",
         )
 

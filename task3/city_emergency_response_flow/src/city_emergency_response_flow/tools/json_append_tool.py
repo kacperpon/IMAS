@@ -38,9 +38,7 @@ class JSONAppendTool(BaseTool):
         **kwargs: Any,
     ) -> Any:
         try:
-            dir_path = kwargs.get("dir_path", self.dir_path)
-            if dir_path is None:
-                return "No directory path provided."
+            dir_path = self.dir_path
             if os.path.isdir(dir_path):
                 
                 json_contents = []

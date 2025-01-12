@@ -89,7 +89,7 @@ class HospitalRouteTool(BaseTool):
         except Exception as e:
             return f"Error occurred while parsing input: {str(e)}"
         
-        tuples = list()
+        total_times = list()
         
         for idx, hospital_name in enumerate(hospital_names):
             print("Calculatin route for hospital: ", hospital_name)
@@ -110,6 +110,9 @@ class HospitalRouteTool(BaseTool):
                 # 2. Identify the nodes in the graph nearest to the origin and destination.
                 orig_node = ox.distance.nearest_nodes(G, origin_lon, origin_lat)
                 dest_node = ox.distance.nearest_nodes(G, destination_lon, destination_lat)
+                
+                G = ox.routing.add_edge_speeds(G)
+                G = ox.routing.add_edge_travel_times(G)
 
                 # 3. Calculate the shortest path (by length) between these two nodes.
                 route = nx.shortest_path(G, orig_node, dest_node, weight="length")
@@ -131,7 +134,7 @@ class HospitalRouteTool(BaseTool):
                 # Only used for ambulances.
                 vehicle_type = "ambulance"
                 
-
+                
                 
                 # 6. Plotting the route
                 
@@ -153,7 +156,13 @@ class HospitalRouteTool(BaseTool):
                 except Exception as e:
                     print(f"Error occurred while plotting route: {str(e)}")
                 
-                tuples.append((hospital_name, route))
+                total_time = round(sum(ox.routing.route_to_gdf(G, route)['travel_time'])) # In seconds
+                total_time = total_time / 60 # In minutes
+                total_times.append(total_time)
+                print(f"Total time for vehicle {hospital_name}: {total_time} minutes")
+
+                
+                
                 
                 
                 
@@ -162,10 +171,9 @@ class HospitalRouteTool(BaseTool):
                 return f"Error occurred while calculating route: {str(e)}"
                 
                 
-        print("Tool output: ")
-        print(tuples)
+        
         new_route = RoutePlanning(
-            routes=tuples,
+            route_duration_min=total_time,
             action_details="Route planning successful.",
         )
 

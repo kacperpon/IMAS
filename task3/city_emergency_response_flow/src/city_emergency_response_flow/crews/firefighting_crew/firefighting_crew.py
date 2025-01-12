@@ -5,7 +5,7 @@ from crewai_tools import FileReadTool, DirectoryReadTool
 
 from .schemas.schemas import *
 from ...tools.emergency_route_tool import EmergencyRouteTool
-from ...tools.json_append_tool_v2 import JSONAppendTool
+from ...tools.json_append_tool import JSONAppendTool
 
 import configparser as ConfigParser
 
@@ -21,7 +21,7 @@ class FirefightingCrew:
         )
     )
 
-    llm = LLM(model=config.get("LLM", "model"), base_url=config.get("LLM", "base_url"))
+    llm = LLM(model=config.get("LLM", "model"), base_url=config.get("LLM", "base_url"), max_tokens=4096)
     output_path = os.path.join(
         os.path.dirname(os.path.relpath(__file__)), "crew_outputs"
     )
@@ -156,7 +156,7 @@ class FirefightingCrew:
     def final_plan_compilation(self) -> Task:
         return Task(
             config=self.tasks_config["final_plan_compilation"],
-            tools=[JSONAppendTool(dir_path=self.output_path, result_as_answer=True)],
+            tools=[JSONAppendTool(dir_path=self.output_path)],
             # context=[ # wait for all tasks to finish
             #     self.taskforce_assignment(),
             #     self.extinguishing_tools_selection(),
@@ -166,9 +166,9 @@ class FirefightingCrew:
             #     self.fire_truck_selection(),
             #     self.route_planning(),
             # ],
-            output_pydantic=FirePlanCompilation,
+            # output_pydantic=FirePlanCompilation,
             output_file=os.path.join(
-                self.output_path, "008_final_plan_compilation.json"
+                self.output_path, "008_final_plan_compilation.md"
             ),
         )
 

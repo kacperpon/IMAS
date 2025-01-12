@@ -4,6 +4,7 @@ from crewai.project import CrewBase, agent, crew, task
 from .schemas.schemas import *
 from crewai_tools import FileReadTool, DirectoryReadTool
 from ...tools.hospital_route_tool import HospitalRouteTool
+from ...tools.json_append_tool import JSONAppendTool
 
 import configparser as ConfigParser
 import random
@@ -20,7 +21,7 @@ class MedicalCrew:
         )
     )
 
-    llm = LLM(model=config.get("LLM", "model"), base_url=config.get("LLM", "base_url"))
+    llm = LLM(model=config.get("LLM", "model"), base_url=config.get("LLM", "base_url"), max_tokens=4096)
     output_path = os.path.join(
         os.path.dirname(os.path.relpath(__file__)), "crew_outputs"
     )
@@ -167,19 +168,9 @@ class MedicalCrew:
     def medical_final_plan_compilation(self) -> Task:
         return Task(
             config=self.tasks_config["medical_final_plan_compilation"],
-            tools=[DirectoryReadTool(directory=self.output_path)],
-            context=[
-                self.medical_taskforce_assignment(),
-                self.medical_supplies_preparation(),
-                self.hospital_capacity_check(),
-                self.hospital_voting(),
-                self.injury_voting(),
-                self.ambulance_selection(),
-                self.ambulance_route_planning(),
-            ],
-            output_pydantic=MedicalPlanCompilation,
+            tools=[JSONAppendTool(dir_path=self.output_path)],
             output_file=os.path.join(
-                self.output_path, "009_medical_final_plan_compilation.json"
+                self.output_path, "008_final_plan_compilation.md"
             ),
         )
 

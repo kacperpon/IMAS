@@ -18,7 +18,7 @@ class EmergencyCrewPhase2:
         )
     )
 
-    llm = LLM(model=config.get("LLM", "model"), base_url=config.get("LLM", "base_url"))
+    llm = LLM(model=config.get("LLM", "model"), base_url=config.get("LLM", "base_url"), max_tokens=4096)
     output_path = os.path.join(
         os.path.dirname(os.path.relpath(__file__)), "crew_outputs"
     )

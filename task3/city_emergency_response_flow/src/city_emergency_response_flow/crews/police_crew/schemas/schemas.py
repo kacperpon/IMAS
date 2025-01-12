@@ -71,8 +71,12 @@ class PatrolSelection(BaseModel):
 class RoutePlanning(BaseModel):
     """Output for planning the route."""
 
-    routes: List[Tuple[str, List[int]]] = Field(
-        ..., description="List of planned OSMnx routes for each vehicle."
+    # routes: List[Tuple[str, List[int]]] = Field(
+    #     ..., description="List of planned OSMnx routes for each vehicle."
+    # )
+    
+    route_duration_min: List[float] = Field(
+        ..., description="The duration in minutes of the route."
     )
     action_details: str = Field(
         ..., description="Additional information on route planning."

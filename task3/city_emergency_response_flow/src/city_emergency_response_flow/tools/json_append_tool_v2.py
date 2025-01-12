@@ -4,6 +4,8 @@ from pydantic import BaseModel, Field
 
 from crewai.tools import BaseTool
 
+import copy
+
 import os, json
 
 
@@ -65,14 +67,18 @@ class JSONAppendTool(BaseTool):
             if os.path.isdir(dir_path):
                 
                 json_contents = ""
+                print("Reading files in directory: ", dir_path)
+                print(os.listdir(dir_path))
                 for filename in os.listdir(dir_path):
+                    print("reading file: ", filename)
                     if filename.endswith(".json"):
                         file_path = os.path.join(dir_path, filename)
                         with open(file_path, "r") as file:
                             f = file.read()
                             json_data = json.loads(f)
                             if "action_details" in json_data:
-                                json_contents += json_data["action_details"] + "\n"
+                                json_contents += str(json_data["action_details"]) + "\n"
+                            f.close()
                 
                 plan_compilation = PlanCompilation(response_plan=json_contents)
                 return plan_compilation.model_dump_json()

@@ -52,8 +52,12 @@ class CityEmergencyResponseFlow(Flow[InitialInformation]):
     def read_emergency_characteristics(self):
         print("Reading emergency characteristics")
 
+        # selected_file = os.path.join(
+        #     "tests", "initial_reports", choice(os.listdir("tests/initial_reports"))
+        # )
+        
         selected_file = os.path.join(
-            "tests", "initial_reports", choice(os.listdir("tests/initial_reports"))
+            "tests", "initial_reports", "initial_report_02.md"
         )
 
         self.state.initial_emergency_report = open(selected_file).read()
@@ -107,8 +111,6 @@ class CityEmergencyResponseFlow(Flow[InitialInformation]):
             )
         )
 
-        self.state.firefighting_plan = result.pydantic.response_plan
-
     ################
     # MEDICAL CREW #
     ################
@@ -124,8 +126,7 @@ class CityEmergencyResponseFlow(Flow[InitialInformation]):
             )
         )
 
-        self.state.medical_plan = result.pydantic.response_plan
-
+    
     ###############
     # POLICE CREW #
     ###############
@@ -139,7 +140,7 @@ class CityEmergencyResponseFlow(Flow[InitialInformation]):
             .kickoff(inputs={"police_information": self.state.police_information})
         )
 
-        self.state.police_plan = result.pydantic.response_plan
+
 
     @listen(
         (
@@ -154,22 +155,42 @@ class CityEmergencyResponseFlow(Flow[InitialInformation]):
     )
     def merge_plans(self):
         print("Merge each crew's plans into one final plan")
-        result = (
-            EmergencyCrewPhase2()
-            .crew()
-            .kickoff(
-                inputs={
-                    "firefighting_plan": self.state.firefighting_plan,
-                    "medical_plan": self.state.medical_plan,
-                    "police_plan": self.state.police_plan,
-                }
-            )
-        )
+        
+        
+        firefighting_plan_path = os.path.join(os.getcwd(), "src", "city_emergency_response_flow", "crews", "firefighting_crew", "crew_outputs", "008_final_plan_compilation.md")
+        medical_plan_path = os.path.join(os.getcwd(), "src", "city_emergency_response_flow", "crews", "medical_crew", "crew_outputs", "008_final_plan_compilation.md")
+        police_plan_path = os.path.join(os.getcwd(), "src", "city_emergency_response_flow", "crews", "police_crew", "crew_outputs", "008_final_plan_compilation.md")
+        
+        # Read and concatenate the contents of three markdown files
+        files_to_merge = [firefighting_plan_path, medical_plan_path, police_plan_path]
+        merged_content = ""
 
-        self.state.final_report = result.pydantic.situation_report
-        print(self.state.final_report)
-        with open("final_report.txt", "w") as f:
-            f.write(self.state.final_report)
+        for file_name in files_to_merge:
+            if os.path.exists(file_name):
+                with open(file_name, "r") as file:
+                    merged_content += file.read() + "\n"
+
+        # Save the concatenated content into final_report.md
+        with open("final_report.md", "w") as final_file:
+            final_file.write(merged_content)
+        
+        
+        # result = (
+        #     EmergencyCrewPhase2()
+        #     .crew()
+        #     .kickoff(
+        #         inputs={
+        #             "firefighting_plan": self.state.firefighting_plan,
+        #             "medical_plan": self.state.medical_plan,
+        #             "police_plan": self.state.police_plan,
+        #         }
+        #     )
+        # )
+
+        # self.state.final_report = result.pydantic.situation_report
+        # print(self.state.final_report)
+        # with open("final_report.txt", "w") as f:
+        #     f.write(self.state.final_report)
 
 
 def kickoff():
